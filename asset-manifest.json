@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.71501e89.chunk.css",
-    "main.js": "/static/js/main.8a1a57af.chunk.js",
-    "main.js.map": "/static/js/main.8a1a57af.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.451c04bb.js",
-    "runtime-main.js.map": "/static/js/runtime-main.451c04bb.js.map",
-    "static/js/2.29e65b86.chunk.js": "/static/js/2.29e65b86.chunk.js",
-    "static/js/2.29e65b86.chunk.js.map": "/static/js/2.29e65b86.chunk.js.map",
-    "static/js/3.c2c614bc.chunk.js": "/static/js/3.c2c614bc.chunk.js",
-    "static/js/3.c2c614bc.chunk.js.map": "/static/js/3.c2c614bc.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.71501e89.chunk.css.map": "/static/css/main.71501e89.chunk.css.map",
-    "static/js/2.29e65b86.chunk.js.LICENSE.txt": "/static/js/2.29e65b86.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/static/media/Hauora-Regular.e7c4f6ff.woff2",
-    "static/media/App.css": "/static/media/Rectangle 76.21553159.png",
-    "static/media/logo.6ce24c58.svg": "/static/media/logo.6ce24c58.svg"
+    "main.css": "/fluence/static/css/main.f54341a8.chunk.css",
+    "main.js": "/fluence/static/js/main.8a1a57af.chunk.js",
+    "main.js.map": "/fluence/static/js/main.8a1a57af.chunk.js.map",
+    "runtime-main.js": "/fluence/static/js/runtime-main.a7e62f7e.js",
+    "runtime-main.js.map": "/fluence/static/js/runtime-main.a7e62f7e.js.map",
+    "static/js/2.29e65b86.chunk.js": "/fluence/static/js/2.29e65b86.chunk.js",
+    "static/js/2.29e65b86.chunk.js.map": "/fluence/static/js/2.29e65b86.chunk.js.map",
+    "static/js/3.c2c614bc.chunk.js": "/fluence/static/js/3.c2c614bc.chunk.js",
+    "static/js/3.c2c614bc.chunk.js.map": "/fluence/static/js/3.c2c614bc.chunk.js.map",
+    "index.html": "/fluence/index.html",
+    "static/css/main.f54341a8.chunk.css.map": "/fluence/static/css/main.f54341a8.chunk.css.map",
+    "static/js/2.29e65b86.chunk.js.LICENSE.txt": "/fluence/static/js/2.29e65b86.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/fluence/static/media/Hauora-Regular.e7c4f6ff.woff2",
+    "static/media/App.css": "/fluence/static/media/Rectangle 76.21553159.png",
+    "static/media/logo.6ce24c58.svg": "/fluence/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.451c04bb.js",
+    "static/js/runtime-main.a7e62f7e.js",
     "static/js/2.29e65b86.chunk.js",
-    "static/css/main.71501e89.chunk.css",
+    "static/css/main.f54341a8.chunk.css",
     "static/js/main.8a1a57af.chunk.js"
   ]
 }
