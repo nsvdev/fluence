@@ -1,0 +1,42 @@
+.nav__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    list-style: none;
+}
+
+.nav__item {
+    margin-right: 40px;
+}
+
+.nav__item:last-child {
+    margin-right: 0;
+}
+
+.nav__link {
+    font-family: 'Hauora_Bold', sans-serif;
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(255, 255, 255);
+
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    transition: all 0.2s linear 0.4s;
+}
+
+.nav__link:hover {
+    color: rgba(207, 255, 196, 0.7);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.nav__link_active {
+    color: rgba(207, 255, 196, 1);
+}
+
+.nav__link_active:hover {
+    color: rgba(207, 255, 196, 1);
+    text-decoration: none;
+    cursor: default;
+}

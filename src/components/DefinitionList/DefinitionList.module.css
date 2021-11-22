@@ -1,0 +1,32 @@
+.definition-list {
+    margin: 0;
+    padding: 0;
+}
+
+.definition-list__definition {
+    display: block;
+    margin: 0 0 17px;
+
+    font-family: "Hauora_Regular";
+    font-size: 30px;
+    line-height: 36px;
+    color: rgb(255, 255, 255);
+}
+
+.definition-list__line {
+    margin-bottom: 6px;
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.definition-list__term {
+    display: block;
+
+    font-family: "Hauora_Bold";
+    font-size: 10px;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 0.6);
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
