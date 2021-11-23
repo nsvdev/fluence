@@ -16,3 +16,14 @@
     height: 32px;
     margin-right: 60px;
 }
+
+@media screen and (max-width: 510px) {
+    .header {
+        display: block;
+    }
+    
+    .header__flex-container {
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}

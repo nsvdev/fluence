@@ -4,6 +4,8 @@
     padding: 0;
 
     list-style: none;
+
+    overflow: hidden;
 }
 
 .progress-list__item {
@@ -11,6 +13,8 @@
 
     margin-right: 10px;
     padding-left: 33px;
+    display: flex;
+    align-items: center;
 
     opacity: 0.4;
 }
@@ -49,7 +53,7 @@
 .progress-list__item::before {
     content: '';
     position: absolute;
-    top: 13px;
+
     left: 0;
 
     width: 21px;
@@ -92,5 +96,6 @@
 
     border: none;
 }
+
 
 

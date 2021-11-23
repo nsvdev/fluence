@@ -30,3 +30,12 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+.definition-list__definition_color_orange {
+    color: rgb(239, 127, 36);
+}
+
+.color_black {
+    color: rgba(0,0,0,0.5);
+    border-color: rgba(0,0,0,0.5);
+}
