@@ -9,7 +9,7 @@ import Progress from '../Progress/Progress';
 import WalletInfo from '../WalletInfo/WalletInfo';
 import PageBegin from '../../pages/begin-page/begin-page';
 import FirstStepPage from '../../pages/step1-page/step1-page';
-import Home from '../ConnectWallet/ConnectWallet';
+import ConnectWallet from '../ConnectWallet/ConnectWallet';
 import './App.css';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/begin' element={<PageBegin/>} />
         <Route path='/' element={<FirstStepPage/>} />
-        <Route path='/connect' element={<Home />} />
+        <Route path='/connect' element={<ConnectWallet />} />
       </Routes>
     </div>
   );
