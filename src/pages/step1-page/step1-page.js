@@ -7,7 +7,7 @@ import Title from '../../components/Title/Title';
 import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
-import Dashboard from '../../components/Dashboad/Dashboard';
+import Dashboard from '../../components/Dashboard/Dashboard';
 
 import styles from './step1-page.module.css';
 

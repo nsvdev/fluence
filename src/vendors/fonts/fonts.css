@@ -33,3 +33,12 @@
     src: url("./Hauora-Medium.woff2") format("woff2"), 
     url("./Hauora-Medium.woff") format("woff");
 }
+
+@font-face {
+    font-family: "Roboto_Regular";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./RobotoMono-Regular.woff2") format("woff2"), 
+    url("./RobotoMono-Regular.woff") format("woff");
+}
