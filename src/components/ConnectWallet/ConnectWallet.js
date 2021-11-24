@@ -26,7 +26,7 @@ if  (typeof window !== 'undefined') {
     })
 }
 
-export const ConnectWallet = () => {
+const ConnectWallet = () => {
     const state = useSelector(state => state.wallet)
     const dispatch = useDispatch()
     const { provider, web3Provider, address, chainId } = state
