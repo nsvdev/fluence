@@ -39,12 +39,40 @@
 }
 
 .dashboard__text {
+    margin: 0;
+    padding: 0;
     margin-bottom: 10px;
-    max-width: 785px;
+
+    font-family: "Hauora_Regular";
+    color:rgb(0, 0, 0);
+
+    letter-spacing: 0.5px;
+}
+
+.dashboard__text_size_large {
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.dashboard__text_size_mid {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.dashboard__span {
+    font-family: "Hauora_Bold";
+}
+
+.dashboard__span_decorate_underline {
+    text-decoration: underline;
 }
 
 .dashboard__list {
     margin: 0 0 30px;
+    padding: 0;
+    max-width: 711px;
+
+    list-style: none;
 }
 
 .dashboard__item {
@@ -65,6 +93,7 @@
 }
 
 .dashboard__paragraph {
+    position: relative;
 
     font-family: "Hauora_Bold" sans-serif;
     font-size: 10px;
@@ -84,3 +113,14 @@
     cursor: pointer;
 }
 
+.dashboard__danger {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 23px;
+    height: 23px;
+}
+
+.dashboard__paragraph_pl_27 {
+    padding-left: 27px;
+}
