@@ -113,6 +113,10 @@
     cursor: pointer;
 }
 
+.dashboard__textarea {
+    margin-top: 18px;
+}
+
 .dashboard__danger {
     position: absolute;
     top: -2px;
