@@ -3,7 +3,9 @@ import { Routes, Route} from 'react-router-dom';
 
 import PageBegin from '../../pages/begin-page/begin-page';
 import FirstStepPage from '../../pages/step1-page/step1-page';
-import ProofPage from '../../pages/proof-page/proof-page'
+import ProofPage from '../../pages/proof-page/proof-page';
+import ConnectWallet from '../ConnectWallet/ConnectWallet';
+
 import './App.css';
 
 function App() {
@@ -13,7 +15,9 @@ function App() {
         
         <Route path='/proof' element={<ProofPage/>} />
         <Route path='/wallet' element={<FirstStepPage/>} />
+        <Route path='/connect' element={<ConnectWallet />} />
         <Route path='/' element={<PageBegin/>} />
+
       </Routes>
     </div>
   );
