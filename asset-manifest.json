@@ -1,27 +1,29 @@
 {
   "files": {
-    "main.css": "/fluence/static/css/main.669765ce.chunk.css",
-    "main.js": "/fluence/static/js/main.d67305c3.chunk.js",
-    "main.js.map": "/fluence/static/js/main.d67305c3.chunk.js.map",
-    "runtime-main.js": "/fluence/static/js/runtime-main.14aa1e9e.js",
-    "runtime-main.js.map": "/fluence/static/js/runtime-main.14aa1e9e.js.map",
-    "static/js/2.cd2892f6.chunk.js": "/fluence/static/js/2.cd2892f6.chunk.js",
-    "static/js/2.cd2892f6.chunk.js.map": "/fluence/static/js/2.cd2892f6.chunk.js.map",
-    "static/js/3.de41566a.chunk.js": "/fluence/static/js/3.de41566a.chunk.js",
-    "static/js/3.de41566a.chunk.js.map": "/fluence/static/js/3.de41566a.chunk.js.map",
-    "index.html": "/fluence/index.html",
-    "static/css/main.669765ce.chunk.css.map": "/fluence/static/css/main.669765ce.chunk.css.map",
-    "static/js/2.cd2892f6.chunk.js.LICENSE.txt": "/fluence/static/js/2.cd2892f6.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/fluence/static/media/Hauora-Regular.e7c4f6ff.woff2",
-    "static/media/begin-page.module.css": "/fluence/static/media/Rectangle 76.21553159.4756101d.webp",
-    "static/media/Progress.module.css": "/fluence/static/media/check.e31a60ba.svg",
-    "static/media/Button.module.css": "/fluence/static/media/github.a4b1394b.svg",
-    "static/media/logo.bff8debf.svg": "/fluence/static/media/logo.bff8debf.svg"
+    "main.css": "/static/css/main.421c73a3.chunk.css",
+    "main.js": "/static/js/main.1af2f7c3.chunk.js",
+    "main.js.map": "/static/js/main.1af2f7c3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7e3a3365.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7e3a3365.js.map",
+    "static/js/2.0f504284.chunk.js": "/static/js/2.0f504284.chunk.js",
+    "static/js/2.0f504284.chunk.js.map": "/static/js/2.0f504284.chunk.js.map",
+    "static/js/3.3866e389.chunk.js": "/static/js/3.3866e389.chunk.js",
+    "static/js/3.3866e389.chunk.js.map": "/static/js/3.3866e389.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.421c73a3.chunk.css.map": "/static/css/main.421c73a3.chunk.css.map",
+    "static/js/2.0f504284.chunk.js.LICENSE.txt": "/static/js/2.0f504284.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/RobotoMono-Regular.ca7e14bf.woff",
+    "static/media/done-page.module.css": "/static/media/Rectangle 76.21553159.4756101d.webp",
+    "static/media/Progress.module.css": "/static/media/check.e31a60ba.svg",
+    "static/media/danger.7d2b15cb.svg": "/static/media/danger.7d2b15cb.svg",
+    "static/media/Button.module.css": "/static/media/github.a4b1394b.svg",
+    "static/media/logo.bff8debf.svg": "/static/media/logo.bff8debf.svg",
+    "static/media/step1-page.module.css": "/static/media/Ф.598a0439.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.14aa1e9e.js",
-    "static/js/2.cd2892f6.chunk.js",
-    "static/css/main.669765ce.chunk.css",
-    "static/js/main.d67305c3.chunk.js"
+    "static/js/runtime-main.7e3a3365.js",
+    "static/js/2.0f504284.chunk.js",
+    "static/css/main.421c73a3.chunk.css",
+    "static/js/main.1af2f7c3.chunk.js"
   ]
 }
