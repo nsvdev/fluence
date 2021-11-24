@@ -8,6 +8,7 @@ import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Dashboard from '../../components/Dashboard/Dashboard';
+import ConnectWallet from '../../components/ConnectWallet/ConnectWallet';
 
 import styles from './step1-page.module.css';
 
@@ -54,7 +55,7 @@ const FirstStepPage = () => {
                                 </Text>
                             </div>
                             <div className={styles.dashboard__button}>
-                                <Button type="large" text="Connect a wallet"/>
+                                <ConnectWallet />
                             </div>
                             <p className={styles.dashboard__paragraph}>
                                 If you are an advanced Ethereum user, you can claim directly from the smart contract.  <Link to='/' className={styles.dashboard__link}>Learn how to do it</Link>
