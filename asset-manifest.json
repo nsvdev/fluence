@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/fluence/static/css/main.87f5224d.chunk.css",
-    "main.js": "/fluence/static/js/main.1af2f7c3.chunk.js",
-    "main.js.map": "/fluence/static/js/main.1af2f7c3.chunk.js.map",
+    "main.js": "/fluence/static/js/main.5e002c72.chunk.js",
+    "main.js.map": "/fluence/static/js/main.5e002c72.chunk.js.map",
     "runtime-main.js": "/fluence/static/js/runtime-main.030d3c49.js",
     "runtime-main.js.map": "/fluence/static/js/runtime-main.030d3c49.js.map",
-    "static/js/2.25d33739.chunk.js": "/fluence/static/js/2.25d33739.chunk.js",
-    "static/js/2.25d33739.chunk.js.map": "/fluence/static/js/2.25d33739.chunk.js.map",
+    "static/js/2.63f4d8e6.chunk.js": "/fluence/static/js/2.63f4d8e6.chunk.js",
+    "static/js/2.63f4d8e6.chunk.js.map": "/fluence/static/js/2.63f4d8e6.chunk.js.map",
     "static/js/3.3866e389.chunk.js": "/fluence/static/js/3.3866e389.chunk.js",
     "static/js/3.3866e389.chunk.js.map": "/fluence/static/js/3.3866e389.chunk.js.map",
     "index.html": "/fluence/index.html",
     "static/css/main.87f5224d.chunk.css.map": "/fluence/static/css/main.87f5224d.chunk.css.map",
-    "static/js/2.25d33739.chunk.js.LICENSE.txt": "/fluence/static/js/2.25d33739.chunk.js.LICENSE.txt",
+    "static/js/2.63f4d8e6.chunk.js.LICENSE.txt": "/fluence/static/js/2.63f4d8e6.chunk.js.LICENSE.txt",
     "static/media/index.css": "/fluence/static/media/RobotoMono-Regular.ca7e14bf.woff",
     "static/media/done-page.module.css": "/fluence/static/media/Rectangle 76.21553159.4756101d.webp",
     "static/media/Progress.module.css": "/fluence/static/media/check.e31a60ba.svg",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.030d3c49.js",
-    "static/js/2.25d33739.chunk.js",
+    "static/js/2.63f4d8e6.chunk.js",
     "static/css/main.87f5224d.chunk.css",
-    "static/js/main.1af2f7c3.chunk.js"
+    "static/js/main.5e002c72.chunk.js"
   ]
 }
