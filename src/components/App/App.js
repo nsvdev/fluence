@@ -22,7 +22,6 @@ function App() {
         <Route path='/delegation' element={<DelegationPage/>} />
         <Route path='/wallet' element={<FirstStepPage/>} />
         <Route path='/done' element={<DonePage/>} />
-        <Route path='/connect' element={<ConnectWallet />} />
         <Route path='/' element={<PageBegin/>} />
 
       </Routes>

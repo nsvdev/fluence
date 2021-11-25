@@ -1,4 +1,4 @@
-import supportedChains from './chains'
+import supportedChains from '../constants/chains'
 
 export const hideString = (str) => {
     return `${str.slice(0, 11)}..${str.slice(-3)}`

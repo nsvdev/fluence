@@ -1,6 +1,6 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { providers } from 'ethers'
-import { useCallback, useEffect, useReducer } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Web3Modal from 'web3modal'
 import { resetWeb3Provider, setAddress, setWeb3Provider } from '../store/actions/wallet'
