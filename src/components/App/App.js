@@ -6,6 +6,7 @@ import FirstStepPage from '../../pages/step1-page/step1-page';
 import ProofPage from '../../pages/proof-page/proof-page';
 import DelegationPage from '../../pages/delegation-page/delegation-page';
 import DonePage from '../../pages/done-page/done-page';
+import AccountNotFound from '../../pages/not-found-account-page/not-found-account-page';
 
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='/wallet' element={<FirstStepPage/>} />
         <Route path='/done' element={<DonePage/>} />
         <Route path='/connect' element={<ConnectWallet />} />
+        <Route path='/not-found' element={<AccountNotFound />} />
         <Route path='/' element={<PageBegin/>} />
 
       </Routes>

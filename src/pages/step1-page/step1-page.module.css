@@ -15,6 +15,15 @@
     margin-bottom: 82px;
 }
 
+.icon {
+    width: 60px;
+    height: 80px;
+
+    background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/285/fire_1f525.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .dashboard {
     margin-bottom: 161px;
 }
@@ -50,7 +59,7 @@
 .dashboard__item {
     margin-bottom: 16px;
 
-    font-family: "Hauora_Regular" sans-serif;
+    font-family: "Hauora_Regular", sans-serif;
     font-size: 18px;
     line-height: 32px;
     color: rgb(0, 0, 0);
@@ -66,7 +75,7 @@
 
 .dashboard__paragraph {
 
-    font-family: "Hauora_Bold" sans-serif;
+    font-family: "Hauora_Bold", sans-serif;
     font-size: 10px;
     line-height: 16px;
     color: rgba(0, 0, 0, 0.5);

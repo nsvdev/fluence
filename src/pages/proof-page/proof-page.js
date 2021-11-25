@@ -29,7 +29,7 @@ const ProofPage = () => {
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
-                            
+                            <form>
                             <ul className={styles.dashboard__list}>
                                 <li className={styles.dashboard__item}>
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_large}`}><span className={styles.dashboard__span}>Step 1: </span>Get the bash script</p>
@@ -52,6 +52,7 @@ const ProofPage = () => {
                                 <li className={styles.dashboard__item}>
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_large}`}><span className={styles.dashboard__span}>Step 3: </span>Enter your proof</p> 
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Copy the base64-encoded proof from your terminal into the box below. The proof will be sent to the smart contract to unlock your tokens.</p>
+                                    
                                     <div className={styles.dashboard__textarea}>
                                         <TextArea rows="4" />
                                     </div>
@@ -63,7 +64,7 @@ const ProofPage = () => {
                             </div>
                             <p className={styles.dashboard__paragraph}>
                                 If you are an advanced Ethereum user, you can claim directly from the smart contract.  <Link to='/' className={styles.dashboard__link}>Learn how to do it</Link>
-                            </p>
+                            </p></form>
                         </Dashboard>
                     </div>
                 </main>

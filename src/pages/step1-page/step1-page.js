@@ -21,7 +21,7 @@ const FirstStepPage = () => {
                         <Progress />
                     </div>
                     <div className={styles.title}>
-                        <Title type="large" text="You are in! 🔥" icon="" />
+                        <Title type="large" text="You are in! " icon="" />
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
@@ -31,7 +31,7 @@ const FirstStepPage = () => {
                             </div>
                             <div className={styles.dashboard__text}>
                                 <Text color="black" type="large">
-                                    Claiming will require an Ethereum wallet and performing basic tasks with terminal on your computer.
+                                    Claiming will require an Ethereum wallet and performing basic tasks with terminal on your computer. :name_badge:
                                 </Text>
                             </div>
                             <ol className={styles.dashboard__list}>
