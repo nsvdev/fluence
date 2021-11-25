@@ -9,11 +9,11 @@ const Button = ({
     opacity=false,
     callback=null
 }) => {
-    if (type === 'default') return <button className={`${styles.button} ${styles.button_height_default}`} onClick={() => callback}>{text}</button>
+    if (type === 'default') return <button className={`${styles.button} ${styles.button_height_default}`} onClick={callback}>{text}</button>
 
-    if (type === 'large' && icon === 'git') return <button className={`${styles.button} ${styles.button_height_large} ${styles.button_icon} ${styles.button_icon_git}`} onClick={() => callback}>{text}</button>
+    if (type === 'large' && icon === 'git') return <button className={`${styles.button} ${styles.button_height_large} ${styles.button_icon} ${styles.button_icon_git}`} onClick={callback}>{text}</button>
 
-    if (type === 'large') return <button className={`${styles.button} ${styles.button_height_large} ${styles.button_opacity}`} onClick={() => callback}>{text}</button>
+    if (type === 'large') return <button className={`${styles.button} ${styles.button_height_large} ${styles.button_opacity}`} onClick={callback}>{text}</button>
 }
 
 export default Button;
