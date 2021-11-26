@@ -2,6 +2,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { providers } from 'ethers'
 import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Web3 from 'web3'
 import Web3Modal from 'web3modal'
 import { resetWeb3Provider, setAddress, setWeb3Provider } from '../store/actions/wallet'
 
@@ -29,6 +30,33 @@ export const useWeb3Connection = () => {
     const state = useSelector(state => state.wallet)
     const dispatch = useDispatch()
     const { provider, web3Provider, address, chainId } = state
+
+    function initWeb3(provider) {
+        const web3 = new Web3(provider);
+      
+        web3.eth.extend({
+          methods: [
+            {
+              name: "chainId",
+              call: "eth_chainId",
+              outputFormatter: web3.utils.hexToNumber
+            }
+          ]
+        });
+      
+        return web3;
+    }
+
+    function sendTransaction(_tx) {
+        return new Promise((resolve, reject) => {
+          web3.eth
+            .sendTransaction(_tx)
+            .once("transactionHash", (txHash) => resolve(txHash))
+            .catch((err) => reject(err));
+        });
+    }
+
+    const web3 = initWeb3(provider)
 
     const connect = useCallback(async () => {
         const provider = await web3Modal.connect()
@@ -94,6 +122,8 @@ export const useWeb3Connection = () => {
         web3Provider,
         address,
         chainId,
-        web3Provider
+        web3Provider,
+        web3,
+        sendTransaction
     }
 }

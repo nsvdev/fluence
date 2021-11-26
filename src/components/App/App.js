@@ -10,9 +10,22 @@ import ConnectWallet from '../ConnectWallet/ConnectWallet';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 
 import './App.css';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { delegateTo } from '../../store/actions/governorBravo';
+import { useContract } from '../../hooks/useContract';
+import { GovernorBravoDelegator } from '../../constants';
 
 function App() {
-  const { address } = useWeb3Connection()
+  const { address, web3, sendTransaction } = useWeb3Connection()
+  const [ contract ] = useContract(GovernorBravoDelegator, web3)
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if(address && web3 && contract) {
+      dispatch(delegateTo(sendTransaction, contract, address))
+    }
+  }, [address])
 
   return (
     <div className="App">

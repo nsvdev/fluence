@@ -11,17 +11,20 @@ import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import styles from './begin-page.module.css';
 import { useContract } from '../../hooks/useContract';
 import { GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants/contractTypes';
+import { useEffect } from 'react';
 
 const PageBegin = () => {
     const [ contract ] = useContract(GovernorBravoDelegate)
 
-    const testContract = async () => {
-        const testRes = await contract.methods.getActions('0').call()
-        console.log(testRes)
-    } 
-
-    testContract()
-
+    useEffect(() => {
+        const testContract = async () => {
+            const testRes = await contract.methods.getActions('0').call()
+            console.log(testRes)
+        } 
+    
+        testContract()
+    }, [])
+    
     return (
         <div className={styles.background}>
             <Header />
