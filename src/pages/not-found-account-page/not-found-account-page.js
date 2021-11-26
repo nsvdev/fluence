@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header';
 import Title from '../../components/Title/Title';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
+import Footer from '../../components/Footer/Footer';
 
 import styles from './not-found-account-page.module.css';
 
@@ -20,7 +21,7 @@ const AccountNotFound = () => {
                 <main className="main">
 
                     <div className={styles.title}>
-                        <Title type="large" text=":| Sorry, seems like you're not eligible for this."  />
+                        <Title type="h1" size="large" text=":| Sorry, seems like you're not eligible for this."  />
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
@@ -37,7 +38,7 @@ const AccountNotFound = () => {
                                 If you are interested in getting FLT now, you can <Link  className={`${styles.dashboard__link} ${styles.dashboard__text_mid}`} to="/">buy it on Uniswap.</Link>
                             </p>
                             <div className={styles.dashboard__title}>
-                                <Title type="medium" color="black" text="Get involved in the community"  />
+                                <Title type="h2" size="medium" color="black" text="Get involved in the community"  />
                             </div>
                             
                             <ul className={styles.dashboard__list}>
@@ -59,6 +60,7 @@ const AccountNotFound = () => {
                     </div>
                 </main>
             </div>
+            <Footer />
         </div>
     )
 }

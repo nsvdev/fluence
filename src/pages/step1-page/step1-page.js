@@ -8,6 +8,7 @@ import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Dashboard from '../../components/Dashboard/Dashboard';
+import Footer from '../../components/Footer/Footer';
 
 import styles from './step1-page.module.css';
 
@@ -21,7 +22,7 @@ const FirstStepPage = () => {
                         <Progress />
                     </div>
                     <div className={styles.title}>
-                        <Title type="large" text="You are in! " icon="" />
+                        <Title type="h1" size="large" text="You are in! " icon="" />
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
@@ -63,6 +64,7 @@ const FirstStepPage = () => {
                     </div>
                 </main>
             </div>
+            <Footer />
         </div>
     )
 }

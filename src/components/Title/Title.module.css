@@ -8,17 +8,22 @@
     letter-spacing: -1px;
 }
 
-.title_type_large {
+.title_size_large {
     font-size: 80px;
     line-height: 88px;
 }
 
-.title_type_medium {
+.title_size_medium {
     font-size: 42px;
     line-height: 50px;
 }
 
-.title_type_small {
+.title_size_default {
+    font-size: 30px;
+    line-height: 36px;
+}
+
+.title_size_small {
     font-size: 19px;
     line-height: 24px;
 }
@@ -28,7 +33,7 @@
 }
 
 @media screen and (max-width: 1366px)  {
-    .title_type_large {
+    .title_size_large {
         font-size: 60px;
         line-height: 70px;
     }

@@ -7,6 +7,8 @@ import ProofPage from '../../pages/proof-page/proof-page';
 import DelegationPage from '../../pages/delegation-page/delegation-page';
 import DonePage from '../../pages/done-page/done-page';
 import AccountNotFound from '../../pages/not-found-account-page/not-found-account-page';
+import LandingPage from '../../pages/landing-page/landing-page';
+import FinishPage from '../../pages/finish-page/finish-page';
 
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 
@@ -24,6 +26,8 @@ function App() {
         <Route path='/done' element={<DonePage/>} />
         <Route path='/connect' element={<ConnectWallet />} />
         <Route path='/not-found' element={<AccountNotFound />} />
+        <Route path='/fluence' element={<LandingPage />} />
+        <Route path='/finish' element={<FinishPage />} />
         <Route path='/' element={<PageBegin/>} />
 
       </Routes>

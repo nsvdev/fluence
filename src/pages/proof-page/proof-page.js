@@ -8,6 +8,7 @@ import Button from '../../components/Button/Button';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import WalletInfo from '../../components/WalletInfo/WalletInfo';
 import TextArea from '../../components/TextArea/TextArea';
+import Footer from '../../components/Footer/Footer';
 
 import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
@@ -25,7 +26,7 @@ const ProofPage = () => {
                         <WalletInfo wallet="wallet" account="0x24343242..534" />
                     </div>
                     <div className={styles.title}>
-                        <Title type="large" text="Submit the proof of Github account ownership"  />
+                        <Title type="h1" size="large" text="Submit the proof of Github account ownership"  />
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
@@ -69,6 +70,7 @@ const ProofPage = () => {
                     </div>
                 </main>
             </div>
+            <Footer />
         </div>
     )
 }
