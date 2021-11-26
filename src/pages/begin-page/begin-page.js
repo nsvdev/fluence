@@ -9,18 +9,11 @@ import Url from '../../components/Url/Url';
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
 
 import styles from './begin-page.module.css';
-
-import GovernorBravoDelegate from '../../contracts/GovernorBravoDelegate.json';
-import { governanceContracts } from '../../constants/addresses';
-import supportedChains from '../../constants/chains';
-import Web3 from 'web3';
+import { useContract } from '../../hooks/useContract';
+import { GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants/contractTypes';
 
 const PageBegin = () => {
-    const web3 = new Web3(supportedChains[1].rpc_url)
-    const contract = new web3.eth.Contract(
-        GovernorBravoDelegate.abi,
-        governanceContracts.kovan.bravo
-    )
+    const [ contract ] = useContract(GovernorBravoDelegate)
 
     const testContract = async () => {
         const testRes = await contract.methods.getActions('0').call()
