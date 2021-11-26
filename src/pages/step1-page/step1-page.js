@@ -8,7 +8,11 @@ import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Dashboard from '../../components/Dashboard/Dashboard';
+
+import Footer from '../../components/Footer/Footer';
+
 import ConnectWallet from '../../components/ConnectWallet/ConnectWallet';
+
 
 import styles from './step1-page.module.css';
 
@@ -22,7 +26,7 @@ const FirstStepPage = () => {
                         <Progress />
                     </div>
                     <div className={styles.title}>
-                        <Title type="large" text="You are in! 🔥" icon="" />
+                        <Title type="h1" size="large" text="You are in! " icon="" />
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
@@ -32,7 +36,7 @@ const FirstStepPage = () => {
                             </div>
                             <div className={styles.dashboard__text}>
                                 <Text color="black" type="large">
-                                    Claiming will require an Ethereum wallet and performing basic tasks with terminal on your computer.
+                                    Claiming will require an Ethereum wallet and performing basic tasks with terminal on your computer. :name_badge:
                                 </Text>
                             </div>
                             <ol className={styles.dashboard__list}>
@@ -64,6 +68,7 @@ const FirstStepPage = () => {
                     </div>
                 </main>
             </div>
+            <Footer />
         </div>
     )
 }

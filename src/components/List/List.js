@@ -6,12 +6,12 @@ import styles from './List.module.css';
 
 const List = ({ title = '', social = false, children }) => {
     return (
-        <>
-            {title !== '' && <Title text={title} type='small' />}
-            <ul className={styles.list}>
+        <div className={`${styles.container} ${title === '' && styles.container_jc_end}`}>
+            {title !== '' && <Title text={title} type="h2" size="small" />}
+            <ul className={styles.list} >
                 {children}
             </ul>
-        </>
+        </div>
     )
 }
 

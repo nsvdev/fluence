@@ -5,6 +5,7 @@ import Progress from '../../components/Progress/Progress';
 import Title from '../../components/Title/Title';
 import WalletInfo from '../../components/WalletInfo/WalletInfo';
 import Button from '../../components/Button/Button';
+import Footer from '../../components/Footer/Footer';
 
 import styles from './done-page.module.css';
 
@@ -27,7 +28,7 @@ const DonePage = () => {
                     </ul>
                     
                     <div className={styles.title}>
-                        <Title type="large" text="Almost done! You can claim your reward now"  />
+                        <Title type="h1" size="large" text="Almost done! You can claim your reward now"  />
                     </div>
 
                     <p className={styles.caption}>
@@ -39,6 +40,7 @@ const DonePage = () => {
                     </div>
                 </main>
             </div>
+            <Footer />
         </div>
     )
 }

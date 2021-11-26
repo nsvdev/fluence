@@ -7,6 +7,7 @@ import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 import Url from '../../components/Url/Url';
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
+import Footer from '../../components/Footer/Footer'
 
 import styles from './begin-page.module.css';
 
@@ -38,7 +39,7 @@ const PageBegin = () => {
                         <Progress />
                     </div>
                     <div className={styles.title}>
-                        <Title type="large" text="Claim your FLT reward"  />
+                        <Title type="h1" size="large" text="Claim your FLT reward"  />
                     </div>
                     <div className={styles["flex-container"]}>
                         <div className={styles["flex-container__part-left"]}>
@@ -81,6 +82,7 @@ const PageBegin = () => {
                     </div>
                 </main>
             </div>
+            <Footer />
         </div>
     )
 }

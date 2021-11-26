@@ -5,7 +5,8 @@ import Progress from '../../components/Progress/Progress';
 import Title from '../../components/Title/Title';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import WalletInfo from '../../components/WalletInfo/WalletInfo';
-import UserCard from '../../components/UserCard/UserCard'
+import UserCard from '../../components/UserCard/UserCard';
+import Footer from '../../components/Footer/Footer';
 
 import { users } from '../../mocks/UserCardMocks'
 import styles from './delegation-page.module.css';
@@ -23,7 +24,7 @@ const DelegationPage = () => {
                         <WalletInfo wallet="wallet" account="0x24343242..534" />
                     </div>
                     <div className={styles.title}>
-                        <Title type="large" text="Confirmed! Delegate FLT to complete the claim"  />
+                        <Title type="h2" size="large" text="Confirmed! Delegate FLT to complete the claim"  />
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
@@ -51,6 +52,7 @@ const DelegationPage = () => {
                     </div>
                 </main>
             </div>
+            <Footer />
         </div>
     )
 }
