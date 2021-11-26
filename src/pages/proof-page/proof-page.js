@@ -12,8 +12,13 @@ import Footer from '../../components/Footer/Footer';
 
 import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
+import { useSelector } from 'react-redux';
+import { hideString } from '../../utils';
 
 const ProofPage = () => {
+    const walletState = useSelector(state => state.wallet)
+    const { address } = walletState
+
     return (
         <div className={styles.background}>
             <Header />
@@ -23,7 +28,7 @@ const ProofPage = () => {
                         <Progress />
                     </div>
                     <div className={styles.wallet}>
-                        <WalletInfo wallet="wallet" account="0x24343242..534" />
+                        <WalletInfo wallet="wallet" account={address ? hideString(address) : ''} />
                     </div>
                     <div className={styles.title}>
                         <Title type="h1" size="large" text="Submit the proof of Github account ownership"  />
