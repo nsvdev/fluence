@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { delegateTo } from '../../store/actions/governorBravo';
 import { useContract } from '../../hooks/useContract';
-import { GovernorBravoDelegator } from '../../constants';
+import { governanceContracts, GovernorBravoDelegator } from '../../constants';
 
 function App() {
   const { address, web3, sendTransaction } = useWeb3Connection()
@@ -23,7 +23,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     if(address && web3 && contract) {
-      dispatch(delegateTo(sendTransaction, contract, address))
+      dispatch(delegateTo(sendTransaction, contract, address, governanceContracts.kovan.bravo))
     }
   }, [address])
 

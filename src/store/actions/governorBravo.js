@@ -5,17 +5,15 @@ export const delegateCreator = () => ({
     type: DELEGATE_TO
 })
 
-export const delegateTo = (sendTransaction, contract, sendingAccount, callee) => {
+export const delegateTo = (sendTransaction, contract, from, to, callee) => {
     return async dispatch => {
-        console.log('sending: ' + sendingAccount)
-        console.log('to: ' + contract._address)
+        console.log('sending: ' + from)
+        console.log('to: ' + to)
 
         const res = await sendTransaction({
-            from: sendingAccount,
-            to: contract._address,
-            data: callee || null,
-            gas: defaultGas,
-            gasLimit: defaultGas
+            from: from,
+            to: to,
+            data: callee || null
         })
 
         console.log(res)
