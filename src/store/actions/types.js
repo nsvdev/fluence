@@ -7,4 +7,5 @@ export const RESET_WEB3_PROVIDER = 'wallet/RESET_WEB3_PROVIDER'
 //////----------- GOVERNOR BRAVO -----------//////
 export const PROPOSAL_CREATED = 'governorBravo/PROPOSAL_CREATED'
 export const TEST_GOVERNOR = 'governorBravo/TEST_GOVERNOR'
-export const DELEGATE_TO = 'governorBravo/DELEGATE_TO'
+export const DELEGATE_SUCCESS = 'governorBravo/DELEGATE_SUCCESS'
+export const DELEGATE_FAIL = 'governorBravo/DELEGATE_FAIL'

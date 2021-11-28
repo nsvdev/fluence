@@ -1,8 +1,15 @@
-import { DELEGATE_TO } from "./types"
+import {
+    DELEGATE_SUCCESS,
+    DELEGATE_FAIL
+} from "./types"
 import { defaultGas } from "../../constants"
 
-export const delegateCreator = () => ({
-    type: DELEGATE_TO
+export const delegateSuccess = () => ({
+    type: DELEGATE_SUCCESS
+})
+
+export const delegateFail = () => ({
+    type: DELEGATE_FAIL
 })
 
 export const delegateTo = (sendTransaction, contract, from, to, callee) => {
@@ -10,13 +17,18 @@ export const delegateTo = (sendTransaction, contract, from, to, callee) => {
         console.log('sending: ' + from)
         console.log('to: ' + to)
 
-        const res = await sendTransaction({
-            from: from,
-            to: to,
-            data: callee || null
-        })
+        try {
+            const res = await sendTransaction({
+                from: from,
+                to: to,
+                data: callee || null
+            })
 
-        console.log(res)
-        dispatch(delegateCreator())
+            console.log(res)
+            dispatch(delegateSuccess())
+        } catch (error) {
+            dispatch(delegateFail())
+        }
+
     }
 }

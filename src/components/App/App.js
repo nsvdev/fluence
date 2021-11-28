@@ -14,11 +14,12 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { delegateTo } from '../../store/actions/governorBravo';
 import { useContract } from '../../hooks/useContract';
-import { governanceContracts, GovernorBravoDelegator } from '../../constants';
+import { governanceContracts, GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants';
 
 function App() {
   const { address, web3, sendTransaction } = useWeb3Connection()
   const [ contract ] = useContract(GovernorBravoDelegator, web3)
+  const [ delegeate ] = useContract(GovernorBravoDelegate, web3)
 
   const dispatch = useDispatch()
   useEffect(() => {
