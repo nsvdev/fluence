@@ -1,0 +1,57 @@
+.overflow {
+    padding-top: 54px;
+    width: 100%;
+    height: 5676px;
+    background-image: url('../../images/bg-landing.webp');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.background_orange{
+
+    width: 100%;
+    height: 300px;
+    margin-bottom: 200px;
+    
+}
+
+.promo__title {
+    margin-top: 189px;
+    margin-bottom: 27px;
+}
+
+.promo__text {
+    margin-bottom: 40px;
+    max-width: 678px;
+
+    font-family: "Hauora_Regular", sans-serif;
+    font-size: 24px;
+    line-height: 33px;
+    color: rgb(255, 255, 255);
+
+    letter-spacing: 0.5px;
+}
+
+.promo__buttons {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.promo__button {
+    margin-right: 19px;
+}
+
+.background_grey{
+
+    width: 100%;
+    height: 900%;
+
+}
+
+.background_blue{
+    width: 100%;
+    height: 900%;
+}

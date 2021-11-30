@@ -1,7 +1,7 @@
 .background {
     padding-top: 54px;
 
-    background: rgba(177, 169, 153, 1);
+    background: radial-gradient(50% 45.85% at 50% 54.15%, #C51103 0%, #DC9E61 100%), #C4C4C4;
     background-image: url('../../images/Rectangle 76.21553159.webp');
     background-repeat: no-repeat;
     background-size: 100% 100%;

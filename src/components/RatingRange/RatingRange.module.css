@@ -1,0 +1,47 @@
+.range {
+    display: flex;
+}
+
+.container {
+    max-width: 200px;
+}
+
+.count {
+    font-family: "Hauora_Bold", sans-serif;
+
+    font-size: 10px;
+    line-height: 16px;
+    color: rgb(207, 255, 196);
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.count_nice {
+    margin-right: 7px;
+}
+
+.range__body {
+    position: relative;
+
+    align-self: center;
+    width: 127px;
+    height: 3px;
+
+    background-color:rgb(220, 32, 32);
+}
+
+
+.count_bad {
+    margin-left: 10px;
+
+    color: rgb(220, 32, 32);
+}
+
+.count_total {
+    margin-top: 25px;
+    margin-left: 37%;
+
+    color: rgb(255, 255, 255);
+
+}

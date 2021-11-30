@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    margin: 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 15px;
+
+    list-style-image: url('../../images/list-image.svg');
+}
+
+.container_jc_end {
+    justify-content: flex-end;
+}

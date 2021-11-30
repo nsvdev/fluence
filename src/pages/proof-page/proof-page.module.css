@@ -1,7 +1,7 @@
 .background {
     padding-top: 54px;
 
-    background: rgba(177, 169, 153, 1);
+    background: radial-gradient(50% 45.85% at 50% 54.15%, #C51103 0%, #DC9E61 100%), #C4C4C4;
     background-image: url('../../images/Rectangle 76.21553159.webp');
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -43,7 +43,7 @@
     padding: 0;
     margin-bottom: 10px;
 
-    font-family: "Hauora_Regular";
+    font-family: "Hauora_Regular", sans-serif;
     color:rgb(0, 0, 0);
 
     letter-spacing: 0.5px;
@@ -60,7 +60,7 @@
 }
 
 .dashboard__span {
-    font-family: "Hauora_Bold";
+    font-family: "Hauora_Bold", sans-serif;
 }
 
 .dashboard__span_decorate_underline {
@@ -78,7 +78,7 @@
 .dashboard__item {
     margin-bottom: 16px;
 
-    font-family: "Hauora_Regular" sans-serif;
+    font-family: "Hauora_Regular", sans-serif;
     font-size: 18px;
     line-height: 32px;
     color: rgb(0, 0, 0);
@@ -95,7 +95,7 @@
 .dashboard__paragraph {
     position: relative;
 
-    font-family: "Hauora_Bold" sans-serif;
+    font-family: "Hauora_Bold", sans-serif;
     font-size: 10px;
     line-height: 16px;
     color: rgba(0, 0, 0, 0.5);
