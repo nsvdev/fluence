@@ -12,18 +12,11 @@ import styles from './begin-page.module.css';
 import { useContract } from '../../hooks/useContract';
 import { GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants/contractTypes';
 import { useEffect } from 'react';
+import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 
 const PageBegin = () => {
-    const [ contract ] = useContract(GovernorBravoDelegate)
-
-    useEffect(() => {
-        const testContract = async () => {
-            const testRes = await contract.methods.getActions('0').call()
-            console.log(testRes)
-        } 
-    
-        testContract()
-    }, [])
+    // const {web3, address} = useWeb3Connection()
+    // const [ contract ] = useContract(GovernorBravoDelegate, web3)
     
     return (
         <div className={styles.background}>

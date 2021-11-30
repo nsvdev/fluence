@@ -10,7 +10,25 @@ import UserCard from '../../components/UserCard/UserCard'
 import { users } from '../../mocks/UserCardMocks'
 import styles from './delegation-page.module.css';
 
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { delegate, delegateTo } from '../../store/actions/governorBravo';
+import { useContract } from '../../hooks/useContract';
+import { governanceContracts } from '../../constants';
+import GovernorBravoDelegator from '../../contracts/GovernorBravoDelegator.json';
+import Comp from '../../contracts/Comp.json'
+import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+
 const DelegationPage = () => {
+    const { address, web3, sendTransaction } = useWeb3Connection()
+
+    const [ compound ] = useContract(Comp, web3)
+    const [ delegator ] = useContract(GovernorBravoDelegator, web3)
+    const dispatch = useDispatch()
+    const delegateAction = () => {
+        dispatch(delegate(compound, address, compound._address, address))
+    }
+
     return (
         <div className={styles.background}>
             <Header />
@@ -38,12 +56,12 @@ const DelegationPage = () => {
                                 {users.map(user => (
                                     <li className={styles.dashboard__item}
                                         key={user.id}>
-                                            <UserCard card={user}/>
+                                            <UserCard card={user} delegateAction={delegateAction}/>
                                     </li>
                                     
                                 ))}
                                 <li className={styles.dashboard__item}>
-                                    <UserCard self/>
+                                    <UserCard delegateAction={delegateAction} self/>
                                 </li>
                             </ul>
 

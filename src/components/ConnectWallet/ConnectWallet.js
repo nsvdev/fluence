@@ -4,7 +4,6 @@ import { getChainData } from '../../utils'
 
 const ConnectWallet = () => {
     const { connect, disconnect, chainId, web3Provider } = useWeb3Connection()
-    const chainData = getChainData(chainId)
 
     return (
         <>

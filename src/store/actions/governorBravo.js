@@ -1,33 +1,34 @@
 import {
-    DELEGATE_SUCCESS,
-    DELEGATE_FAIL
+    DELEGATE_STATUS
 } from "./types"
-import { defaultGas } from "../../constants"
+import {
+    SUCCESS,
+    FAIL,
+    MINED,
+    MINING,
+    PENDING,
+    REJECTED
+} from '../../constants'
 
-export const delegateSuccess = () => ({
-    type: DELEGATE_SUCCESS
+export const delegateStatus = (status) => ({
+    type: DELEGATE_STATUS,
+    payload: status
 })
 
-export const delegateFail = () => ({
-    type: DELEGATE_FAIL
-})
-
-export const delegateTo = (sendTransaction, contract, from, to, callee) => {
+export const delegate = (contract, from, to, delegatee) => {
     return async dispatch => {
         console.log('sending: ' + from)
         console.log('to: ' + to)
 
         try {
-            const res = await sendTransaction({
-                from: from,
-                to: to,
-                data: callee || null
-            })
+            dispatch(delegateStatus(PENDING))
+            const res = await contract.methods.delegate(delegatee).send({ from: from })
 
             console.log(res)
-            dispatch(delegateSuccess())
+            dispatch(delegateStatus(MINING))
         } catch (error) {
-            dispatch(delegateFail())
+            console.log(error)
+            dispatch(delegateStatus(REJECTED))
         }
 
     }
