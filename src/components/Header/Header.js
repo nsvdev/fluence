@@ -29,7 +29,7 @@ const Header = ({ button=false }) => {
                 <img src={logo} alt="fluence logotype" className={styles.header__logo} />
                 <MainNavigation width={currentWidthWindow} />
             </div>
-            {button && currentWidthWindow > 510 && <Button type='default' text='Start building' />}
+            {button && currentWidthWindow > 700 && <Button type='default' text='Start building' />}
         </header>
     )
 }

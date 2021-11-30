@@ -1,21 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import dialog from '../../images/dialog-black.svg';
-import telegram from '../../images/telegram-black.svg';
-import discord from '../../images/discord-black.svg';
+
 import styles from './LinkWithIcon.module.css';
 
-const LinkWithIcon = ({ text, icon, url='/' }) => {
-    const link = 
-        icon === 'telegram' ? telegram 
-        : icon === 'discord' ? discord
-        : icon === 'dialog' ? dialog : ''
+const LinkWithIcon = ({ color='', text, icon, url='/' }) => {
 
+
+        const style = {
+            width: "38px",
+            height: "38px",
+            "margin-right": "10px",
+            display: "inline-block",
+
+            
+            backgroundPosition: "center",
+            backgroundRepeat:" no-repeat",
+
+            border: "1px solid #000000",
+            borderRadius: "50%",
+            backgroundImage: `url(${icon})`
+        }
+
+        const styleWhite = {
+            width: "38px",
+            height: "38px",
+            "margin-right": "10px",
+            display: "inline-block",
+
+            
+            backgroundPosition: "center",
+            backgroundRepeat:" no-repeat",
+
+            border: "1px solid #CFFFC4",
+            borderRadius: "50%",
+            backgroundImage: `url(${icon})`
+        }
 
     return (
-        <Link to={url} className={styles["link-with-icon"]}>
-            <div style={{backgroundImage: "url(" + { dialog } + ")"}} className={styles["link-with-icon__icon"]} />
+        <Link to={url} className={`${styles["link-with-icon"]} ${color === 'white' && styles["link-with-icon_color_white"]}`}>
+            <div   style={color==='white' ? styleWhite : style} />
             <span>{text}</span>
         </Link>
     )

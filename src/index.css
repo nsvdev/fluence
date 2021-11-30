@@ -23,5 +23,17 @@ code {
 
 .main {
   width: 90.64%;
-  padding: 0 10px;
+  padding: 0 15px;
+}
+
+@media screen and (max-width: 1275px) {
+  .container {
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main {
+    width: 100%;
+  }
 }

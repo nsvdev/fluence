@@ -11,7 +11,7 @@ const ProposalsList = ({ cards }) => {
     return (
         <>
             < div className={styles.title}>
-                <Title type="h4" size="small" text="Latest proposals" />
+                <Title type="h4"  text="Latest proposals" />
             </div>
             <ul className={styles.list}>
                 {cards.map(card => (
@@ -22,7 +22,7 @@ const ProposalsList = ({ cards }) => {
             </ul>
             <div className={styles["flex-container"]}>
                 <Link to="/" className={styles.link} >Show all</Link>
-                <Button text="+  Add new proposal" type="small" />
+                <Button text={`+   Add new proposal`} type="small" />
             </div>
             
         </>

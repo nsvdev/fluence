@@ -51,7 +51,7 @@ const ProofPage = () => {
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Run the script in your machine terminal. Make sure keys that are uploaded to Github are also stored on this machine.</p>
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>If everything went well, you should see a base64-encoded string in your terminal — that’s your proof.</p>
                                     <div className={styles.dashboard__textarea}>
-                                        <TextArea text='./flt-proof.sh' disabled />
+                                        <p className={styles.paragraph}>./flt-proof.sh</p>
                                     </div>
                                 </li>
 
@@ -60,7 +60,7 @@ const ProofPage = () => {
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Copy the base64-encoded proof from your terminal into the box below. The proof will be sent to the smart contract to unlock your tokens.</p>
                                     
                                     <div className={styles.dashboard__textarea}>
-                                        <TextArea rows="4" />
+                                        <TextArea name="token" rows="4" />
                                     </div>
                                 </li>
                             </ul>

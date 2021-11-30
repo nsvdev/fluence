@@ -1,10 +1,27 @@
 .overflow {
     padding-top: 54px;
     width: 100%;
-    height: 5676px;
+    height: 100%;
     background-image: url('../../images/bg-landing.webp');
     background-size: 100% 100%;
     background-repeat: no-repeat;
+}
+
+.container {
+
+
+    padding: 0 10px;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.content {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.main1 {
+    width: 100%;
 }
 
 .background_orange{
@@ -12,7 +29,10 @@
     width: 100%;
     height: 300px;
     margin-bottom: 200px;
-    
+}
+
+.promo {
+    margin-bottom: 256px;
 }
 
 .promo__title {
@@ -44,6 +64,54 @@
     margin-right: 19px;
 }
 
+.future {
+    width: 90.64%;
+    margin: 0 auto;
+}
+
+.future__title {
+    max-width: 369px;
+}
+
+.future__line {
+    margin-top: 30px;
+    margin-bottom: 52px;
+    width: 62px;
+    height: 3px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.future__paragraphs {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0px;
+
+    list-style: none;
+}
+
+.future__paragraph {
+    max-width: 459px;
+    min-width: 345px;
+    margin-right: 79px;
+}
+
+.future__paragraph:last-child {
+    margin-right: 0;
+}
+
+.future__text {
+    margin: 0;
+
+    font-family: "Hauora_Regular", sans-serif;
+    font-size: 24px;
+    line-height: 33px;
+    color: #FFFFFF;
+
+    letter-spacing: 0.5px;
+}
+
 .background_grey{
 
     width: 100%;
@@ -54,4 +122,467 @@
 .background_blue{
     width: 100%;
     height: 900%;
+}
+
+.token {
+    margin-bottom: 244px;
+}
+
+.token__container {
+    margin-bottom: 112px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../images/circle-orange.png");
+    background-size: 441px 441px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+
+
+.token__title {
+    margin-top: 441px;
+}
+
+.token__text {
+    max-width: 876px;
+
+    font-family: "Hauora_Regular", sans-serif;
+    font-size: 24px;
+    line-height: 33px;
+    color: rgb(255, 255, 255);
+
+    letter-spacing: 0.5px; 
+    text-align: center;  
+}
+
+.token__advantages {
+    margin: 0 0 42px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    list-style: none;
+}
+
+.token__advantage {
+    width: 33%;
+    min-width: 350px;
+}
+
+.token__content {
+    margin-bottom: 46px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0px 15px 25px rgba(20, 40, 82, 0.7);
+}
+
+.token__content_small {
+    
+    max-width: 244px;
+    padding: 20px 46px 22px 30px;
+    box-sizing: border-box;
+}
+
+.token__content_large {
+    max-width: 300px;
+    padding: 14px 15px;
+    box-sizing: border-box;
+}
+
+.token__caption {
+    margin-top: 8px;
+    font-family: "Hauora_Bold", sans-serif;
+    font-size: 10px;
+    line-height: 16px;
+    color: rgb(255, 255, 255);
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.token__card-text {
+    max-width: 370px;
+    font-family: "Hauora_Regular", sans-serif;
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(255, 255, 255);
+
+    letter-spacing: 0.5px;
+}
+
+.token__image {
+    margin-bottom: 46px;
+    width: 300px;
+    height: 113px;
+    object-fit: cover;
+}
+
+.token__dashboard {
+    padding: 19px 17px;
+    background-color: rgba(37, 39, 43, 1);
+}
+
+.token__lines {
+    max-width: 116px;
+    height: 35px;
+}
+
+.token__lines {
+    max-width: 108px;
+    height: 36px;
+    margin-right: 10px;
+}
+
+.advantage__flex {
+    display: flex;
+    margin-top: 56px;
+
+}
+
+.token__button {
+    text-align: center;
+}
+
+.token__note {
+    margin-left: 10px;
+    font-family: "Hauora_Bold", sans-serif;
+    font-size: 10px;
+    line-height: 16px;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+
+    opacity: 0.7;
+}
+
+.developer {
+    margin-bottom: 419px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url("../../images/circles.png");
+    background-position: center;
+    background-size: 1312px;
+    background-repeat: no-repeat;
+}
+
+.developer__title {
+    margin-bottom: 58px;
+}
+
+.developer__text {
+    max-width: 600px;
+    margin: 0 0 30px;
+
+    font-family: "Hauora_Regular", sans-serif;
+    font-size: 24px;
+    line-height: 33px;
+    color: #FFFFFF;
+
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.developer__button {
+    margin: 43px 0 26px;
+}
+
+.developer__paragraph {
+    margin: 0;
+
+    font-family: "Hauora_Bold", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 21px;
+    color: #FFFFFF;
+
+    letter-spacing: 0.2px;
+}
+
+.developer__span {
+    margin-left: 10px;
+}
+
+.involved {
+    width: 100%;
+    margin-bottom: 136px;
+}
+
+.involved__title {
+    text-align: center;
+    margin-bottom: 95px;
+}
+
+.involved__flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.delegates__container {
+    padding: 27px 34px 30px;
+
+    background-color: rgba(37, 39, 43);
+    border-radius: 20px;
+}
+
+.delegates__list {
+    margin: 0;
+    padding: 0;
+
+    
+
+    list-style: none;
+    
+}
+
+.delegates__item {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.card {
+    max-width: 423px;
+    min-height: 251px;
+    padding: 27px 29px;
+
+    background-color: rgb(37, 39, 43);
+
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+
+.card__user-info {
+    display: flex;
+}
+
+.card__avatar {
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+}
+
+.card__name {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 2px;
+
+    font-family: 'Hauora_Bold' sans-serif;
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(204, 204, 204);
+
+    letter-spacing: 0.2px;
+}
+
+.card__wallet {
+    padding-right: 10px;
+    font-family: 'Hauora_Bold', sans-serif;
+    font-size: 10px;
+    line-height: 16px;
+    color: rgb(204, 204, 204);
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(204, 204, 204, 0.4);
+}
+
+.card__wallet_left {
+    padding: 0;
+    padding-left: 10px;
+
+    border: none;
+    border-left: 1px solid rgba(204, 204, 204, 0.4);
+}
+
+.delegates {
+    min-width: 392px;
+}
+
+.delegates__item {
+    margin-bottom: 28px;
+}
+
+.delegates__title {
+    margin-bottom: 40px;
+}
+
+.card__rating {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 7px;
+
+    font-family: 'Hauora_Bold', sans-serif;
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(204, 204, 204);
+
+    letter-spacing: 0.2px;
+    text-align: end;
+}
+
+.card__delegator {
+    margin: 0;
+    font-family: 'Hauora_Bold', sans-serif;
+    font-size: 10px;
+    line-height: 16px;
+    color: rgb(204, 204, 204);
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.card__text {
+    margin: 0;
+    margin-bottom: 19px;
+
+    font-family: 'Hauora_Regular', sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: rgb(255, 255, 255);
+
+    letter-spacing: 0.5px;
+}
+
+.involved__left {
+    max-width: 817px;
+    width: 65.88%;
+}
+
+.delegates__flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.conversation {
+    margin-top: 138px;
+}
+
+.conversation__title {
+    margin-bottom: 50px;
+}
+
+.link {
+    align-self: center;
+    position: relative;
+
+    padding-right: 18px;
+
+    font-family: "Hauora_Regular", sans-serif;
+
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(255,255,255);
+
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    transition: opacity 0.2s linear 0.2s;
+}
+
+.link:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.link::after {
+    content: '';
+
+    position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 5;
+
+    width: 8px;
+    height: 6px;
+
+    background-image: url("../../images/arrow-green.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1245px) {
+    .involved__flex-container {
+        justify-content: center;
+    }
+    .involved__left {
+        width: 50%;
+        min-width: 611px;
+        margin-right: 10px;
+    }
+    .delegates {
+
+        max-width: 400px;
+        min-width: 360px;
+    }
+}
+
+@media screen and (max-width: 1071px) {
+    .token__advantages {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .involved__flex-container {
+        flex-wrap:  wrap;
+    }
+
+    
+
+    .delegates__container {
+        padding: 15px;
+    }
+}
+
+
+@media screen and (max-width: 1005px) {
+    .involved__left {
+        width: 50%;
+        min-width: 500px;
+        margin-right: 10px;
+    }
+
+    
+
+    .delegates__container {
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .future__paragpaph {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .token__advantages {
+
+    }
+
+    .token__advantage {
+        min-width: 250px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .token__advantages {
+
+    }
+
+    .token__advantage {
+        min-width: 150px;
+    }
 }

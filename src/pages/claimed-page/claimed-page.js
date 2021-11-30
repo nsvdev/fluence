@@ -1,9 +1,7 @@
 import React from 'react';
 
 import Header from '../../components/Header/Header';
-import Progress from '../../components/Progress/Progress';
 import Title from '../../components/Title/Title';
-import WalletInfo from '../../components/WalletInfo/WalletInfo';
 import Button from '../../components/Button/Button';
 import Footer from '../../components/Footer/Footer';
 import ProposalsList from '../../components/ProposalsList/ProposalsList';
@@ -11,7 +9,7 @@ import Url from '../../components/Url/Url';
 import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
 
 import dialog from '../../images/dialog.svg';
-import styles from './finish-page.module.css';
+import styles from './claimed-page.module.css';
 
 const cards = [
     {
@@ -40,7 +38,7 @@ const cards = [
     }
 ]
 
-const FinishPage = () => {
+const ClaimedPage = () => {
     return (
         <div className={styles.background}>
             <div className={styles.background__image}>
@@ -52,25 +50,11 @@ const FinishPage = () => {
             
             <div className="container">
                 <main className="main">
-                    <div className={styles.progress}>
-                        <Progress />
-                    </div>
-                    <ul className={styles.wallets}>
-                        <li className={styles.wallet}>
-                            <WalletInfo wallet="wallet" account="0x24343242..534" />
-                        </li>
-                        <li className={styles.wallet}>
-                            <WalletInfo wallet="delegate" account="0xD69B...1fE4" />
-                        </li>
-                    </ul>
                     
                     <div className={styles.title}>
-                        <Title type="h1" size="large" text="500 FLT claimed 🔥"  />
+                        <Title type="h1" size="large" text="Seems like you have claimed your reward already"  />
                     </div>
 
-                    <p className={styles.caption}>
-                        You have successfully claimed the FLT reward!
-                    </p>
                     <ul className={styles.buttons}>
                         <li className={styles.button}>
                             <Button type="large" text="Claim 500 FLT" />
@@ -107,4 +91,4 @@ const FinishPage = () => {
     )
 }
 
-export default FinishPage;
+export default ClaimedPage;

@@ -5,12 +5,17 @@
     
     color: rgb(255, 255, 255);
 
-    letter-spacing: -1px;
+    letter-spacing: 1px;
 }
 
 .title_size_large {
     font-size: 80px;
     line-height: 88px;
+}
+
+.title_size_big {
+    font-size: 60px;
+    line-height: 70px;
 }
 
 .title_size_medium {
@@ -36,5 +41,27 @@
     .title_size_large {
         font-size: 60px;
         line-height: 70px;
+    }
+}
+
+@media screen and (max-width: 900px)  {
+    .title_size_large {
+        font-size: 60px;
+        line-height: 70px;
+    }
+    .title_size_big {
+        font-size: 42px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 600px)  {
+    .title_size_large {
+        font-size: 42px;
+        line-height: 50px;
+    }
+    .title_size_big {
+        font-size: 30px;
+        line-height: 36px;
     }
 }

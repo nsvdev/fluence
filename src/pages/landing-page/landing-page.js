@@ -1,171 +1,248 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import WalletInfo from '../../components/WalletInfo/WalletInfo';
-import TextArea from '../../components/TextArea/TextArea';
 
 import Header from '../../components/Header/Header';
-import Progress from '../../components/Progress/Progress';
 import Title from '../../components/Title/Title';
-import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
-import DefinitionList from '../../components/DefinitionList/DefinitionList';
-import Dashboard from '../../components/Dashboard/Dashboard';
 import Footer from '../../components/Footer/Footer';
-import RatingRange from '../../components/RatingRange/RatingRange';
-import Proposal from '../../components/Proposal/Proposal';
+import Url from '../../components/Url/Url';
+import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
+import ProposalsList from '../../components/ProposalsList/ProposalsList';
 
+import { users } from '../../mocks/UserCardMocks';
 
+import cardImage from '../../images/landing-card.png';
+import linesImage from '../../images/Group 2125.svg';
+import dataImage from '../../images/image 111.png';
 import styles from './landing-page.module.css';
+import dialog from '../../images/dialog.svg';
 
-const card = {
-    id: 12344,
-    status: 'failed',
-    nice: 300,
-    bad: 1500,
-    number: '034',
-    date: 'Jun 24rd, 2021'
-}
 
-const card1 = {
-    id: 12344,
-    status: 'executed',
-    nice: 4000,
-    bad: 500,
-    number: '034',
-    date: 'Jun 24rd, 2021'
-}
-
-const card2 = {
-    id: 12344,
-    status: 'in voting',
-    nice: 2200,
-    bad: 1500,
-    number: '034',
-    date: 'Jun 24rd, 2021'
-}
+const cards = [
+    {
+        id: 12344,
+        status: 'failed',
+        nice: 300,
+        bad: 1500,
+        number: '034',
+        date: 'Jun 24rd, 2021'
+    },
+    {
+        id: 12344,
+        status: 'executed',
+        nice: 4000,
+        bad: 500,
+        number: '034',
+        date: 'Jun 24rd, 2021'
+    },
+    {
+        id: 12344,
+        status: 'in voting',
+        nice: 2200,
+        bad: 1500,
+        number: '034',
+        date: 'Jun 24rd, 2021'
+    },
+    {
+        id: 123844,
+        status: 'executed',
+        nice: 4000,
+        bad: 500,
+        number: '034',
+        date: 'Jun 24rd, 2021'
+    },
+    {
+        id: 1299344,
+        status: 'in voting',
+        nice: 2200,
+        bad: 1500,
+        number: '034',
+        date: 'Jun 24rd, 2021'
+    }
+]
 
 const LandingPage = () => {
 
     return (
         <div className={styles.overflow}>
-            <Header button />
-            <div className="container">
-                <main className="main">
-                    <section className={styles.promo}>
-                        <div className={styles.promo__title}>
-                            <Title type="h1" size="large" text="Fluence DAO" />
-                        </div>
-                        <Proposal card={card} />
-                        <Proposal card={card1} />
-                        <Proposal card={card2} />
-                        <p className={styles.promo__text}>
-                            Fluence is managed via a digital, global, and decentralised organization which everyone can take part of
-                        </p>
-                        <ul className={styles.promo__buttons}>
-                            <li className={styles.promo__button}>
-                                <Button type="large" text="Claim your token" />
-                            </li>
-                            <li className={styles.promo__button}>
-                                <Button 
-                                    type="large" 
-                                    opacity={true} 
-                                    text="Active proposals" 
-                                />
-                            </li>
-                        </ul>
-                    </section>
-                    
-                    <div className={styles.dashboard}>
-                        <Dashboard>
-                            <div className={styles["dashboard__flex-container"]}>
-                                <div className={styles.dashboard__logo}/>
-                                <DefinitionList dd="500 FLT" dt="ready to be claimed" colorD="orange" colorT="black"/>
+            {/* <Header button />
+            <div className={styles.container}>
+                <main className={styles.main1}>
+                    <div className={styles.content}>
+                        <section className={styles.promo}>
+                            <div className={styles.promo__title}>
+                                <Title type="h1" size="large" text="Fluence DAO" />
                             </div>
-                            <div className={styles.dashboard__text}>
-                                <Text color="black" type="large">
-                                    Claiming will require an Ethereum wallet and performing basic tasks with terminal on your computer. :name_badge:
-                                </Text>
-                            </div>
-                            <ol className={styles.dashboard__list}>
-                                <li className={styles.dashboard__item}>
-                                    Connect an Ethereum wallet
-                                </li>
-                                <li className={styles.dashboard__item}>
-                                    Generate proof of Github account ownership
-                                </li>
-                                <li className={styles.dashboard__item}>
-                                    Delegate or self-delegate DAO voting power
-                                </li>
-                                <li className={styles.dashboard__item}>
-                                    Receive the tokens
-                                </li>
-                            </ol>
-                            <div className={styles.dashboard__caption}>
-                                <Text color="grey" type="small">
-                                    Two Ethereum transactions of 0.001 ETH & 0.002 ETH gas fees will be involved on steps 3 & 4
-                                </Text>
-                            </div>
-                            <div className={styles.dashboard__button}>
-                                <Button type="large" text="Connect a wallet"/>
-                            </div>
-                            <p className={styles.dashboard__paragraph}>
-                                If you are an advanced Ethereum user, you can claim directly from the smart contract.  
+                            <p className={styles.promo__text}>
+                                Fluence is managed via a digital, global, and decentralised organization which everyone can take part of
                             </p>
-                        </Dashboard>
-                    </div>
-                </main>
-            </div>
-            <main className="main">
-                    <div className={styles.progress}>
-                        <Progress />
-                    </div>
-                    <div className={styles.wallet}>
-                        <WalletInfo wallet="wallet" account="0x24343242..534" />
-                    </div>
-                    <div className={styles.title}>
-                        <Title type="large" text="Submit the proof of Github account ownership"  />
-                    </div>
-                    <div className={styles.dashboard}>
-                        <Dashboard>
-                            <form>
-                            <ul className={styles.dashboard__list}>
-                                <li className={styles.dashboard__item}>
-                                    <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_large}`}><span className={styles.dashboard__span}>Step 1: </span>Get the bash script</p>
-                                    <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}><Link to='/' className={styles.dashboard__link}>Download </Link>the proof generation bash script to your local machine from Github and run it with the following command.</p>
-                                    <p className={`${styles.dashboard__paragraph} ${styles.dashboard__paragraph_pl_27}`}>
-                                        
-                                    This script will read your private key, so we highly recommend inspecting the source code first
-                            </p>
+                            <ul className={styles.promo__buttons}>
+                                <li className={styles.promo__button}>
+                                    <Button type="large" text="Claim your token" />
                                 </li>
-
-                                <li className={styles.dashboard__item}>
-                                    <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_large}`}><span className={styles.dashboard__span}>Step 2: </span>Generate a proof</p>
-                                    <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Run the script in your machine terminal. Make sure keys that are uploaded to Github are also stored on this machine.</p>
-                                    <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>If everything went well, you should see a base64-encoded string in your terminal — that’s your proof.</p>
-                                    <div className={styles.dashboard__textarea}>
-                                        <TextArea text='./flt-proof.sh' disabled />
-                                    </div>
-                                </li>
-
-                                <li className={styles.dashboard__item}>
-                                    <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_large}`}><span className={styles.dashboard__span}>Step 3: </span>Enter your proof</p> 
-                                    <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Copy the base64-encoded proof from your terminal into the box below. The proof will be sent to the smart contract to unlock your tokens.</p>
-                                    
-                                    <div className={styles.dashboard__textarea}>
-                                        <TextArea rows="4" />
-                                    </div>
+                                <li className={styles.promo__button}>
+                                    <Button 
+                                        type="large" 
+                                        opacity={true} 
+                                        text="Active proposals" 
+                                    />
                                 </li>
                             </ul>
-
-                            <div className={styles.dashboard__button}>
-                                <Button type="large" text="Submit proof"/>
+                        </section>
+                        <section className={styles.future}>
+                            <div className={styles.future__title}>
+                                <Title type="h3" size="medium" text="Govern the future of the Internet" />
                             </div>
-                            <p className={styles.dashboard__paragraph}>
-                                If you are an advanced Ethereum user, you can claim directly from the smart contract.  <Link to='/' className={styles.dashboard__link}>Learn how to do it</Link>
-                            </p></form>
-                        </Dashboard>
+                            <div className={styles.future__line} />
+                            <ul className={styles.future__paragraphs}>
+                                <li className={styles.future__paragraph}>
+                                    <p className={styles.future__text}>
+                                        Fluence enables the new generation of internet infrastructure that is owned and controlled by the community. Crowdsourcing intellectual capacity from a broad community helps to make the best decisions, move quickly, and safeguard project values over the long-term.
+                                    </p>
+                                </li>
+                                <li className={styles.future__paragraph}>
+                                    <p className={styles.future__text}>
+                                        The Fluence DAO was established to collectively manage the project via decentralized governance. It is a digital organization on the Ethereum blockchain which is not constrained by corporate structures, and welcomes anyone’s participation in a transparent decision making process.
+                                    </p>
+                                </li>
+                            </ul>
+                        </section>
+                        
+                        <section className={styles.token}>
+                            <div className={styles.token__container}>
+
+                                
+
+                                <div className={styles.token__title}>
+                                    <Title type="h2" size="large" text="The Fluence token"/>
+                                </div>
+                                
+                                <p className={styles.token__text}>
+                                    The Fluence token (FLT) enables the collective governance of the Fluence project and facilitates escrow, payment and reward distribution
+                                </p>
+                            </div>
+                            <ul className={styles.token__advantages}>
+                                <li className={styles.token__advantage}>
+                                    <div className={`${styles.token__content} ${styles.token__content_small}`}>
+                                        <Title type="h3" text="$50,123,456"/>
+                                        <p className={styles.token__caption}>
+                                            total treasury holdings
+                                        </p>
+                                    </div>
+                                    <Title type="h3" text="Treasury allocation"/>
+                                    <p className={styles["token__card-text"]}>
+                                        Vote for the distribution of the DAO treasury towards marketing, development, or liquidity providing activities.
+                                    </p>
+                                </li>
+                                <li className={styles.token__advantage}>
+                                    <img src={cardImage} alt="card-rating" className={styles.token__image} />
+                                    <Title type="h3" text="Protocol upgrades"/>
+                                    <p className={styles["token__card-text"]}>
+                                        Suggest protocol improvements, new features and participate in the collective token engineering.
+                                    </p>
+                                </li>
+                                <li className={styles.token__advantage}>
+                                    <div className={`${styles.token__content} ${styles.token__content_large}`}>
+                                        <div className={styles.token__dashboard}>
+                                            <img src={linesImage} alt="lines" className={styles.token__lines} />
+                                            <img src={dataImage} alt="data" className={styles.token__data}/>
+                                        </div>
+                                    </div>
+                                    <div className={styles.advantage__flex}>
+                                        <Title type="h3" text="Cloud economy"/>
+                                        <span className={styles.token__note} >coming soon</span>
+                                    </div>
+                                    
+                                    <p className={styles["token__card-text"]}>
+                                        Suggest protocol improvements, new features and participate in the collective token engineering.
+                                    </p>
+                                </li>
+
+                            </ul>
+                            <div className={styles.token__button}>
+                                <Button text="Learn more about FLT" type="small" opacity />
+                            </div>
+                        </section>
+                    </div>
+                    
+                        
+                    
+                    <section className={styles.developer}>
+                        <div className={styles.developer__title}>
+                            <Title size="large" type="h2" text="Developer reward" />
+                        </div>
+                        <p className={styles.developer__text}>
+                            Fluence has distributed FLT rewards to ~10,000 selected Web3 developers and contributors
+                        </p>
+                        <p className={styles.developer__text}>
+                            Claim your reward and join the DAO
+                        </p>
+                        <div className={styles.developer__button}>
+                            <Button size="large" text="Check if I’m eligible" />
+                        </div>
+                        
+                        <p className={styles.developer__paragraph}>
+                            Didn’t receive a reward? <span className={styles.developer__span}><Url  text="Get FLT on Uniswap" /></span>
+                        </p>
+                    </section>
+                    <div className={styles.content}>
+                        <section className={styles.involved}>
+                            <div className={styles.involved__title}>
+                                <Title text="Get involved in the Fluence DAO" type="h2" size="big" />
+                            </div>
+                            
+                            <div className={styles["involved__flex-container"]}>
+                                <div className={styles.involved__left}>
+                                    <ProposalsList cards={cards} />
+                                    
+                                </div>
+                                <div className={styles.delegates}>
+                                    <div className={styles.delegates__title}>
+                                        <Title text="Top delegates" type="h3" />
+                                    </div>
+                                    <div className={styles.delegates__container}>
+                                        <ul className={styles.delegates__list}>
+                                            {users.map(card => (
+                                                <li className={styles.delegates__item}>
+                                                    <div className={styles["card__user-info"]} key={card.id}>
+                                                        <img className={styles.card__avatar} alt={card.name} src={card.url} />
+                                                        <div className={styles.card__info}>
+                                                            <p className={styles.card__name}>{card.name}</p>
+                                                            <span className={styles.card__wallet}>{card.wallet}</span>
+                                                            <span className={`${styles.card__wallet} ${styles.card__wallet_left}`}>{card.votes.length} votes</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className={styles["card__rating-container"]}>
+                                                        <p className={styles.card__rating}>{card.rating}</p>
+                                                        <p className={styles.card__delegator}>
+                                                            {card.delegators.length} delegators
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        
+                                        </ul>
+                                        <div className={styles["delegates__flex-container"]}>
+                                            <Link to="/" className={styles.link} >Show all</Link>
+                                            <Button text={`Become a delegate`} type="small" />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div className={styles.conversation}>
+                                    <div className={styles.conversation__title}>
+                                        <Title  type="h3" size="medium" text="Get involved in conversations" />
+                                    </div>
+                                    <div className={styles.conversation__link}>
+                                        <LinkWithIcon color="white" text="Governance forum" icon={dialog} />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </main>
+            </div> */}
+            
             <Footer />
         </div>
     )

@@ -6,3 +6,9 @@
     border-radius: 22px;
     box-sizing: border-box;
 }
+
+@media screen and (max-width: 768px) {
+    .dashboard {
+        padding: 37px 15px 68px 15px;
+    }
+}

@@ -5,10 +5,8 @@ import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
 import Title from '../../components/Title/Title';
 import Text from '../../components/Text/Text';
-import Button from '../../components/Button/Button';
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Dashboard from '../../components/Dashboard/Dashboard';
-
 import Footer from '../../components/Footer/Footer';
 
 import ConnectWallet from '../../components/ConnectWallet/ConnectWallet';

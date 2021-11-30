@@ -9,7 +9,7 @@ const MainNavigation = ({ width }) => {
 
     // eslint-disable-next-line no-lone-blocks
     return (<>
-        {width < 511
+        {width < 700
             ?
                 <nav>
                     <button className={styles.burger} />

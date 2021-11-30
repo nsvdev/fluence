@@ -35,9 +35,7 @@ const PageBegin = () => {
             <Header />
             <div className="container">
                 <main className="main">
-                    <div className={styles.progress}>
-                        <Progress />
-                    </div>
+
                     <div className={styles.title}>
                         <Title type="h1" size="large" text="Claim your FLT reward"  />
                     </div>
