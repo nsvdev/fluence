@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -11,7 +11,38 @@ import Footer from '../../components/Footer/Footer';
 import { users } from '../../mocks/UserCardMocks'
 import styles from './delegation-page.module.css';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { delegate, delegateTo } from '../../store/actions/governorBravo';
+import { useContract } from '../../hooks/useContract';
+import { governanceContracts } from '../../constants';
+import GovernorBravoDelegator from '../../contracts/GovernorBravoDelegator.json';
+import Comp from '../../contracts/Comp.json'
+import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+import { hideString } from '../../utils';
+import { useNavigate } from 'react-router-dom';
+
 const DelegationPage = () => {
+    const { address, web3, sendTransaction, web3Provider } = useWeb3Connection()
+    const delegateState = useSelector(state => state.governorBravo)
+
+    const [ compound ] = useContract(Comp, governanceContracts.hardhat.token, web3)
+    const [ delegator ] = useContract(GovernorBravoDelegator, governanceContracts.hardhat.delegator, web3)
+
+    const navigate = useNavigate()
+
+    const dispatch = useDispatch()
+    const delegateAction = () => {
+        dispatch(delegate(compound, address, governanceContracts.hardhat.token, address))
+    }
+    const acc = hideString(address)
+
+    useEffect(() => {
+        if (delegateState.delegatee) {
+            navigate('/done')
+        }
+    }, [delegateState.delegatee])
+
     return (
         <div className={styles.background}>
             <Header />
@@ -21,7 +52,7 @@ const DelegationPage = () => {
                         <Progress />
                     </div>
                     <div className={styles.wallet}>
-                        <WalletInfo wallet="wallet" account="0x24343242..534" />
+                        <WalletInfo wallet="wallet" account={acc} />
                     </div>
                     <div className={styles.title}>
                         <Title type="h2" size="large" text="Confirmed! Delegate FLT to complete the claim"  />
@@ -39,12 +70,12 @@ const DelegationPage = () => {
                                 {users.map(user => (
                                     <li className={styles.dashboard__item}
                                         key={user.id}>
-                                            <UserCard card={user}/>
+                                            <UserCard card={user} delegateAction={delegateAction}/>
                                     </li>
                                     
                                 ))}
                                 <li className={styles.dashboard__item}>
-                                    <UserCard self/>
+                                    <UserCard delegateAction={delegateAction} self/>
                                 </li>
                             </ul>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -18,6 +18,7 @@ import { hideString } from '../../utils';
 const ProofPage = () => {
     const walletState = useSelector(state => state.wallet)
     const { address } = walletState
+    const navigate = useNavigate()
 
     return (
         <div className={styles.background}>
@@ -35,7 +36,9 @@ const ProofPage = () => {
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
-                            <form>
+                            <form
+                                onSubmit={() => navigate('/delegation')}
+                            >
                             <ul className={styles.dashboard__list}>
                                 <li className={styles.dashboard__item}>
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_large}`}><span className={styles.dashboard__span}>Step 1: </span>Get the bash script</p>

@@ -12,14 +12,14 @@ export function walletReducer(state = initialState, action) {
 
     switch (action.type) {
         case SET_WEB3_PROVIDER:
-        return {
-            ...state,
-            ...action.payload
-        }
+            return {
+                ...state,
+                ...action.payload
+            }
         case SET_ADDRESS:
             return {
                 ...state,
-                address: action.payload,
+                address: action.payload.address,
             }
         case SET_CHAIN_ID:
             return {

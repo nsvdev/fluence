@@ -16,7 +16,7 @@ import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import './App.css';
 
 function App() {
-  const { address } = useWeb3Connection()
+  const { address, web3, sendTransaction } = useWeb3Connection()
 
   return (
     <div className="App">
