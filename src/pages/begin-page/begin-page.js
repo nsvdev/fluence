@@ -14,10 +14,18 @@ import { useContract } from '../../hooks/useContract';
 import { GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants/contractTypes';
 import { useEffect } from 'react';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+import { useNavigate } from 'react-router-dom';
 
 const PageBegin = () => {
     // const {web3, address} = useWeb3Connection()
     // const [ contract ] = useContract(GovernorBravoDelegate, web3)
+    const navigate = useNavigate()
+
+    const toWallet = () => {
+        setTimeout(() => {
+            navigate('/wallet')
+        }, 600);
+    }
     
     return (
         <div className={styles.background}>
@@ -46,7 +54,12 @@ const PageBegin = () => {
                             </ul>
                             <ul className={styles.buttons}>
                                 <li className={styles.button}>
-                                    <Button type="large" icon="git" text="Check if I’m eligible" />
+                                    <Button
+                                        type="large"
+                                        icon="git"
+                                        text="Check if I’m eligible"
+                                        callback={toWallet}
+                                    />
                                 </li>
                                 <li className={styles.button}>
                                     <span className={styles.span}>or</span>

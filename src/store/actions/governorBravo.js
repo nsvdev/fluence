@@ -1,5 +1,6 @@
 import {
-    DELEGATE_STATUS
+    DELEGATE_STATUS,
+    SET_DELEGATEE
 } from "./types"
 import {
     SUCCESS,
@@ -15,6 +16,11 @@ export const delegateStatus = (status) => ({
     payload: status
 })
 
+export const setDelegatee = (address) => ({
+    type: SET_DELEGATEE,
+    payload: address
+})
+
 export const delegate = (contract, from, to, delegatee) => {
     return async dispatch => {
         console.log('sending: ' + from)
@@ -26,6 +32,7 @@ export const delegate = (contract, from, to, delegatee) => {
 
             console.log(res)
             dispatch(delegateStatus(MINING))
+            dispatch(setDelegatee(delegatee))
         } catch (error) {
             console.log(error)
             dispatch(delegateStatus(REJECTED))

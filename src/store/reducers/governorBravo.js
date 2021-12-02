@@ -1,12 +1,14 @@
 import {
     PROPOSAL_CREATED,
-    DELEGATE_STATUS
+    DELEGATE_STATUS,
+    SET_DELEGATEE
 } from "../actions/types"
 
 const initialState = {
     proposals: [],
     degelationStatus: null,
-    currentProposal: null
+    currentProposal: null,
+    delegatee: null
 }
 
 export function governorBravoReducer(state = initialState, action) {
@@ -21,6 +23,13 @@ export function governorBravoReducer(state = initialState, action) {
             return {
                 ...state,
                 delegationStatus: action.payload
+            }
+        }
+
+        case SET_DELEGATEE: {
+            return {
+                ...state,
+                delegatee: action.payload
             }
         }
 

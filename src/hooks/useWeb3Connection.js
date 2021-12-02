@@ -88,7 +88,7 @@ export const useWeb3Connection = () => {
     useEffect(() => {
         if (provider?.on) {
         const handleAccountsChanged = (accounts) => {
-            // console.log('accountsChanged', accounts)
+            console.log('accountsChanged', accounts)
             dispatch(setAddress(accounts))
         }
         const handleChainChanged = (_hexChainId) => {

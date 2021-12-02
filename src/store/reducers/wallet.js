@@ -19,7 +19,7 @@ export function walletReducer(state = initialState, action) {
         case SET_ADDRESS:
             return {
                 ...state,
-                address: action.payload,
+                address: action.payload.address,
             }
         case SET_CHAIN_ID:
             return {
