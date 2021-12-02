@@ -8,6 +8,9 @@ import Dashboard from '../../components/Dashboard/Dashboard';
 import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
 import Footer from '../../components/Footer/Footer';
 
+import dialogBlack from '../../images/dialog-black.svg';
+import telegramBlack from '../../images/telegram-black.svg';
+import discordBlack from '../../images/discord-black.svg';
 import styles from './not-found-account-page.module.css';
 
 const AccountNotFound = () => {
@@ -44,13 +47,13 @@ const AccountNotFound = () => {
                             <ul className={styles.dashboard__list}>
                                 
                                 <li className={styles.dashboard__item}>
-                                        <LinkWithIcon text="Join the Discord server" icon="discord" />
+                                        <LinkWithIcon text="Join the Discord server" icon={discordBlack} />
                                 </li>
                                 <li className={styles.dashboard__item}>
-                                        <LinkWithIcon text="Connect on Telegram" icon="telegram" />
+                                        <LinkWithIcon text="Connect on Telegram" icon={telegramBlack} />
                                 </li>
                                 <li className={styles.dashboard__item}>
-                                        <LinkWithIcon text="Governance forum" icon="dialog" />
+                                        <LinkWithIcon text="Governance forum" icon={dialogBlack} />
                                 </li>
                                 
 

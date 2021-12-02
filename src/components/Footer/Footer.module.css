@@ -13,6 +13,7 @@
 .footer__container {
     max-width: 1240px;
     margin: 0 auto;
+    padding: 0 10px;
 }
 
 .footer_row_top {
@@ -23,6 +24,7 @@
 
 .footer__flex-container {
     display: flex;
+    min-width: 425px;
     flex-direction: column;
     row-gap: 31px;
 }
@@ -40,10 +42,13 @@
 
 .footer_column_left {
     width: 36%;
+    min-width: 240px;
+    padding-right: 20px;
 }
 
 .footer_column_right {
     width: 48%;
+    min-width: 340px;
 }
 
 .footer__text {
@@ -52,6 +57,7 @@
 
 .footer__form {
     position: relative;
+    min-width: 430px;
 
     width: 48.79%;
     align-self: center;
@@ -126,6 +132,10 @@
     border: none;
 }
 
+.footer__flex-column {
+    display: flex;
+}
+
 .footer__submit:hover {
     cursor: pointer;
 }
@@ -146,7 +156,45 @@
 
 
 .footer__item {
+    margin-bottom: 16px;
+
+    font-family: "Hauora_Bold", sans-serif;
+    font-size: 15px;
+    line-height: 21px;
     color: rgb(204, 204, 204);
+}
+
+.footer__item_disabled {
+    color: rgba(196, 196, 196, 0.5)
+}
+
+.footer__item:last-child {
+    margin-bottom: 0;
+}
+
+.footer__link {
+
+    font-family: "Hauora_Bold", sans-serif;
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(204, 204, 204);
+
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    transition: opacity 0.2s linear 0.2s;
+}
+
+.footer__link:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.footer__caption {
+    color: rgba(196, 196, 196, 0.5);
+    font-size: 10px;
+    line-height: 16px;
+
+    letter-spacing: 1px;
 }
 
 .footer__item_list_arrow {
@@ -159,7 +207,51 @@
     left: 0;
     z-index: 20;
 
-    width: 1058px;
+    width: 73%;
     height: 207px;
     background-image: url("../../images/footer\ corner.png");
+    overflow: hidden;
+}
+
+@media screen and (max-width: 900px) {
+    .footer__container {
+        flex-wrap: wrap;
+    }
+
+    .footer_row_top {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .footer_row_bottom {
+        
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 619px) {
+    .footer_row_bottom {
+        
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 619px) {
+    .footer__form {
+        min-width: 345px;
+    }
+
+    .footer_column_left {
+        display: flex;
+        justify-content: space-between;
+        min-width: 345px;
+    }
+
+    .footer__flex-column {
+        justify-content: space-between;
+        min-width: 345px;
+    }
+    .footer_column_right {
+        flex-wrap: wrap;
+    }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Title from '../Title/Title';
 import Text from '../Text/Text';
@@ -40,7 +41,6 @@ const Footer = () => {
                         />
                         <span className={`${styles.footer__error} ${!isValid && styles.footer__error_show}`}>That doesn’t look like a valid email</span>
                         <button type='submit' className={styles.footer__submit}>
-                            {/* <img src={arrow} alt="button submit" className={styles.footer__span} /> */}
                         </button>
                     </form>
                 </div>
@@ -48,52 +48,60 @@ const Footer = () => {
                     <div className={styles.footer_column_left}>
                         <List title='Learn' >
                             <li className={styles.footer__item}>
-                                Technology
+                                <Link className={styles.footer__link} to="/">Technology</Link>
                             </li>
                             <li className={styles.footer__item}>
-                                FAQ
+                                <Link className={styles.footer__link} to="/">FAQ</Link>
                             </li>
                             <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                Videos
+                                <Link className={styles.footer__link} to="/">Videos</Link>
                             </li>
                         </List>
                         <List title='Build' >
                             <li className={styles.footer__item}>
-                            Quick start 
+                                <Link className={styles.footer__link} to="/">Quick start </Link>
                             </li>
                             <li className={styles.footer__item}>
-                                Tutorials
+                                <Link className={styles.footer__link} to="/">Tutorials</Link>
                             </li>
                             <li className={`${styles.footer__item}`}>
-                                Docs
+                                <Link className={styles.footer__link} to="/">Docs</Link>
                             </li>
                         </List>
                     </div>
                     <div className={styles.footer_column_right}>
-                        <div style={{display: "flex"}}>
+                        <div className={styles["footer__flex-column"]}>
                             <List title='Get involved' >
                                 <li className={styles.footer__item}>
-                                    DAO 
+                                    <Link className={styles.footer__link} to="/">DAO </Link>
                                 </li>
                                 <li className={styles.footer__item}>
-                                    Events
+                                    <Link className={styles.footer__link}  to="/">Events</Link>
                                 </li>
                             </List>
                             <List>
                                 <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                    Telegram
+                                    <Link className={styles.footer__link} to="/">Telegram</Link>
                                 </li>
                                 <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                    Discord
+                                    <Link className={styles.footer__link} to="/">Discord</Link>
                                 </li>
-                                <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                    Forum <span>soon</span>
+                                <li className={`${styles.footer__item} ${styles.footer__item_disabled} ${styles.footer__item_list_arrow}`}>
+                                    Forum <span className={styles.footer__caption}>soon</span>
                                 </li>
                             </List>
                         </div>
                         
                         <List social>
-                            
+                            <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
+                                <Link className={styles.footer__link} to="/">Telegram</Link>
+                            </li>
+                            <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
+                                <Link className={styles.footer__link} to="/">Discord</Link>
+                            </li>
+                            <li className={`${styles.footer__item} ${styles.footer__item_disabled} ${styles.footer__item_list_arrow}`}>
+                                Forum <span className={styles.footer__caption}>soon</span>
+                            </li>
                         </List>
                     </div>
                 </div>

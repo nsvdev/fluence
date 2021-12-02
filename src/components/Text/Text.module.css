@@ -38,3 +38,10 @@
 .text_color_grey {
     color: rgb(204, 204, 204);
 }
+
+@media screen and (max-width:768px) {
+    .text_type_large {
+        font-size: 21px;
+        line-height: 30px;
+    }
+}

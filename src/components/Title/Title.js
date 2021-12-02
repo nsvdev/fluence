@@ -4,7 +4,7 @@ import styles from './Title.module.css';
 
 const Title = ({ size='default', text, type, color='' }) => {
 
-    const styleSize = size === 'large' ? styles.title_size_large : size === 'medium' ? styles.title_size_medium : size === 'default' ? styles.title_size_default : size === 'small' ? styles.title_size_small : '';
+    const styleSize = size === 'large' ? styles.title_size_large : size === 'big' ? styles.title_size_big : size === 'medium' ? styles.title_size_medium : size === 'default' ? styles.title_size_default : size === 'small' ? styles.title_size_small : '';
 
     const styleColor = color === 'black' ? styles.title_color_black : '';
 

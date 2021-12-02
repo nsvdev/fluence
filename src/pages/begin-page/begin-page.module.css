@@ -89,7 +89,7 @@
 
 @media screen and (max-width: 1366px)  {
     .title {
-        max-width: 350px;
+        max-width: 250px;
     }
 }
 
@@ -118,11 +118,30 @@
     }
 
     .definitions {
-        margin-bottom: 56px;
+        margin-bottom: 30px;
     }
+
+    .flex-container {
+        margin-bottom: 120px;
+    }
+
+    .definition {
+        margin-bottom: 40px;
+    }
+    
+    .definition:last-child {
+        margin-bottom: 0;
+    }
+
+    
+    
 }
 
 @media screen and (max-width: 519px) {
+
+    .title {
+        margin-bottom: 60px;
+    }
     .buttons {
         flex-direction: column;
         align-items: center;
@@ -131,5 +150,24 @@
     .button:first-child {
         margin-bottom: 20px;
         margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .buttons {
+        display: block;
+        margin: 0 auto;
+        max-width: 300px;
+    }
+
+    .button {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .button:last-child {
+        margin: 0;
+        text-align: center;
+        margin-right: 50px;
     }
 }

@@ -49,6 +49,20 @@
     letter-spacing: 0.5px;
 }
 
+.paragraph {
+    width: 100%;
+    padding: 14px;
+
+    font-family: 'Roboto_Regular' sans-serif;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgb(0, 0, 0);
+
+    background-color: rgba(196, 196, 196, 0.5);
+
+    border-radius: 5px;
+}
+
 .dashboard__text_size_large {
     font-size: 24px;
     line-height: 33px;
