@@ -13,28 +13,21 @@ import styles from './delegation-page.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { delegate, delegateTo } from '../../store/actions/governorBravo';
-import { useContract } from '../../hooks/useContract';
-import { governanceContracts } from '../../constants';
-import GovernorBravoDelegator from '../../contracts/GovernorBravoDelegator.json';
-import Comp from '../../contracts/Comp.json'
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { hideString } from '../../utils';
 import { useNavigate } from 'react-router-dom';
+import { delegate, getProposalCount } from '../../store/actions/governance';
 
 const DelegationPage = () => {
     const { address, web3, sendTransaction, web3Provider } = useWeb3Connection()
-    const delegateState = useSelector(state => state.governorBravo)
-
-    const [ compound ] = useContract(Comp, governanceContracts.hardhat.token, web3)
-    const [ delegator ] = useContract(GovernorBravoDelegator, governanceContracts.hardhat.delegator, web3)
-
+    const delegateState = useSelector(state => state.governance)
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
-    const delegateAction = () => {
-        dispatch(delegate(compound, address, governanceContracts.hardhat.token, address))
+    const delegateAction = async () => {
+        dispatch(delegate(web3Provider, address, 'kovan'))
     }
+
     const acc = hideString(address)
 
     useEffect(() => {

@@ -1,8 +1,8 @@
 import { combineReducers } from "redux"
 import { walletReducer } from "./wallet"
-import { governorBravoReducer } from "./governorBravo"
+import { governanceReducer } from "./governance"
 
 export default combineReducers({
     wallet: walletReducer,
-    governorBravo: governorBravoReducer
+    governance: governanceReducer
 })

@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export function walletReducer(state = initialState, action) {
-    console.log(action)
 
     switch (action.type) {
         case SET_WEB3_PROVIDER:
