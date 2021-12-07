@@ -4,14 +4,17 @@ import Button from '../Button/Button'
 
 import styles from './UserCard.module.css';
 
-const UserCard = ({ card=null, self=false }) => {
+const UserCard = ({ card=null, self=false, delegateAction }) => {
     
     return (<>
         {self 
             
         ?
             <article className={`${styles.card} ${styles.card_flex}`}>
-                <Button text='Delegate to self' />
+                <Button
+                    callback={delegateAction}
+                    text='Delegate to self'
+                />
             </article>
         :
             <article className={styles.card}>
