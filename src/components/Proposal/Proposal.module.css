@@ -115,19 +115,41 @@
         padding-left: 15px;
         padding-right: 15px;
     }
-    .flex-container {
-        flex-wrap:wrap;
-    }
+
 }
 
 @media screen and (max-width: 1005px) {
     .card__text {
  
-        width: 100%;
+        width: 60%;
     
         font-family: "Hauora_Bold", sans-serif;
         font-size: 19px;
         line-height: 24px;
-        color: rgb(204, 204, 204);
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+
+    .card {
+        padding-left: 40px;
+        padding-right: 30px;
+    }
+    .flex-container {
+        display: block;
+    }
+
+    .card__text {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+    .card {
+        padding-left: 5%;
+        padding-right: 5%;
+
     }
 }

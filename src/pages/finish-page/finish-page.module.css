@@ -23,7 +23,6 @@
 
 .header {
     position: relative;
-    z-index: 2;
     
     margin-bottom: 103px;
 }
@@ -34,7 +33,6 @@
 
 .wallets {
     position: relative;
-    z-index: 2;
 
     margin: 0;
     margin-bottom: 15px;
@@ -50,10 +48,17 @@
 
 .title {
     position: relative;
-    z-index: 2;
+
+    display: flex;
 
     margin: 0;
     margin-bottom: 43px;
+}
+
+.icon-fire {
+    font-size: 80px; 
+    line-height: 88px;
+    margin-left: 10px;
 }
 
 .caption {
@@ -114,4 +119,72 @@
 
 .conversation__title {
     margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1366px) {
+    .icon-fire {
+        font-size: 60px;
+        line-height: 70px;
+    }
+}
+
+@media screen and (max-width: 1275px) {
+    .main {
+        width: 100%;
+    }
+
+    .involved__list {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .buttons {
+        display: block;
+        margin-bottom: 117px;
+    }
+
+    .button {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .button:last-child {
+        margin-bottom: 0;
+        margin-top:20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .icon-fire {
+        font-size: 42px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .wallets {
+        display: block;
+        margin-bottom: 15px;
+        margin-top: 60px;
+    }
+
+    .wallet {
+        margin-right: 0;
+        margin-bottom: 10px;
+        max-width: 200px;
+    }
+
+    .wallet:last-child {
+        margin-bottom: 0;
+    }
+
+    .icon-fire {
+        display: none;
+    }
+
+    .progress {
+        position: absolute;
+        right: 20px;
+    }
 }

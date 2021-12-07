@@ -22,14 +22,14 @@ const Header = ({ button=false }) => {
             window.removeEventListener('resize', resizeCurrentWidth);
         }
         
-    }, [window.innerWidth])
+    }, [])
     return (
         <header className={styles.header}>
             <div className={styles['header__flex-container']}>
                 <img src={logo} alt="fluence logotype" className={styles.header__logo} />
                 <MainNavigation width={currentWidthWindow} />
             </div>
-            {button && currentWidthWindow > 700 && <Button type='default' text='Start building' />}
+            {button && currentWidthWindow > 768 && <Button type='default' text='Start building' />}
         </header>
     )
 }

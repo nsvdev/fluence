@@ -12,6 +12,8 @@
 }
 
 .title {
+    align-items: flex-end;
+    display: flex;
     margin-bottom: 82px;
 }
 
@@ -22,6 +24,10 @@
     background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/285/fire_1f525.png');
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.definition {
+    width: 234px;
 }
 
 .dashboard {
@@ -52,6 +58,12 @@
     max-width: 785px;
 }
 
+.icon-fire {
+    font-size: 80px; 
+    line-height: 88px;
+    margin-left: 10px;
+}
+
 .dashboard__list {
     margin: 0 0 30px;
 }
@@ -75,6 +87,8 @@
 
 .dashboard__paragraph {
 
+    margin: 0;
+
     font-family: "Hauora_Bold", sans-serif;
     font-size: 10px;
     line-height: 16px;
@@ -93,3 +107,54 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 1366px) {
+    .icon-fire {
+        font-size: 60px;
+        line-height: 70px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .icon-fire {
+        font-size: 42px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 1275px) {
+    .main {
+        width: 100%;
+        
+    }
+
+    .dashboard {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 951px) {
+    .dashboard__item {
+        width:100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .dashboard__text {
+        margin-bottom: 30px;
+    }
+    .main {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .wallet,
+    .title,
+    .progress {
+        margin-left: 15px;
+    }
+
+    .dashboard__button {
+        margin-bottom: 56px;
+    }
+}

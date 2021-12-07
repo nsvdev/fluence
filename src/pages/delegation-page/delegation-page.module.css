@@ -21,6 +21,10 @@
     margin-bottom: 161px;
 }
 
+.wallet {
+    max-width: 200px;
+}
+
 .dashboard__text {
     margin: 0;
     margin-bottom: 20px;
@@ -59,4 +63,33 @@
 
 .dashboard__item {
     width:48.06%;
+}
+
+@media screen and (max-width: 1275px) {
+    .main {
+        width: 100%;
+        
+    }
+
+    .dashboard {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 951px) {
+    .dashboard__item {
+        width:100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .main {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .wallet,
+    .title {
+        margin-left: 15px;
+    }
 }

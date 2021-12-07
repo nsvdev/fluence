@@ -11,12 +11,10 @@ import AccountNotFound from '../../pages/not-found-account-page/not-found-accoun
 import LandingPage from '../../pages/landing-page/landing-page';
 import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
-import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 
 import './App.css';
 
 function App() {
-  const { address } = useWeb3Connection()
 
   return (
     <div className="App">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect, useCallback }  from 'react';
 
 
 import { roundNumber } from '../../utils/utils';
@@ -9,16 +9,16 @@ const RatingRange = ({ nice, bad }) => {
 
 const [width, setWidth] = useState('51%')
 
-    const stylesIndicator = () => {
+    const stylesIndicator = useCallback(() => {
         if (nice > 0) {
             return String(nice / (nice + bad) * 100) + "%"
         }
         return '1%'
-    }
+    }, [bad, nice])
 
 useEffect(() => {
     setWidth(stylesIndicator())
-}, [])
+}, [stylesIndicator])
 
     const style = {
         position: "absolute",

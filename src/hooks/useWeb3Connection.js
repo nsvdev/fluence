@@ -38,7 +38,7 @@ export const useWeb3Connection = () => {
         const network = await web3Provider.getNetwork()
 
         dispatch(setWeb3Provider(provider, web3Provider, address, network))
-    }, [])
+    }, [dispatch])
 
     const disconnect = useCallback(
         async function () {
@@ -48,7 +48,7 @@ export const useWeb3Connection = () => {
             }
             dispatch(resetWeb3Provider())
         },
-        [provider]
+        [provider, dispatch]
     )
 
     useEffect(() => {
@@ -85,7 +85,7 @@ export const useWeb3Connection = () => {
             }
         }
     }
-    }, [provider, disconnect])
+    }, [provider, disconnect, dispatch])
 
     return {
         connect,
@@ -93,7 +93,6 @@ export const useWeb3Connection = () => {
         provider,
         web3Provider,
         address,
-        chainId,
-        web3Provider
+        chainId
     }
 }

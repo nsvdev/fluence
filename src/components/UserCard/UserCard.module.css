@@ -1,5 +1,5 @@
 .card {
-    max-width: 423px;
+
     min-height: 251px;
     padding: 27px 29px;
 
@@ -100,4 +100,24 @@
     color: rgb(255, 255, 255);
 
     letter-spacing: 0.5px;
+}
+
+@media screen and (max-width: 460px) {
+    .card {
+        padding: 27px 18px;
+    }
+    .card__wallet {
+        display: block;
+        border: none;
+        padding-right: 0;
+    }
+
+    .card__wallet_left {
+        padding-left: 0;
+        border: none;
+    }
+
+    .card__rating {
+        margin-bottom: 2px;
+    }
 }

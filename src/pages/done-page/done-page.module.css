@@ -47,3 +47,30 @@
 .button {
     margin-bottom: 345px;
 }
+
+@media screen and (max-width: 490px) {
+    .wallets {
+        display: block;
+    }
+    .wallet {
+        margin-right: 0;
+        margin-bottom: 10;
+        max-width: 200px;
+    }
+
+    .wallet:last-child {
+        margin-bottom: 0;
+    
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .progress {
+        position: absolute;
+        right: 20px;
+    }
+
+    .wallets {
+        margin-top: 60px;
+    }
+}

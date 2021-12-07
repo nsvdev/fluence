@@ -1,10 +1,10 @@
 import Button from '../Button/Button'
 import { useWeb3Connection } from '../../hooks/useWeb3Connection'
-import { getChainData } from '../../utils'
+//import { getChainData } from '../../utils'
 
 const ConnectWallet = () => {
-    const { connect, disconnect, chainId, web3Provider } = useWeb3Connection()
-    const chainData = getChainData(chainId)
+    const { connect, disconnect, web3Provider } = useWeb3Connection()
+    //const chainData = getChainData(chainId)
 
     return (
         <>

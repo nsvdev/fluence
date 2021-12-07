@@ -3,7 +3,7 @@
 }
 
 .container {
-    max-width: 200px;
+    min-width: 305px;
 }
 
 .count {
@@ -25,7 +25,7 @@
     position: relative;
 
     align-self: center;
-    width: 127px;
+    width: 75%;
     height: 3px;
 
     background-color:rgb(220, 32, 32);
@@ -46,9 +46,27 @@
 
 }
 
+@media screen and (max-width: 1245px) {
+    .range__body {
+        width: 60%;
+    }
+    .container {
+        min-width: 200px;
+    }
+}
+
 @media screen and (max-width: 1005px) {
     .container {
-        min-width: 305px;
+        width: 100%
+    }
+    /* .range__body {
+        width: 80%;
+    } */
+}
+
+@media screen and (max-width: 750px) {
+    .range {
+        justify-content: center;
     }
     .range__body {
         width: 75%;

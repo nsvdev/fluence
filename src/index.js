@@ -9,17 +9,17 @@ import rootReducer from './store/reducers/root';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
-const composeEnhancers =
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    }) : null;
+// const composeEnhancers =
+//   typeof window === 'object' &&
+//   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+//     }) : null;
 
-const enhancer = composeEnhancers(
-  applyMiddleware(thunk)
-);
+// const enhancer = composeEnhancers(
+//   applyMiddleware(thunk)
+// );
 
-const store = createStore(rootReducer, enhancer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <React.StrictMode>

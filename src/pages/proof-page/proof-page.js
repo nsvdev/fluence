@@ -22,17 +22,20 @@ const ProofPage = () => {
     return (
         <div className={styles.background}>
             <Header />
-            <div className="container">
-                <main className="main">
-                    <div className={styles.progress}>
-                        <Progress />
+            <div className={styles.container}>
+                <main className={styles.main1}>
+                    <div className={styles.content}>
+                        <div className={styles.progress}>
+                            <Progress />
+                        </div>
+                        <div className={styles.wallet}>
+                            <WalletInfo wallet="wallet" account={address ? hideString(address) : ''} />
+                        </div>
+                        <div className={styles.title}>
+                            <Title type="h1" size="large" text="Submit the proof of Github account ownership"  />
+                        </div>
                     </div>
-                    <div className={styles.wallet}>
-                        <WalletInfo wallet="wallet" account={address ? hideString(address) : ''} />
-                    </div>
-                    <div className={styles.title}>
-                        <Title type="h1" size="large" text="Submit the proof of Github account ownership"  />
-                    </div>
+                    
                     <div className={styles.dashboard}>
                         <Dashboard>
                             <form>
