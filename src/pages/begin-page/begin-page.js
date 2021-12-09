@@ -13,15 +13,24 @@ import styles from './begin-page.module.css';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { web2Logout } from '../../store/actions/user';
 
 const PageBegin = () => {
     const navigate = useNavigate()
     const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
 
-    const toWallet = () => {
-        setTimeout(() => {
+    useEffect(() => {
+        if(user.name) {
             navigate('/wallet')
-        }, 600);
+        }
+    }, [user])
+
+    const logOut = () => {
+        dispatch(web2Logout())
+        logout()
     }
     
     return (
@@ -63,7 +72,7 @@ const PageBegin = () => {
                                                 type="large"
                                                 icon="git"
                                                 text="Logout"
-                                                callback={() => logout()}
+                                                callback={() => logOut()}
                                             />
                                             :
                                             <Button
