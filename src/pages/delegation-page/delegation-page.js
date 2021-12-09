@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { hideString } from '../../utils';
 import { useNavigate } from 'react-router-dom';
-import { delegate, getProposalCount } from '../../store/actions/governance';
+import { delegate } from '../../store/actions/governance';
 
 const DelegationPage = () => {
     const { address, web3, sendTransaction, web3Provider } = useWeb3Connection()

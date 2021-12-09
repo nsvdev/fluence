@@ -6,15 +6,15 @@ import './index.css';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer from './store/reducers/root';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import Auth0ProviderRouted from './components/Auth0ProviderRouted/Auth0ProviderRouted';
 
-const composeEnhancers =
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    }) : null;
+const composeEnhancers = 
+  (process.env.NODE_ENV === 'development' 
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
+     null) 
+  || compose;
 
 const enhancer = composeEnhancers(
   applyMiddleware(thunk)
