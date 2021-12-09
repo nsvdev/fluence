@@ -15,11 +15,13 @@ import { GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants/c
 import { useEffect } from 'react';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const PageBegin = () => {
     // const {web3, address} = useWeb3Connection()
     // const [ contract ] = useContract(GovernorBravoDelegate, web3)
     const navigate = useNavigate()
+    const { loginWithRedirect } = useAuth0()
 
     const toWallet = () => {
         setTimeout(() => {
@@ -56,7 +58,7 @@ const PageBegin = () => {
                                         type="large"
                                         icon="git"
                                         text="Check if I’m eligible"
-                                        callback={toWallet}
+                                        callback={() => loginWithRedirect()}
                                     />
                                 </li>
                                 <li className={styles.button}>
