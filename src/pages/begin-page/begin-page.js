@@ -12,6 +12,7 @@ import Footer from '../../components/Footer/Footer'
 import styles from './begin-page.module.css';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const PageBegin = () => {
     const navigate = useNavigate()

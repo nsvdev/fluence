@@ -8,8 +8,13 @@ import Button from '../../components/Button/Button';
 import Footer from '../../components/Footer/Footer';
 
 import styles from './done-page.module.css';
+import { useSelector } from 'react-redux';
+import { hideString } from '../../utils';
 
 const DonePage = () => {
+    const address = useSelector(state => state.wallet.address)
+    const delegatee = useSelector(state => state.governance.delegatee)
+
     return (
         <div className={styles.background}>
             <Header />
@@ -20,10 +25,10 @@ const DonePage = () => {
                     </div>
                     <ul className={styles.wallets}>
                         <li className={styles.wallet}>
-                            <WalletInfo wallet="wallet" account="0x24343242..534" />
+                            <WalletInfo wallet="wallet" account={hideString(address)} />
                         </li>
                         <li className={styles.wallet}>
-                            <WalletInfo wallet="delegate" account="0xD69B...1fE4" />
+                            <WalletInfo wallet="delegate" account={hideString(delegatee)} />
                         </li>
                     </ul>
                     
