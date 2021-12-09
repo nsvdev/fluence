@@ -21,7 +21,7 @@ const PageBegin = () => {
     // const {web3, address} = useWeb3Connection()
     // const [ contract ] = useContract(GovernorBravoDelegate, web3)
     const navigate = useNavigate()
-    const { loginWithRedirect } = useAuth0()
+    const { loginWithRedirect, isAuthenticated, logout } = useAuth0()
 
     const toWallet = () => {
         setTimeout(() => {
@@ -54,12 +54,23 @@ const PageBegin = () => {
                             </ul>
                             <ul className={styles.buttons}>
                                 <li className={styles.button}>
-                                    <Button
-                                        type="large"
-                                        icon="git"
-                                        text="Check if I’m eligible"
-                                        callback={() => loginWithRedirect()}
-                                    />
+                                    {
+                                        isAuthenticated ?
+                                            <Button 
+                                                type="large"
+                                                icon="git"
+                                                text="Logout"
+                                                callback={() => logout()}
+                                            />
+                                            :
+                                            <Button
+                                                type="large"
+                                                icon="git"
+                                                text="Check if I’m eligible"
+                                                callback={() => loginWithRedirect()}
+                                            /> 
+
+                                    }
                                 </li>
                                 <li className={styles.button}>
                                     <span className={styles.span}>or</span>

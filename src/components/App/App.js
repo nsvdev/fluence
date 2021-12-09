@@ -23,18 +23,13 @@ function App() {
   const { address, web3Provider, sendTransaction } = useWeb3Connection()
   const dispatch = useDispatch()
   const error = useSelector(state => state.governance.error)
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0()
+  const { user, isAuthenticated, isLoading } = useAuth0()
 
   useEffect(() => {
     if (web3Provider) {
       dispatch(getProposalCount(web3Provider, 'kovan'))
     }
   },[web3Provider])
-
-  useEffect(() => {
-    const token = getAccessTokenSilently()
-    console.log(token)
-  }, [])
 
   useEffect(() => {
     if (error) {
