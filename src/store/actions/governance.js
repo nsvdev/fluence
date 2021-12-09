@@ -42,9 +42,16 @@ export const delegate = (w3provider, delegatee, network) => {
         let contract = new Contract(governanceContracts[network].token, abis.Comp.abi, w3provider);
         let signed = await contract.connect(signer);
         try {
-            await signed.delegate(delegatee);
-            dispatch(setDelegatee(delegatee))
-            dispatch(delegateStatus(SUCCESS))
+            const tx = await signed.delegate(delegatee);
+            dispatch(delegateStatus(MINING))
+            try {
+                await tx.wait()
+                dispatch(delegateStatus(MINED))
+                dispatch(setDelegatee(delegatee))
+            } catch (error) {
+                dispatch(delegateStatus(FAIL))
+                dispatch(setError(error.message))
+            }
         } catch (error) {
             dispatch(delegateStatus(REJECTED))
             dispatch(setError(error.message))
