@@ -10,16 +10,12 @@ import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
 
 import styles from './begin-page.module.css';
-import { useContract } from '../../hooks/useContract';
-import { GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants/contractTypes';
 import { useEffect } from 'react';
-import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { useNavigate } from 'react-router-dom';
 
 const PageBegin = () => {
-    // const {web3, address} = useWeb3Connection()
-    // const [ contract ] = useContract(GovernorBravoDelegate, web3)
     const navigate = useNavigate()
+    const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
 
     const toWallet = () => {
         setTimeout(() => {
@@ -52,12 +48,31 @@ const PageBegin = () => {
                             </ul>
                             <ul className={styles.buttons}>
                                 <li className={styles.button}>
-                                    <Button
-                                        type="large"
-                                        icon="git"
-                                        text="Check if I’m eligible"
-                                        callback={toWallet}
-                                    />
+                                    {
+                                        isLoading? 
+                                            <Button 
+                                                type="large"
+                                                icon="git"
+                                                text="Loading..."
+                                                disabled
+                                            />
+                                        :
+                                        isAuthenticated ?
+                                            <Button 
+                                                type="large"
+                                                icon="git"
+                                                text="Logout"
+                                                callback={() => logout()}
+                                            />
+                                            :
+                                            <Button
+                                                type="large"
+                                                icon="git"
+                                                text="Check if I’m eligible"
+                                                callback={() => loginWithRedirect()}
+                                            /> 
+
+                                    }
                                 </li>
                                 <li className={styles.button}>
                                     <span className={styles.span}>or</span>
