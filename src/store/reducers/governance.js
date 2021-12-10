@@ -3,7 +3,8 @@ import {
     DELEGATE_STATUS,
     SET_DELEGATEE,
     SET_ERROR,
-    SET_PROPOSAL_COUNT
+    SET_PROPOSAL_COUNT,
+    CLAIM_STATUS
 } from "../actions/types"
 
 const initialState = {
@@ -12,7 +13,10 @@ const initialState = {
     currentProposal: null,
     delegatee: null,
     error: null,
-    proposalCount: null
+    proposalCount: null,
+    claimStatus: null,
+    proofStatus: null,
+    proof: ''
 }
 
 export function governanceReducer(state = initialState, action) {
@@ -44,6 +48,12 @@ export function governanceReducer(state = initialState, action) {
             return {
                 ...state,
                 proposalCount: action.payload 
+            }
+        }
+        case CLAIM_STATUS: {
+            return {
+                ...state,
+                claimStatus: action.payload
             }
         }
         default:

@@ -7,11 +7,11 @@ import {
     DELEGATE_STATUS,
     SET_DELEGATEE,
     SET_PROPOSAL_COUNT,
-    SET_ERROR
+    SET_ERROR,
+    CLAIM_STATUS
 } from "./types"
 
 import {
-    SUCCESS,
     FAIL,
     MINED,
     MINING,
@@ -25,6 +25,11 @@ export const delegateStatus = (status) => ({
     payload: status
 })
 
+export const claimStatus = (status) => ({
+    type: CLAIM_STATUS,
+    payload: status
+})
+
 export const setDelegatee = (address) => ({
     type: SET_DELEGATEE,
     payload: address
@@ -34,6 +39,28 @@ export const setError = (error) => ({
     type: SET_ERROR,
     payload: error
 })
+
+export const claim = (w3provider, proof, network) => {
+    return async dispatch => {
+        let signer = w3provider.getSigner();
+        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let signed = await contract.connect(signer);
+        try {
+            const tx = await signed.claim(proof);
+            dispatch(claimStatus(MINING))
+            try {
+                await tx.wait()
+                dispatch(claimStatus(MINED))
+            } catch (error) {
+                dispatch(claimStatus(FAIL))
+                dispatch(setError(error.message))
+            }
+        } catch (error) {
+            dispatch(claimStatus(REJECTED))
+            dispatch(setError(error.message))
+        }
+    }
+}
 
 export const delegate = (w3provider, delegatee, network) => {
     return async dispatch => {

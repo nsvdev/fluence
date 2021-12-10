@@ -19,5 +19,6 @@ export const governanceContracts = {
         "alpha": "0xd71a3e5E18E286200deadD01A659a94E65A72496",
         "bravo": "0x92AF86f9486218195a9bFd88D4C79Ea65Ba8dF49",
         "delegator": "0x9Ad133aE13Cc735326b10f173075069816A7c8DD",
+        "mock": "0xc76a5739Ea9ca1231ED699A202fd0C49aE21C36a"
     }
 }
