@@ -3,7 +3,11 @@ import {
     DELEGATE_STATUS,
     SET_DELEGATEE,
     SET_ERROR,
-    SET_PROPOSAL_COUNT
+    SET_PROPOSAL_COUNT,
+    CLAIM_STATUS,
+    SET_ALEGIBILITY,
+    SET_LOCAL_PROOF,
+    SET_OWNERSHIP
 } from "../actions/types"
 
 const initialState = {
@@ -12,7 +16,18 @@ const initialState = {
     currentProposal: null,
     delegatee: null,
     error: null,
-    proposalCount: null
+    proposalCount: null,
+    claimStatus: null,
+    proofStatus: null,
+    proof: '',
+    alegibility: {
+        isAlegible: false,
+        checked: false
+    },
+    githubOwnership: {
+        isOwner: false,
+        checked: false
+    }
 }
 
 export function governanceReducer(state = initialState, action) {
@@ -44,6 +59,30 @@ export function governanceReducer(state = initialState, action) {
             return {
                 ...state,
                 proposalCount: action.payload 
+            }
+        }
+        case CLAIM_STATUS: {
+            return {
+                ...state,
+                claimStatus: action.payload
+            }
+        }
+        case SET_ALEGIBILITY: {
+            return {
+                ...state,
+                alegibility: action.payload
+            }
+        }
+        case SET_LOCAL_PROOF: {
+            return {
+                ...state,
+                proof: action.payload
+            }
+        }
+        case SET_OWNERSHIP: {
+            return {
+                ...state,
+                githubOwnership: action.payload
             }
         }
         default:

@@ -1,6 +1,7 @@
 import { Routes, Route} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect } from 'react';
 
 import PageBegin from '../../pages/begin-page/begin-page';
 import FirstStepPage from '../../pages/step1-page/step1-page';
@@ -13,23 +14,30 @@ import LandingPage from '../../pages/landing-page/landing-page';
 import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
-import { useAuth0 } from '@auth0/auth0-react';
 
 import './App.css';
-import { useEffect } from 'react';
 import { getProposalCount } from '../../store/actions/governance';
+import { web2Login } from '../../store/actions/user';
+import { getNetworkName } from '../../store/actions/wallet';
 
 function App() {
-  const { address, web3Provider, sendTransaction } = useWeb3Connection()
+  const { web3Provider } = useWeb3Connection()
   const dispatch = useDispatch()
   const error = useSelector(state => state.governance.error)
-  const { user, isAuthenticated, isLoading } = useAuth0()
+  const networkName = useSelector(state => state.wallet.networkName)
+  const { user, isAuthenticated } = useAuth0()
 
   useEffect(() => {
     if (web3Provider) {
-      dispatch(getProposalCount(web3Provider, 'kovan'))
+      dispatch(getNetworkName(web3Provider))
     }
   },[web3Provider])
+
+  useEffect(() => {
+    if (networkName) {
+      dispatch(getProposalCount(web3Provider, networkName))
+    }
+  }, [networkName])
 
   useEffect(() => {
     if (error) {
@@ -38,7 +46,11 @@ function App() {
     }
   }, [error])
 
-  console.log(user)
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(web2Login(user))
+    }
+  }, [user, isAuthenticated])
   return (
       <div className="App">
         <Routes>
