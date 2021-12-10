@@ -7,7 +7,8 @@ export const initialState = {
     sub: null,
     email: null,
     email_verfified: null,
-    updated_at: null
+    updated_at: null,
+    key: 'test'
 }
 
 export const userReducer = (state=initialState, action) => {

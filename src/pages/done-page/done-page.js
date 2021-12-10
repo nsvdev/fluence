@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -12,16 +12,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hideString } from '../../utils';
 import { claim } from '../../store/actions/governance';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+import { useNavigate } from 'react-router-dom';
 
 const DonePage = () => {
     const { web3Provider } = useWeb3Connection()
     const { address, networkName } = useSelector(state => state.wallet)
     const { delegatee, proof } = useSelector(state => state.governance)
+    const { claimStatus } = useSelector(state => state.governance)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleClaim = () => {
         dispatch(claim(web3Provider, proof, networkName))
     }
+
+    useEffect(() => {
+        if (claimStatus) {
+            navigate('/finish')
+        }
+    }, [claimStatus])
 
     return (
         <div className={styles.background}>

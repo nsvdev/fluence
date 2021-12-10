@@ -12,6 +12,9 @@ export const SET_DELEGATEE = 'gov/SET_DELEGATEE'
 export const SET_PROPOSAL_COUNT = 'gov/SET_PROPOSAL_COUNT'
 export const SET_ERROR = 'gov/SET_ERROR'
 export const CLAIM_STATUS = 'gov/CLAIM_STATUS'
+export const SET_ALEGIBILITY = 'gov/SET_ALEGIBILITY'
+export const SET_LOCAL_PROOF = 'gov/SET_LOCAL_PROOF'
+export const SET_OWNERSHIP = 'gov/SET_OWNERSHIP'
 
 //////----------- USER -----------//////
 export const WEB2_LOGIN = 'user/WEB2_LOGIN'

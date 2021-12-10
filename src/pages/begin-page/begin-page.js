@@ -15,18 +15,32 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { web2Logout } from '../../store/actions/user';
+import { checkGithubKey } from '../../store/actions/governance';
+import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 
 const PageBegin = () => {
     const navigate = useNavigate()
     const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
-    const user = useSelector(state => state.user)
+    const { isAlegible, checked } = useSelector(state => state.governance.alegibility)
+    const { networkName, web3Provider } = useSelector(state => state.wallet)
+    const {name, key} = useSelector(state => state.user)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(user.name) {
-            navigate('/wallet')
+        if(name && web3Provider) {
+            dispatch(checkGithubKey(web3Provider, key, networkName))
         }
-    }, [user])
+    }, [name, web3Provider])
+
+    useEffect(() => {
+        if(checked) {
+            if(isAlegible) {
+                navigate('/proof')
+            } else {
+                navigate('/not-found')
+            }
+        }
+    }, [checked, isAlegible])
 
     const logOut = () => {
         dispatch(web2Logout())

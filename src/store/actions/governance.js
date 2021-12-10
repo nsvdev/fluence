@@ -8,7 +8,10 @@ import {
     SET_DELEGATEE,
     SET_PROPOSAL_COUNT,
     SET_ERROR,
-    CLAIM_STATUS
+    CLAIM_STATUS,
+    SET_ALEGIBILITY,
+    SET_LOCAL_PROOF,
+    SET_OWNERSHIP
 } from "./types"
 
 import {
@@ -19,6 +22,10 @@ import {
     REJECTED
 } from '../../constants'
 
+export const setLocalProof = (proof) => ({
+    type: SET_LOCAL_PROOF,
+    payload: proof
+})
 
 export const delegateStatus = (status) => ({
     type: DELEGATE_STATUS,
@@ -57,6 +64,58 @@ export const claim = (w3provider, proof, network) => {
             }
         } catch (error) {
             dispatch(claimStatus(REJECTED))
+            dispatch(setError(error.message))
+        }
+    }
+}
+
+export const setAlegibility = (alegible) => ({
+    type: SET_ALEGIBILITY,
+    payload: {
+        isAlegible: alegible,
+        checked: true
+    }
+})
+
+export const checkGithubKey = (w3provider, key, network) => {
+    return async dispatch => {
+        let signer = w3provider.getSigner();
+        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let signed = await contract.connect(signer);
+        try {
+            const alegible = await signed.checkKey(key);
+            dispatch(setAlegibility(alegible))
+        } catch (error) {
+            dispatch(setAlegibility({
+                isAlegible: false,
+                checked: true
+            }))
+            dispatch(setError(error.message))
+        }
+    }
+}
+
+export const setGithubOwnership = (owner) => ({
+    type: SET_OWNERSHIP,
+    payload: {
+        isOwner: owner,
+        checked: true
+    }
+})
+
+export const checkGithubOwnership = (w3provider, proof, network) => {
+    return async dispatch => {
+        let signer = w3provider.getSigner();
+        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let signed = await contract.connect(signer);
+        try {
+            const owner = await signed.checkProof(proof);
+            dispatch(setGithubOwnership(owner))
+        } catch (error) {
+            dispatch(setGithubOwnership({
+                isOwner: false,
+                checked: true
+            }))
             dispatch(setError(error.message))
         }
     }
