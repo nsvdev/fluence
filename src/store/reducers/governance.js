@@ -7,7 +7,8 @@ import {
     CLAIM_STATUS,
     SET_ALEGIBILITY,
     SET_LOCAL_PROOF,
-    SET_OWNERSHIP
+    SET_OWNERSHIP,
+    SET_CLAIM_STATUS
 } from "../actions/types"
 
 const initialState = {
@@ -27,7 +28,8 @@ const initialState = {
     githubOwnership: {
         isOwner: false,
         checked: false
-    }
+    },
+    hasClaimed: null
 }
 
 export function governanceReducer(state = initialState, action) {
@@ -83,6 +85,12 @@ export function governanceReducer(state = initialState, action) {
             return {
                 ...state,
                 githubOwnership: action.payload
+            }
+        }
+        case SET_CLAIM_STATUS: {
+            return {
+                ...state,
+                hasClaimed: action.payload
             }
         }
         default:

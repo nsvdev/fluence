@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect } from 'react';
 
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import PageBegin from '../../pages/begin-page/begin-page';
 import FirstStepPage from '../../pages/step1-page/step1-page';
 import ProofPage from '../../pages/proof-page/proof-page';
@@ -14,10 +17,11 @@ import LandingPage from '../../pages/landing-page/landing-page';
 import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 
-import './App.css';
 import { getProposalCount } from '../../store/actions/governance';
 import { web2Login } from '../../store/actions/user';
 import { getNetworkName } from '../../store/actions/wallet';
+import { ToastContainer, toast } from 'react-toastify';
+import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 
 import {
   ROUTE_FLUENCE,
@@ -31,6 +35,7 @@ import {
   ROUTE_NOT_FOUND,
   ROUTE_CLAIMED
 } from '../../constants/routes'
+import { catchError } from '../../utils';
 
 function App() {
 
@@ -60,8 +65,7 @@ function App() {
 
   useEffect(() => {
     if (error) {
-      // todo: replace with a toast
-      alert(error)
+      toast(catchError(error, true))
     }
   }, [error])
 
@@ -74,6 +78,7 @@ function App() {
 
   return (
       <div className="App">
+        <ToastContainer />
         <Routes>
           <Route path={ROUTE_FLUENCE} element={<LandingPage />} />
           <Route path={ROUTE_INDEX} element={<PageBegin/>} />

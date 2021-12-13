@@ -14,8 +14,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { web2Logout } from '../../store/actions/user';
-import { checkGithubKey } from '../../store/actions/governance';
-import { ROUTE_NOT_FOUND, ROUTE_WALLET } from '../../constants/routes';
+import { checkGithubKey, checkHasClaimed } from '../../store/actions/governance';
+import { ROUTE_CLAIMED, ROUTE_NOT_FOUND, ROUTE_WALLET } from '../../constants/routes';
 
 const PageBegin = () => {
     const navigate = useNavigate()
@@ -23,6 +23,7 @@ const PageBegin = () => {
     const { isAlegible, checked } = useSelector(state => state.governance.alegibility)
     const { networkName, web3Provider } = useSelector(state => state.wallet)
     const { name, key } = useSelector(state => state.user)
+    const { hasClaimed } = useSelector(state => state.governance)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -30,6 +31,12 @@ const PageBegin = () => {
             dispatch(checkGithubKey(web3Provider, key, networkName))
         }
     }, [name, web3Provider])
+
+    useEffect(() => {
+        if (web3Provider && networkName) {
+            dispatch(checkHasClaimed(web3Provider, networkName))
+        }
+    }, [web3Provider, networkName])
 
     useEffect(() => {
         if(checked) {
@@ -40,6 +47,15 @@ const PageBegin = () => {
             }
         }
     }, [checked, isAlegible])
+
+    useEffect(() => {
+        if(hasClaimed) {
+            navigate(ROUTE_CLAIMED)
+        }
+
+    }, [hasClaimed])
+
+    console.log(hasClaimed)
 
     const logOut = () => {
         dispatch(web2Logout())
