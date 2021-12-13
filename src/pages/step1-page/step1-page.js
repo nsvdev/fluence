@@ -14,6 +14,7 @@ import ConnectWallet from '../../components/ConnectWallet/ConnectWallet';
 
 import styles from './step1-page.module.css';
 import { useSelector } from 'react-redux';
+import { ROUTE_PROOF } from '../../constants/routes';
 
 const FirstStepPage = () => {
     const navigate = useNavigate()
@@ -22,7 +23,7 @@ const FirstStepPage = () => {
 
     useEffect(() => {
         if (address) {
-            // navigate('/proof')
+            navigate(ROUTE_PROOF)
         }
     }, [address])
 

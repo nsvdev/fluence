@@ -15,14 +15,14 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { web2Logout } from '../../store/actions/user';
 import { checkGithubKey } from '../../store/actions/governance';
-import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+import { ROUTE_NOT_FOUND, ROUTE_WALLET } from '../../constants/routes';
 
 const PageBegin = () => {
     const navigate = useNavigate()
     const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
     const { isAlegible, checked } = useSelector(state => state.governance.alegibility)
     const { networkName, web3Provider } = useSelector(state => state.wallet)
-    const {name, key} = useSelector(state => state.user)
+    const { name, key } = useSelector(state => state.user)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -34,9 +34,9 @@ const PageBegin = () => {
     useEffect(() => {
         if(checked) {
             if(isAlegible) {
-                navigate('/proof')
+                navigate(ROUTE_WALLET)
             } else {
-                navigate('/not-found')
+                navigate(ROUTE_NOT_FOUND)
             }
         }
     }, [checked, isAlegible])

@@ -155,7 +155,7 @@ export const getProposalCount = (w3provider, network) => {
         let contract = new Contract(governanceContracts[network].alpha, abis.GovernorAlpha.abi, w3provider);
         try {
           const count = await contract.proposalCount();
-          dispatch(setProposalCount(count))
+          dispatch(setProposalCount(count.toNumber()))
         } catch (error) {
           dispatch(setProposalCount(0))
           dispatch(setError(error.message))

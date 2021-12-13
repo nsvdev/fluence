@@ -13,6 +13,7 @@ import { hideString } from '../../utils';
 import { claim } from '../../store/actions/governance';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE_FINISH } from '../../constants/routes';
 
 const DonePage = () => {
     const { web3Provider } = useWeb3Connection()
@@ -28,7 +29,7 @@ const DonePage = () => {
 
     useEffect(() => {
         if (claimStatus) {
-            navigate('/finish')
+            navigate(ROUTE_FINISH)
         }
     }, [claimStatus])
 
