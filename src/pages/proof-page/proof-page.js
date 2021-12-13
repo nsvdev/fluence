@@ -43,9 +43,6 @@ const ProofPage = () => {
         }
     }, [checked, isOwner])
 
-
-    const { values, handleChange } = useFormWithValidation();
-
     return (
         <div className={styles.background}>
             <Header />

@@ -28,22 +28,24 @@ export const isTransactionMined = async(w3provider, transactionHash) => {
     }
   }
   
-export function catchError(error) {
-    console.error(error.message);
+export function catchError(error, isMessage = false) {
+    const message = isMessage ? error : error.message
   
     // try to extract error message, otherwise return raw error
     let formatted_error;
   
-    if (error.message.startsWith("invalid ENS name")) {
+    if (message.startsWith("invalid ENS name")) {
       formatted_error = "Missing or invalid parameter.";
-    } else if (error.message.startsWith("invalid BigNumber string")) {
+    } else if(message.startsWith("JsonRpcEngine")) {
+      formatted_error = "Cannot connect to the blockchain."
+    } else if (message.startsWith("invalid BigNumber string")) {
       formatted_error = "Invalid number parameter."
     } else {
       try {
-        let errors = JSON.stringify(error).match(EXTRACT_ERROR_MESSAGE);
+        let errors = JSON.stringify(message).match(EXTRACT_ERROR_MESSAGE);
         formatted_error = errors[errors.length - 1];
       } catch (e) {
-        formatted_error = error.message;
+        formatted_error = message;
       }
     }
   

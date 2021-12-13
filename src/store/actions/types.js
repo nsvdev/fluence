@@ -15,6 +15,7 @@ export const CLAIM_STATUS = 'gov/CLAIM_STATUS'
 export const SET_ALEGIBILITY = 'gov/SET_ALEGIBILITY'
 export const SET_LOCAL_PROOF = 'gov/SET_LOCAL_PROOF'
 export const SET_OWNERSHIP = 'gov/SET_OWNERSHIP'
+export const SET_CLAIM_STATUS = 'gov/SET_CLAIM_STATUS'
 
 //////----------- USER -----------//////
 export const WEB2_LOGIN = 'user/WEB2_LOGIN'

@@ -11,7 +11,8 @@ import {
     CLAIM_STATUS,
     SET_ALEGIBILITY,
     SET_LOCAL_PROOF,
-    SET_OWNERSHIP
+    SET_OWNERSHIP,
+    SET_CLAIM_STATUS
 } from "./types"
 
 import {
@@ -91,6 +92,28 @@ export const checkGithubKey = (w3provider, key, network) => {
                 checked: true
             }))
             dispatch(setError(error.message))
+        }
+    }
+}
+
+export const setHasClaimed = (hasClaimed) => ({
+    type: SET_CLAIM_STATUS,
+    payload: hasClaimed
+})
+
+export const checkHasClaimed = (w3provider, network) => {
+    console.log(network)
+
+    return async dispatch => {
+        let signer = w3provider.getSigner();
+        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let signed = await contract.connect(signer);
+        try {
+            const hasClaimed = await signed.checkInteraction();
+            dispatch(setHasClaimed(hasClaimed))
+        } catch (error) {
+            dispatch(setError(error.message))
+            dispatch(setHasClaimed(false))
         }
     }
 }
