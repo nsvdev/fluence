@@ -28,7 +28,7 @@ const cards = [
         date: 'Jun 24rd, 2021'
     },
     {
-        id: 12344,
+        id: 121344,
         status: 'executed',
         nice: 4000,
         bad: 500,
@@ -36,7 +36,7 @@ const cards = [
         date: 'Jun 24rd, 2021'
     },
     {
-        id: 12344,
+        id: 123244,
         status: 'in voting',
         nice: 2200,
         bad: 1500,
@@ -65,7 +65,7 @@ const LandingPage = () => {
 
     return (
         <div className={styles.overflow}>
-            {/* <Header button />
+            <Header button />
             <div className={styles.container}>
                 <main className={styles.main1}>
                     <div className={styles.content}>
@@ -203,7 +203,7 @@ const LandingPage = () => {
                                     <div className={styles.delegates__container}>
                                         <ul className={styles.delegates__list}>
                                             {users.map(card => (
-                                                <li className={styles.delegates__item}>
+                                                <li className={styles.delegates__item} key={card.id}>
                                                     <div className={styles["card__user-info"]} key={card.id}>
                                                         <img className={styles.card__avatar} alt={card.name} src={card.url} />
                                                         <div className={styles.card__info}>
@@ -241,7 +241,7 @@ const LandingPage = () => {
                         </section>
                     </div>
                 </main>
-            </div> */}
+            </div>
             
             <Footer />
         </div>

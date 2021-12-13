@@ -14,7 +14,9 @@ import Footer from '../../components/Footer/Footer';
 import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
 import { hideString } from '../../utils';
+
 import { checkGithubOwnership, setLocalProof } from '../../store/actions/governance';
+
 
 const ProofPage = () => {
     const { address, web3Provider, networkName } = useSelector(state => state.wallet)
@@ -40,20 +42,26 @@ const ProofPage = () => {
         }
     }, [checked, isOwner])
 
+
+    const { values, handleChange } = useFormWithValidation();
+
     return (
         <div className={styles.background}>
             <Header />
-            <div className="container">
-                <main className="main">
-                    <div className={styles.progress}>
-                        <Progress />
+            <div className={styles.container}>
+                <main className={styles.main1}>
+                    <div className={styles.content}>
+                        <div className={styles.progress}>
+                            <Progress />
+                        </div>
+                        <div className={styles.wallet}>
+                            <WalletInfo wallet="wallet" account={address ? hideString(address) : ''} />
+                        </div>
+                        <div className={styles.title}>
+                            <Title type="h1" size="large" text="Submit the proof of Github account ownership"  />
+                        </div>
                     </div>
-                    <div className={styles.wallet}>
-                        <WalletInfo wallet="wallet" account={address ? hideString(address) : ''} />
-                    </div>
-                    <div className={styles.title}>
-                        <Title type="h1" size="large" text="Submit the proof of Github account ownership"  />
-                    </div>
+                    
                     <div className={styles.dashboard}>
                         <Dashboard>
                             <form
@@ -83,7 +91,9 @@ const ProofPage = () => {
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Copy the base64-encoded proof from your terminal into the box below. The proof will be sent to the smart contract to unlock your tokens.</p>
                                     
                                     <div className={styles.dashboard__textarea}>
+
                                         <TextArea onChange={(e) => setProofValue(e.target.value)} name="token" rows="4" />
+
                                     </div>
                                 </li>
                             </ul>

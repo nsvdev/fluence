@@ -50,11 +50,12 @@ const FinishPage = () => {
                 <Header button />
             </div>
             
+            
             <div className="container">
-                <main className="main">
+                <main className={` main ${styles.main}`}>
                     <div className={styles.progress}>
                         <Progress />
-                    </div>
+                    </div> 
                     <ul className={styles.wallets}>
                         <li className={styles.wallet}>
                             <WalletInfo wallet="wallet" account="0x24343242..534" />
@@ -65,7 +66,8 @@ const FinishPage = () => {
                     </ul>
                     
                     <div className={styles.title}>
-                        <Title type="h1" size="large" text="500 FLT claimed 🔥"  />
+                        <Title type="h1" size="large" text="500 FLT claimed "  />
+                        <span className={styles["icon-fire"]}> 🔥</span>
                     </div>
 
                     <p className={styles.caption}>
@@ -73,7 +75,7 @@ const FinishPage = () => {
                     </p>
                     <ul className={styles.buttons}>
                         <li className={styles.button}>
-                            <Button type="large" text="Claim 500 FLT" />
+                            <Button type="large" text="Display FLT in Metamask" />
                         </li>
                         <li className={styles.button}>
                             <Button type="large" icon="twitter" text="Share on Twitter" />

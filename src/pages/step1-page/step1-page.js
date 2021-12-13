@@ -30,22 +30,26 @@ const FirstStepPage = () => {
         <div className={styles.background}>
             <Header />
             <div className="container">
-                <main className="main">
+                <main className={`main ${styles.main}`}>
                     <div className={styles.progress}>
                         <Progress />
                     </div>
                     <div className={styles.title}>
                         <Title type="h1" size="large" text="You are in! " icon="" />
+                        <span className={styles["icon-fire"]}> 🔥</span>
                     </div>
                     <div className={styles.dashboard}>
                         <Dashboard>
                             <div className={styles["dashboard__flex-container"]}>
                                 <div className={styles.dashboard__logo}/>
-                                <DefinitionList dd="500 FLT" dt="ready to be claimed" colorD="orange" colorT="black"/>
+                                <div className={styles.definition}>
+                                    <DefinitionList dd="500 FLT" dt="ready to be claimed" colorD="orange" colorT="black"/>
+                                </div>
+                                
                             </div>
                             <div className={styles.dashboard__text}>
                                 <Text color="black" type="large">
-                                    Claiming will require an Ethereum wallet and performing basic tasks with terminal on your computer. :name_badge:
+                                    Claiming will require an Ethereum wallet and performing basic tasks with terminal on your computer.
                                 </Text>
                             </div>
                             <ol className={styles.dashboard__list}>

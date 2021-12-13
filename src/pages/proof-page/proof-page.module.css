@@ -7,6 +7,21 @@
     background-size: 100% 100%;
 }
 
+.container {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.content {
+    padding: 0 15px;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.main1 {
+    width: 100%;
+}
+
 .progress {
     margin-bottom: 30px;
 }
@@ -16,7 +31,9 @@
 }
 
 .dashboard {
-    margin-bottom: 161px;
+    max-width: 1240px;
+    margin: 0 auto 161px;
+    overflow: hidden;
 }
 
 .dashboard__flex-container {

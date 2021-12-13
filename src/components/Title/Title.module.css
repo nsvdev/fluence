@@ -64,4 +64,14 @@
         font-size: 30px;
         line-height: 36px;
     }
+
+    .title_size_medium {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .title_size_default {
+        font-size: 19px;
+        line-height: 23px;
+    }
 }

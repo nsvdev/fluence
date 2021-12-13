@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Header from '../../components/Header/Header';
-import Progress from '../../components/Progress/Progress';
 import Title from '../../components/Title/Title';
 import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';

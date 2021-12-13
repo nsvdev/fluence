@@ -48,25 +48,24 @@
 .button_icon {
     position: relative;
 
-    padding-left: 70px;
-    padding-right: 50px;
+    padding-left: 55px;
     
 }
 
 .button_icon::before {
     content: '';
     position: absolute;
-    top: 13px;
-    left: 40px;
-
-    width: 21px;
-    height: 20px;
-    
 }
+
+
 
 .button_icon_git::before {
     background-image: url('../../images/github.svg');
     transition: all 0.2s linear 0.2s;
+    width: 20.5px;
+    height: 20px;
+    top: 16px;
+    left: 20px;
 }
 
 .button_icon_git:hover::before {
@@ -78,6 +77,10 @@
     transition: all 0.2s linear 0.2s;
     background-position: center;
     background-repeat: no-repeat;
+    width: 16px;
+    height: 13px;
+    top: 20px;
+    left: 30px;
 }
 
 .button_icon_twitter:hover::before {

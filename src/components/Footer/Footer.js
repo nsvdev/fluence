@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 import Title from '../Title/Title';
@@ -7,13 +7,19 @@ import List from '../List/List';
 
 import { useFormWithValidation } from '../../hooks/useForm';
 
-
+import discord from '../../images/discord.svg';
+import twitter from '../../images/twitter.svg';
+import telegram from '../../images/telegram.svg';
+import youtube from '../../images/youtube.svg';
 import styles from './Footer.module.css';
 
 const Footer = () => {
 
-    const { values, handleChange, isValid } = useFormWithValidation();
+    const { values, handleChange, isValid, resetForm } = useFormWithValidation();
 
+    useEffect(() => {
+        resetForm()
+    }, [])
     const handleSubmit = (e) => {
         e.preventDefault();
     }
@@ -31,7 +37,7 @@ const Footer = () => {
                     </div>
                     <form className={styles.footer__form} onSubmit={handleSubmit}>
                         <input 
-                            className={`${styles.footer__input} ${!isValid && styles.footer__input_type_error}`}
+                            className={`${styles.footer__input} ${!isValid && values.email  && styles.footer__input_type_error}`}
                             type='email'
                             placeholder='Enter email'
                             name='email'
@@ -39,8 +45,8 @@ const Footer = () => {
                             value={values.email || ''}
                             onChange={handleChange}
                         />
-                        <span className={`${styles.footer__error} ${!isValid && styles.footer__error_show}`}>That doesn’t look like a valid email</span>
-                        <button type='submit' className={styles.footer__submit}>
+                        <span className={`${styles.footer__error} ${!isValid && values.email && styles.footer__error_show}`}>That doesn’t look like a valid email</span>
+                        <button type='submit' className={styles.footer__submit} disabled={!isValid}>
                         </button>
                     </form>
                 </div>
@@ -79,30 +85,46 @@ const Footer = () => {
                                     <Link className={styles.footer__link}  to="/">Events</Link>
                                 </li>
                             </List>
-                            <List>
-                                <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                    <Link className={styles.footer__link} to="/">Telegram</Link>
+                            <div style={{"marginTop": "20px"}}>
+                                <List>
+                                    <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
+                                        <Link className={styles.footer__link} to="/">Telegram</Link>
+                                    </li>
+                                    <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
+                                        <Link className={styles.footer__link} to="/">Discord</Link>
+                                    </li>
+                                    <li className={`${styles.footer__item} ${styles.footer__item_disabled} ${styles.footer__item_list_arrow}`}>
+                                        Forum <span className={styles.footer__caption}>soon</span>
+                                    </li>
+                                </List>
+                            </div>
+                            
+                        </div>
+                        <div className={styles["footer__column_flex-end"]}>
+                            <List social>
+                                <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
+                                    <Link className={styles.footer__link} to="/">
+                                        <img src={discord} alt="icon"/>
+                                    </Link>
                                 </li>
-                                <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                    <Link className={styles.footer__link} to="/">Discord</Link>
+                                <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
+                                    <Link className={styles.footer__link} to="/">
+                                    <img src={twitter} alt="icon"/>
+                                    </Link>
                                 </li>
-                                <li className={`${styles.footer__item} ${styles.footer__item_disabled} ${styles.footer__item_list_arrow}`}>
-                                    Forum <span className={styles.footer__caption}>soon</span>
+                                <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
+                                    <Link className={styles.footer__link} to="/">
+                                        <img src={telegram} alt="icon"/>
+                                    </Link>
+                                </li>
+                                <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
+                                    <Link className={styles.footer__link} to="/">
+                                    <img src={youtube} alt="icon"/>
+                                    </Link>
                                 </li>
                             </List>
                         </div>
                         
-                        <List social>
-                            <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                <Link className={styles.footer__link} to="/">Telegram</Link>
-                            </li>
-                            <li className={`${styles.footer__item} ${styles.footer__item_list_arrow}`}>
-                                <Link className={styles.footer__link} to="/">Discord</Link>
-                            </li>
-                            <li className={`${styles.footer__item} ${styles.footer__item_disabled} ${styles.footer__item_list_arrow}`}>
-                                Forum <span className={styles.footer__caption}>soon</span>
-                            </li>
-                        </List>
                     </div>
                 </div>
             </div>

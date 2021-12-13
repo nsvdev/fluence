@@ -13,7 +13,6 @@ import AccountNotFound from '../../pages/not-found-account-page/not-found-accoun
 import LandingPage from '../../pages/landing-page/landing-page';
 import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
-import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 
 import './App.css';
 import { getProposalCount } from '../../store/actions/governance';
@@ -21,7 +20,9 @@ import { web2Login } from '../../store/actions/user';
 import { getNetworkName } from '../../store/actions/wallet';
 
 function App() {
+
   const { web3Provider } = useWeb3Connection()
+
   const dispatch = useDispatch()
   const error = useSelector(state => state.governance.error)
   const networkName = useSelector(state => state.wallet.networkName)
@@ -46,11 +47,13 @@ function App() {
     }
   }, [error])
 
+
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(web2Login(user))
     }
   }, [user, isAuthenticated])
+
   return (
       <div className="App">
         <Routes>

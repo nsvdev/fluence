@@ -10,6 +10,7 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import Auth0ProviderRouted from './components/Auth0ProviderRouted/Auth0ProviderRouted';
 
+
 const composeEnhancers = 
   (process.env.NODE_ENV === 'development' 
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
@@ -20,7 +21,8 @@ const enhancer = composeEnhancers(
   applyMiddleware(thunk)
 )
 
-const store = createStore(rootReducer, enhancer)
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <React.StrictMode>

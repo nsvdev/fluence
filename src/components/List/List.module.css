@@ -12,6 +12,14 @@
     list-style-image: url('../../images/list-image.svg');
 }
 
+.list_social {
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    list-style: none;
+}
+
 .container_jc_end {
     justify-content: flex-end;
 }

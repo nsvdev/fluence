@@ -40,7 +40,7 @@ const DelegationPage = () => {
         <div className={styles.background}>
             <Header />
             <div className="container">
-                <main className="main">
+                <main className={`main ${styles.main}`}>
                     <div className={styles.progress}>
                         <Progress />
                     </div>
