@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
@@ -14,10 +14,14 @@ import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
 import { useSelector } from 'react-redux';
 import { hideString } from '../../utils';
+import { useFormWithValidation } from '../../hooks/useForm'
 
 const ProofPage = () => {
     const walletState = useSelector(state => state.wallet)
     const { address } = walletState
+
+
+    const { values, handleChange } = useFormWithValidation();
 
     return (
         <div className={styles.background}>
@@ -63,7 +67,7 @@ const ProofPage = () => {
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Copy the base64-encoded proof from your terminal into the box below. The proof will be sent to the smart contract to unlock your tokens.</p>
                                     
                                     <div className={styles.dashboard__textarea}>
-                                        <TextArea name="token" rows="4" />
+                                        <TextArea name="token" value={values.token} handleChange={handleChange}  rows="4" />
                                     </div>
                                 </li>
                             </ul>

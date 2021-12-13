@@ -648,6 +648,11 @@
     .promo__button:last-child {
         margin: 0;
     }
+
+    .token__content {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 
 @media screen and (max-width: 540px) {
@@ -686,6 +691,19 @@
         margin-bottom: 120px;
     }
 
+    .advantage__flex {
+        display: block;
+    }
+
+    .token__caption {
+        font-size: 7px;
+        line-height: 10px;
+    }
+
+    .token__title {
+        padding-top: 350px;
+    }
+
     .developer {
         margin-bottom: 120px;
     }
@@ -701,5 +719,22 @@
 
     .involved__left {
         margin-bottom: 71px;
+    }
+
+    @media screen and (max-width: 400px) {
+        .token__advantages {
+            justify-content: flex-start;
+            padding-top: 100px;
+        }
+
+        .developer__title {
+            margin-bottom: 22px;
+        }
+
+        .token__title {
+            padding-top: 480px;
+
+            text-align: center;
+        }
     }
 }
