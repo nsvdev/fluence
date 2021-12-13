@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -12,14 +13,34 @@ import Footer from '../../components/Footer/Footer';
 
 import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
-import { useSelector } from 'react-redux';
 import { hideString } from '../../utils';
-import { useFormWithValidation } from '../../hooks/useForm'
+
+import { checkGithubOwnership, setLocalProof } from '../../store/actions/governance';
+
 
 const ProofPage = () => {
-    const walletState = useSelector(state => state.wallet)
-    const { address } = walletState
+    const { address, web3Provider, networkName } = useSelector(state => state.wallet)
+    const { checked, isOwner } = useSelector(state => state.governance.githubOwnership)
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [ proofValue, setProofValue ] = useState('')
+
+    const handleForm = (e) => {
+        e.preventDefault()
+        dispatch(setLocalProof(proofValue))
+        dispatch(checkGithubOwnership(web3Provider, proofValue, networkName))
+    }
+
+    useEffect(() => {
+        if (checked) {
+            if(isOwner) {
+                navigate('/delegation')
+            } else {
+                navigate('/not-found')
+            }
+        }
+    }, [checked, isOwner])
 
 
     const { values, handleChange } = useFormWithValidation();
@@ -44,7 +65,7 @@ const ProofPage = () => {
                     <div className={styles.dashboard}>
                         <Dashboard>
                             <form
-                                onSubmit={() => navigate('/delegation')}
+                                onSubmit={handleForm}
                             >
                             <ul className={styles.dashboard__list}>
                                 <li className={styles.dashboard__item}>
@@ -70,7 +91,9 @@ const ProofPage = () => {
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Copy the base64-encoded proof from your terminal into the box below. The proof will be sent to the smart contract to unlock your tokens.</p>
                                     
                                     <div className={styles.dashboard__textarea}>
-                                        <TextArea name="token" value={values.token} handleChange={handleChange}  rows="4" />
+
+                                        <TextArea onChange={(e) => setProofValue(e.target.value)} name="token" rows="4" />
+
                                     </div>
                                 </li>
                             </ul>

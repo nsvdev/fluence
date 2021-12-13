@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -8,8 +8,30 @@ import Button from '../../components/Button/Button';
 import Footer from '../../components/Footer/Footer';
 
 import styles from './done-page.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { hideString } from '../../utils';
+import { claim } from '../../store/actions/governance';
+import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+import { useNavigate } from 'react-router-dom';
 
 const DonePage = () => {
+    const { web3Provider } = useWeb3Connection()
+    const { address, networkName } = useSelector(state => state.wallet)
+    const { delegatee, proof } = useSelector(state => state.governance)
+    const { claimStatus } = useSelector(state => state.governance)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleClaim = () => {
+        dispatch(claim(web3Provider, proof, networkName))
+    }
+
+    useEffect(() => {
+        if (claimStatus) {
+            navigate('/finish')
+        }
+    }, [claimStatus])
+
     return (
         <div className={styles.background}>
             <Header />
@@ -20,10 +42,10 @@ const DonePage = () => {
                     </div>
                     <ul className={styles.wallets}>
                         <li className={styles.wallet}>
-                            <WalletInfo wallet="wallet" account="0x24343242..534" />
+                            <WalletInfo wallet="wallet" account={hideString(address)} />
                         </li>
                         <li className={styles.wallet}>
-                            <WalletInfo wallet="delegate" account="0xD69B...1fE4" />
+                            <WalletInfo wallet="delegate" account={hideString(delegatee)} />
                         </li>
                     </ul>
                     
@@ -36,7 +58,7 @@ const DonePage = () => {
                     </p>
                     
                     <div className={styles.button}>
-                        <Button text='Claim 500 FLT' />
+                        <Button callback={handleClaim} text='Claim 500 FLT' />
                     </div>
                 </main>
             </div>
