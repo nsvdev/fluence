@@ -1,4 +1,5 @@
 import { Routes, Route} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 import PageBegin from '../../pages/begin-page/begin-page';
@@ -13,8 +14,28 @@ import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 
 import './App.css';
+import { useEffect } from 'react';
+import { getProposalCount } from '../../store/actions/governance';
 
 function App() {
+
+  const { address, web3Provider, sendTransaction } = useWeb3Connection()
+  const dispatch = useDispatch()
+  const error = useSelector(state => state.governance.error)
+
+  useEffect(() => {
+    if (web3Provider) {
+      dispatch(getProposalCount(web3Provider, 'kovan'))
+    }
+  },[web3Provider])
+
+  useEffect(() => {
+    if (error) {
+      // todo: replace with a toast
+      alert(error)
+    }
+  }, [error])
+
 
   return (
     <div className="App">

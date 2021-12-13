@@ -34,6 +34,22 @@ const supportedChains = [
     //   },
     // },
     {
+      name: 'Hardhat',
+      short_name: 'hat',
+      chain: 'ETH',
+      network: 'hardhat',
+      chain_id: 31337,
+      network_id: 31337,
+      rpc_url: 'http://localhost:8545',
+      native_currency: {
+        symbol: 'ETH',
+        name: 'Ethereum',
+        decimals: '18',
+        contractAddress: '',
+        balance: '',
+      },
+    },
+    {
       name: 'Ethereum Rinkeby',
       short_name: 'rin',
       chain: 'ETH',

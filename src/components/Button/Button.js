@@ -11,7 +11,6 @@ const Button = ({
 }) => {
     if (type === 'default') return <button className={`${styles.button} ${styles.button_height_default}`} onClick={callback}>{text}</button>
 
-
     if (type === 'small' && opacity === true) return <button className={`${styles.button} ${styles.button_height_small} ${styles.button_opacity}`} onClick={callback}>{text}</button>
 
     if (type === 'small') return <button className={`${styles.button} ${styles.button_height_small}`} onClick={callback}>{text}</button>

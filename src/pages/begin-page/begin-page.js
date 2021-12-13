@@ -9,26 +9,23 @@ import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
 
 import styles from './begin-page.module.css';
-
-import GovernorBravoDelegate from '../../contracts/GovernorBravoDelegate.json';
-import { governanceContracts } from '../../constants/addresses';
-import supportedChains from '../../constants/chains';
-import Web3 from 'web3';
+import { useContract } from '../../hooks/useContract';
+import { GovernorBravoDelegate, GovernorBravoDelegator } from '../../constants/contractTypes';
+import { useEffect } from 'react';
+import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+import { useNavigate } from 'react-router-dom';
 
 const PageBegin = () => {
-    const web3 = new Web3(supportedChains[1].rpc_url)
-    const contract = new web3.eth.Contract(
-        GovernorBravoDelegate.abi,
-        governanceContracts.kovan.bravo
-    )
+    // const {web3, address} = useWeb3Connection()
+    // const [ contract ] = useContract(GovernorBravoDelegate, web3)
+    const navigate = useNavigate()
 
-    const testContract = async () => {
-        const testRes = await contract.methods.getActions('0').call()
-        console.log(testRes)
-    } 
-
-    testContract()
-
+    const toWallet = () => {
+        setTimeout(() => {
+            navigate('/wallet')
+        }, 600);
+    }
+    
     return (
         <div className={styles.background}>
             <Header />
@@ -54,7 +51,12 @@ const PageBegin = () => {
                             </ul>
                             <ul className={styles.buttons}>
                                 <li className={styles.button}>
-                                    <Button type="large" icon="git" text="Check if I’m eligible" />
+                                    <Button
+                                        type="large"
+                                        icon="git"
+                                        text="Check if I’m eligible"
+                                        callback={toWallet}
+                                    />
                                 </li>
                                 <li className={styles.button}>
                                     <span className={styles.span}>or</span>
