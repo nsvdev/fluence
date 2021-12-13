@@ -12,6 +12,8 @@ import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
 
 import dialog from '../../images/dialog.svg';
 import styles from './finish-page.module.css';
+import { hideString } from '../../utils';
+import { useSelector } from 'react-redux';
 
 const cards = [
     {
@@ -41,6 +43,9 @@ const cards = [
 ]
 
 const FinishPage = () => {
+    const { address } = useSelector(state => state.wallet)
+    const { delegatee } = useSelector(state => state.governance)
+
     return (
         <div className={styles.background}>
             <div className={styles.background__image}>
@@ -58,10 +63,10 @@ const FinishPage = () => {
                     </div> 
                     <ul className={styles.wallets}>
                         <li className={styles.wallet}>
-                            <WalletInfo wallet="wallet" account="0x24343242..534" />
+                            <WalletInfo wallet="wallet" account={hideString(address)} />
                         </li>
                         <li className={styles.wallet}>
-                            <WalletInfo wallet="delegate" account="0xD69B...1fE4" />
+                            <WalletInfo wallet="delegate" account={hideString(delegatee)} />
                         </li>
                     </ul>
                     

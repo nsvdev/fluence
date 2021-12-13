@@ -16,6 +16,7 @@ import styles from './proof-page.module.css';
 import { hideString } from '../../utils';
 
 import { checkGithubOwnership, setLocalProof } from '../../store/actions/governance';
+import { ROUTE_DELEGATION, ROUTE_NOT_FOUND } from '../../constants/routes';
 
 
 const ProofPage = () => {
@@ -35,9 +36,9 @@ const ProofPage = () => {
     useEffect(() => {
         if (checked) {
             if(isOwner) {
-                navigate('/delegation')
+                navigate(ROUTE_DELEGATION)
             } else {
-                navigate('/not-found')
+                navigate(ROUTE_NOT_FOUND)
             }
         }
     }, [checked, isOwner])
