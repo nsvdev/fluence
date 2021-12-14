@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/fluence/static/css/main.467fe085.chunk.css",
-    "main.js": "/fluence/static/js/main.b6461df9.chunk.js",
-    "main.js.map": "/fluence/static/js/main.b6461df9.chunk.js.map",
+    "main.css": "/fluence/static/css/main.5b50ccde.chunk.css",
+    "main.js": "/fluence/static/js/main.cbad942b.chunk.js",
+    "main.js.map": "/fluence/static/js/main.cbad942b.chunk.js.map",
     "runtime-main.js": "/fluence/static/js/runtime-main.e1a04ddc.js",
     "runtime-main.js.map": "/fluence/static/js/runtime-main.e1a04ddc.js.map",
     "static/js/2.8d202433.chunk.js": "/fluence/static/js/2.8d202433.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.e1628432.chunk.js": "/fluence/static/js/3.e1628432.chunk.js",
     "static/js/3.e1628432.chunk.js.map": "/fluence/static/js/3.e1628432.chunk.js.map",
     "index.html": "/fluence/index.html",
-    "static/css/main.467fe085.chunk.css.map": "/fluence/static/css/main.467fe085.chunk.css.map",
+    "static/css/main.5b50ccde.chunk.css.map": "/fluence/static/css/main.5b50ccde.chunk.css.map",
     "static/js/2.8d202433.chunk.js.LICENSE.txt": "/fluence/static/js/2.8d202433.chunk.js.LICENSE.txt",
     "static/media/Group 2125.f5d958fd.svg": "/fluence/static/media/Group 2125.f5d958fd.svg",
     "static/media/index.css": "/fluence/static/media/RobotoMono-Regular.ca7e14bf.woff",
@@ -39,7 +39,7 @@
   "entrypoints": [
     "static/js/runtime-main.e1a04ddc.js",
     "static/js/2.8d202433.chunk.js",
-    "static/css/main.467fe085.chunk.css",
-    "static/js/main.b6461df9.chunk.js"
+    "static/css/main.5b50ccde.chunk.css",
+    "static/js/main.cbad942b.chunk.js"
   ]
 }
