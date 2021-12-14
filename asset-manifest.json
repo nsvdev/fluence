@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/fluence/static/css/main.467fe085.chunk.css",
-    "main.js": "/fluence/static/js/main.f271838a.chunk.js",
-    "main.js.map": "/fluence/static/js/main.f271838a.chunk.js.map",
+    "main.js": "/fluence/static/js/main.b6461df9.chunk.js",
+    "main.js.map": "/fluence/static/js/main.b6461df9.chunk.js.map",
     "runtime-main.js": "/fluence/static/js/runtime-main.e1a04ddc.js",
     "runtime-main.js.map": "/fluence/static/js/runtime-main.e1a04ddc.js.map",
     "static/js/2.8d202433.chunk.js": "/fluence/static/js/2.8d202433.chunk.js",
@@ -40,6 +40,6 @@
     "static/js/runtime-main.e1a04ddc.js",
     "static/js/2.8d202433.chunk.js",
     "static/css/main.467fe085.chunk.css",
-    "static/js/main.f271838a.chunk.js"
+    "static/js/main.b6461df9.chunk.js"
   ]
 }
