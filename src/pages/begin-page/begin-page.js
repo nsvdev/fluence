@@ -55,8 +55,6 @@ const PageBegin = () => {
 
     }, [hasClaimed])
 
-    console.log(hasClaimed)
-
     const logOut = () => {
         dispatch(web2Logout())
         logout()

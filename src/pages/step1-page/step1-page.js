@@ -23,7 +23,9 @@ const FirstStepPage = () => {
 
     useEffect(() => {
         if (address) {
-            navigate(ROUTE_PROOF)
+            setTimeout(() => {
+                navigate(ROUTE_PROOF)
+            }, 4000);
         }
     }, [address])
 

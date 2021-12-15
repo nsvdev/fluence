@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import rootReducer from './store/reducers/root';
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
+
 import Auth0ProviderRouted from './components/Auth0ProviderRouted/Auth0ProviderRouted';
 
 
@@ -22,7 +23,8 @@ const enhancer = composeEnhancers(
 )
 
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+// const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, enhancer)
 
 ReactDOM.render(
   <React.StrictMode>
@@ -33,7 +35,6 @@ ReactDOM.render(
           </Auth0ProviderRouted>
         </Router>
     </Provider>
-    
   </React.StrictMode>,
   document.getElementById('root')
 );
