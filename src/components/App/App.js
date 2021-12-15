@@ -1,7 +1,12 @@
 import { Routes, Route, useLocation} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import {
+  Chains,
+  TheGraphProvider,
+  useCreateSubgraph
+} from "thegraph-react";
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,6 +27,7 @@ import { web2Login } from '../../store/actions/user';
 import { getNetworkName } from '../../store/actions/wallet';
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
+import { theGraphEndpoints } from '../../constants/endpoints';
 
 import {
   ROUTE_FLUENCE,
@@ -36,9 +42,10 @@ import {
   ROUTE_CLAIMED
 } from '../../constants/routes'
 import { catchError } from '../../utils';
+import { setFluenceSubgraph } from '../../store/actions/graph';
+import TestSubgraph from '../TestSubgraph/TestSubgraph';
 
 function App() {
-
   const { web3Provider } = useWeb3Connection()
 
   const dispatch = useDispatch()
@@ -46,6 +53,15 @@ function App() {
   const networkName = useSelector(state => state.wallet.networkName)
   const { user, isAuthenticated } = useAuth0()
   const location = useLocation()
+
+  const fluence = useCreateSubgraph({
+    [Chains.RINKEBY]: theGraphEndpoints['rinkeby'],
+  });
+
+  const subgraphs = useMemo(() => {
+    dispatch(setFluenceSubgraph(fluence))
+    return [fluence];
+  }, [fluence]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,9 +93,11 @@ function App() {
   }, [user, isAuthenticated])
 
   return (
+    <TheGraphProvider chain={Chains.RINKEBY} subgraphs={subgraphs}>
       <div className="App">
         <ToastContainer />
         <Routes>
+          <Route path={'/test-subgraph'} element={<TestSubgraph />} />
           <Route path={ROUTE_FLUENCE} element={<LandingPage />} />
           <Route path={ROUTE_INDEX} element={<PageBegin/>} />
           <Route path={ROUTE_WALLET} element={<FirstStepPage/>} />
@@ -92,6 +110,7 @@ function App() {
           <Route path={ROUTE_CLAIMED} element={<ClaimedPage />} />
         </Routes>
       </div>
+    </TheGraphProvider>
   );
 }
 

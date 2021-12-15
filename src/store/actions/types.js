@@ -20,3 +20,6 @@ export const SET_CLAIM_STATUS = 'gov/SET_CLAIM_STATUS'
 //////----------- USER -----------//////
 export const WEB2_LOGIN = 'user/WEB2_LOGIN'
 export const WEB2_LOGOUT = 'user/WEB2_LOGOUT'
+
+/////------------ THE GRAPH -----------//////
+export const SET_FLUENCE_SUBGRAPH = 'graph/SET_FLUENCE_SUBGRAPH'

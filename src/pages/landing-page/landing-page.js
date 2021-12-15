@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useSubgraph } from 'thegraph-react';
+import { gql } from '@apollo/client'
 
 import Header from '../../components/Header/Header';
 import Title from '../../components/Title/Title';
@@ -62,6 +65,56 @@ const cards = [
 ]
 
 const LandingPage = () => {
+    const { fluence } = useSelector(state => state.graph)
+    const { useQuery } = useSubgraph(fluence);
+    
+    const { error, loading, data } = useQuery(gql`
+    {
+        proposals(
+        first: 5,
+        orderBy: id,
+        orderDirection: desc
+        ) {
+            id,
+            title,
+            proposalCreated {
+                timestamp
+            },
+            canceled,
+            executed,
+            forVotes {
+                value
+            },
+            againstVotes {
+                value
+            },
+            abstainVotes {
+                value
+            },
+            eta
+        } 
+        accounts(
+            first:6,
+        ) {
+            id,
+            balances {
+            delegatorsCount,
+            value {
+                value
+            },
+            voting {
+                value
+            }
+            }
+        }
+    }    
+    `);
+
+    useEffect(() => {
+        if (data) {
+            alert(JSON.stringify(data))
+        }
+    }, [data])
 
     return (
         <div className={styles.overflow}>
@@ -193,8 +246,11 @@ const LandingPage = () => {
                             
                             <div className={styles["involved__flex-container"]}>
                                 <div className={styles.involved__left}>
-                                    <ProposalsList cards={cards} />
-                                    
+                                    {
+                                        ( loading || error )
+                                        ?   <div style={{color: '#fff'}}>loading...</div>
+                                        :   <ProposalsList cards={cards} />
+                                    }
                                 </div>
                                 <div className={styles.delegates}>
                                     <div className={styles.delegates__title}>
