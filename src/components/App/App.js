@@ -59,7 +59,7 @@ function App() {
   });
 
   const subgraphs = useMemo(() => {
-    dispatch(setFluenceSubgraph(fluence))
+    dispatch(setFluenceSubgraph(fluence));
     return [fluence];
   }, [fluence]);
 

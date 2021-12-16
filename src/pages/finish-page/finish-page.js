@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useSubgraph } from 'thegraph-react';
+import { proposalsQuery } from '../../utils/graphQueries';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -13,7 +16,6 @@ import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
 import dialog from '../../images/dialog.svg';
 import styles from './finish-page.module.css';
 import { hideString } from '../../utils';
-import { useSelector } from 'react-redux';
 
 const cards = [
     {
@@ -45,6 +47,16 @@ const cards = [
 const FinishPage = () => {
     const { address } = useSelector(state => state.wallet)
     const { delegatee } = useSelector(state => state.governance)
+    const { fluence } = useSelector(state => state.graph)
+    const { useQuery } = useSubgraph(fluence)
+    const [ proposals, setProposals ] = useState([])
+    
+    const { error, loading, data } = useQuery(proposalsQuery);
+    useEffect(() => {
+        if (data) {
+            const { proposals } = data
+        }
+    }, [data])
 
     return (
         <div className={styles.background}>
@@ -95,7 +107,12 @@ const FinishPage = () => {
                             <Title type="h3" size="medium" text="Get involved with the DAO" />
                         </div>
                         <div className={styles.involved__list}>
-                            <ProposalsList cards={cards} />
+                            {
+                                ( loading || error )
+                                ?   <div style={{color: '#fff'}}>loading...</div>
+                                // no proposals on chain yet
+                                :   <ProposalsList cards={cards} />
+                            }
                         </div>
                     </section>
 
