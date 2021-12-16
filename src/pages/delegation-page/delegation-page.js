@@ -16,18 +16,19 @@ import styles from './delegation-page.module.css';
 
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { hideString } from '../../utils';
-import { delegate } from '../../store/actions/governance';
+import { delegate, storeDelegatee } from '../../store/actions/governance';
 import { accountsQueryFactory } from '../../utils/graphQueries';
 import { accountsMapper } from '../../utils/gqlMappers';
+import { ROUTE_DONE } from '../../constants/routes';
 
 const DelegationPage = () => {
     const { address, web3, sendTransaction, web3Provider } = useWeb3Connection()
-    const delegateState = useSelector(state => state.governance)
+    const { delegatee } = useSelector(state => state.governance.values)
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
-    const delegateAction = async (delegatee) => {
-        dispatch(delegate(web3Provider, delegatee, 'kovan'))
+    const delegateAction = (delegatee) => {
+        dispatch(storeDelegatee(delegatee))
     }
 
     const acc = hideString(address)
@@ -45,10 +46,10 @@ const DelegationPage = () => {
     }, [data])
 
     useEffect(() => {
-        if (delegateState.delegatee) {
-            navigate('/done')
+        if (delegatee) {
+            navigate(ROUTE_DONE)
         }
-    }, [delegateState.delegatee])
+    }, [delegatee])
 
     return (
         <div className={styles.background}>

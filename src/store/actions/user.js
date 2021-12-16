@@ -2,7 +2,8 @@ import {
     SET_KEY,
     WEB2_LOGIN,
     WEB2_LOGOUT,
-    USER_ERROR
+    USER_ERROR,
+    STORE_KEY
 } from './types'
 
 import { initialState } from '../reducers/user'
@@ -26,6 +27,11 @@ export const setKey = (key) => ({
 export const setError = (message) => ({
     type: USER_ERROR,
     payload: message
+})
+
+export const storeKey = (key) => ({
+    type: STORE_KEY,
+    payload: key
 })
 
 export const fetchKeyFromGithub = (nickname) => {

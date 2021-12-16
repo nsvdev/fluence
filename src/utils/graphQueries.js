@@ -1,5 +1,13 @@
 import { gql } from '@apollo/client'
 
+export const findAccountQueryFactory = address => gql`
+{
+    account(id:"${address.toLowerCase()}") {
+        id
+    }
+}
+`
+
 export const proposalsAccountsQuery = gql`
 {
     proposals(

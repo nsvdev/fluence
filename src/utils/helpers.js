@@ -41,12 +41,7 @@ export function catchError(error, isMessage = false) {
     } else if (message.startsWith("invalid BigNumber string")) {
       formatted_error = "Invalid number parameter."
     } else {
-      try {
-        let errors = JSON.stringify(message).match(EXTRACT_ERROR_MESSAGE);
-        formatted_error = errors[errors.length - 1];
-      } catch (e) {
-        formatted_error = message;
-      }
+      formatted_error = message;
     }
   
     return formatted_error;
