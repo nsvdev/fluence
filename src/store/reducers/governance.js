@@ -11,7 +11,8 @@ import {
     SET_CLAIM_STATUS,
     STORE_PROOF,
     STORE_KEY,
-    STORE_DELEGATEE
+    STORE_DELEGATEE,
+    GOV_CLEANUP
 } from "../actions/types"
 
 const initialState = {
@@ -40,6 +41,10 @@ const initialState = {
 
 export function governanceReducer(state = initialState, action) {
     switch (action.type) {
+        case GOV_CLEANUP: {
+            return initialState
+        }
+
         case PROPOSAL_CREATED:
             return {
                 ...state,
@@ -55,12 +60,6 @@ export function governanceReducer(state = initialState, action) {
             return {
                 ...state,
                 delegatee: action.payload
-            }
-        }
-        case SET_ERROR: {
-            return {
-                ...state,
-                error: action.payload
             }
         }
         case SET_PROPOSAL_COUNT: {

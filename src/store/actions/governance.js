@@ -50,6 +50,29 @@ export const setError = (error) => ({
     payload: error
 })
 
+export const claimV2 = (w3provider, proof, key, delegatee, network) => {
+    return async dispatch => {
+        dispatch(setError(null))
+        let signer = w3provider.getSigner();
+        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let signed = await contract.connect(signer);
+        try {
+            const tx = await signed.claimV2(proof, key, delegatee);
+            dispatch(claimStatus(MINING))
+            try {
+                await tx.wait()
+                dispatch(claimStatus(MINED))
+            } catch (error) {
+                dispatch(claimStatus(FAIL))
+                dispatch(setError(error.message))
+            }
+        } catch (error) {
+            dispatch(claimStatus(REJECTED))
+            dispatch(setError(error.message))
+        }
+    }
+}
+
 export const claim = (w3provider, proof, network) => {
     return async dispatch => {
         let signer = w3provider.getSigner();

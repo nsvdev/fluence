@@ -28,7 +28,8 @@ const enhancer = composeEnhancers(
 const persistConfig = {
   key: 'root',
   storage,
-  stateReconciler: autoMergeLevel2
+  stateReconciler: autoMergeLevel2,
+  blacklist: ['error']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

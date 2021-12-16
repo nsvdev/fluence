@@ -29,7 +29,7 @@ const PageBegin = memo(() => {
     const { data } = useQuery(findAccountQueryFactory(address || '0x186e5235386D62e962F00A7C2cD1420aDc144866'))
 
     useEffect(() => {
-        if(name && key && web3Provider) {
+        if(key) {
             dispatch(storeKey(key))
         }
     }, [name, web3Provider, key])

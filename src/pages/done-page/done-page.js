@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -10,26 +10,35 @@ import Footer from '../../components/Footer/Footer';
 import styles from './done-page.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideString } from '../../utils';
-import { claim } from '../../store/actions/governance';
+import { claim, claimV2 } from '../../store/actions/governance';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_FINISH } from '../../constants/routes';
+import { MINED, MINING, PENDING } from '../../constants';
+import { toast } from 'react-toastify';
 
 const DonePage = () => {
     const { web3Provider } = useWeb3Connection()
     const { address, networkName } = useSelector(state => state.wallet)
-    const { delegatee, proof } = useSelector(state => state.governance)
     const { claimStatus } = useSelector(state => state.governance)
+    const { proof, delegatee, key } = useSelector(state => state.governance.values)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleClaim = () => {
-        dispatch(claim(web3Provider, proof, networkName))
+        dispatch(claimV2(web3Provider, proof, key, delegatee, networkName))
     }
 
+    const loader = useRef()
+
     useEffect(() => {
-        if (claimStatus) {
+        if (claimStatus === MINING) {
+            loader.current = toast.loading("Please wait while the transaction is being mined...")
+        }
+        if (claimStatus === MINED) {
+            toast.update(loader.current, { render: "Transaction mined succesfully", type: "success", isLoading: false });
             navigate(ROUTE_FINISH)
+            toast.dismiss(loader.current)
         }
     }, [claimStatus])
 

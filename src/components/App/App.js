@@ -28,6 +28,7 @@ import { getNetworkName } from '../../store/actions/wallet';
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { theGraphEndpoints } from '../../constants/endpoints';
+import { reduxCleanup } from '../../store/actions/common';
 
 import {
   ROUTE_FLUENCE,
@@ -49,10 +50,14 @@ function App() {
   const { web3Provider } = useWeb3Connection()
 
   const dispatch = useDispatch()
-  const error = useSelector(state => state.governance.error)
+  const { error } = useSelector(state => state.error)
   const networkName = useSelector(state => state.wallet.networkName)
   const { user, isAuthenticated } = useAuth0()
   const location = useLocation()
+
+  // useEffect(() => {
+  //   dispatch(reduxCleanup())
+  // }, [])
 
   const fluence = useCreateSubgraph({
     [Chains.RINKEBY]: theGraphEndpoints['rinkeby'],

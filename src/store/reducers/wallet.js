@@ -3,7 +3,8 @@ import {
     SET_ADDRESS,
     SET_CHAIN_ID,
     SET_WEB3_PROVIDER,
-    SET_NETWORK_NAME
+    SET_NETWORK_NAME,
+    WALLET_CLEANUP
 } from "../actions/types"
 
 const initialState = {
@@ -16,6 +17,10 @@ const initialState = {
 
 export function walletReducer(state = initialState, action) {
     switch (action.type) {
+        case WALLET_CLEANUP: {
+            return initialState
+        }
+
         case SET_WEB3_PROVIDER:
             return {
                 ...state,
