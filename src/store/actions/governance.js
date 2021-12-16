@@ -12,7 +12,9 @@ import {
     SET_ALEGIBILITY,
     SET_LOCAL_PROOF,
     SET_OWNERSHIP,
-    SET_CLAIM_STATUS
+    SET_CLAIM_STATUS,
+    STORE_DELEGATEE,
+    STORE_PROOF
 } from "./types"
 
 import {
@@ -102,8 +104,6 @@ export const setHasClaimed = (hasClaimed) => ({
 })
 
 export const checkHasClaimed = (w3provider, network) => {
-    console.log(network)
-
     return async dispatch => {
         let signer = w3provider.getSigner();
         let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
@@ -117,6 +117,11 @@ export const checkHasClaimed = (w3provider, network) => {
         }
     }
 }
+
+export const storeProof = (proof) => ({
+    type: STORE_PROOF,
+    payload: proof
+})
 
 export const setGithubOwnership = (owner) => ({
     type: SET_OWNERSHIP,
@@ -143,6 +148,11 @@ export const checkGithubOwnership = (w3provider, proof, network) => {
         }
     }
 }
+
+export const storeDelegatee = (delegatee) => ({
+    type: STORE_DELEGATEE,
+    payload: delegatee
+})
 
 export const delegate = (w3provider, delegatee, network) => {
     return async dispatch => {

@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, memo } from 'react';
+import { useSubgraph } from 'thegraph-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../components/Header/Header';
 import Title from '../../components/Title/Title';
@@ -9,51 +13,35 @@ import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
 
 import styles from './begin-page.module.css';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { web2Logout } from '../../store/actions/user';
+import { storeKey, web2Logout } from '../../store/actions/user';
 import { checkGithubKey, checkHasClaimed } from '../../store/actions/governance';
 import { ROUTE_CLAIMED, ROUTE_NOT_FOUND, ROUTE_WALLET } from '../../constants/routes';
+import { findAccountQueryFactory } from '../../utils/graphQueries';
 
-const PageBegin = () => {
+const PageBegin = memo(() => {
     const navigate = useNavigate()
     const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
-    const { isAlegible, checked } = useSelector(state => state.governance.alegibility)
-    const { networkName, web3Provider } = useSelector(state => state.wallet)
+    const { web3Provider, address } = useSelector(state => state.wallet)
     const { name, key } = useSelector(state => state.user)
-    const { hasClaimed } = useSelector(state => state.governance)
+    const { fluence } = useSelector(state => state.graph)
+    const { useQuery } = useSubgraph(fluence)
     const dispatch = useDispatch()
+    const { data } = useQuery(findAccountQueryFactory(address || '0x186e5235386D62e962F00A7C2cD1420aDc144866'))
 
     useEffect(() => {
-        if(name && web3Provider) {
-            dispatch(checkGithubKey(web3Provider, key, networkName))
+        if(name && key && web3Provider) {
+            dispatch(storeKey(key))
         }
-    }, [name, web3Provider])
+    }, [name, web3Provider, key])
 
     useEffect(() => {
-        if (web3Provider && networkName) {
-            dispatch(checkHasClaimed(web3Provider, networkName))
-        }
-    }, [web3Provider, networkName])
-
-    useEffect(() => {
-        if(checked) {
-            if(isAlegible) {
-                navigate(ROUTE_WALLET)
-            } else {
-                navigate(ROUTE_NOT_FOUND)
-            }
-        }
-    }, [checked, isAlegible])
-
-    useEffect(() => {
-        if(hasClaimed) {
+        // for demo invert this
+        if(data?.account) {
             navigate(ROUTE_CLAIMED)
+        } else {
+            navigate(ROUTE_WALLET)
         }
-
-    }, [hasClaimed])
+    }, [data])
 
     const logOut = () => {
         dispatch(web2Logout())
@@ -137,6 +125,6 @@ const PageBegin = () => {
             <Footer />
         </div>
     )
-}
+})
 
 export default PageBegin;

@@ -17,6 +17,11 @@ export const SET_LOCAL_PROOF = 'gov/SET_LOCAL_PROOF'
 export const SET_OWNERSHIP = 'gov/SET_OWNERSHIP'
 export const SET_CLAIM_STATUS = 'gov/SET_CLAIM_STATUS'
 
+//////----------- GOV STORAGE -----------//////
+export const STORE_PROOF = 'gvstore/STORE_PROOF'
+export const STORE_DELEGATEE = 'gvstore/STORE_DELEGATEE'
+export const STORE_KEY = 'gvstore/STORE_KEY'
+
 //////----------- USER -----------//////
 export const WEB2_LOGIN = 'user/WEB2_LOGIN'
 export const WEB2_LOGOUT = 'user/WEB2_LOGOUT'
