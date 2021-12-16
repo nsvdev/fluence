@@ -22,10 +22,9 @@ const FirstStepPage = () => {
     const { address } = wallet
 
     useEffect(() => {
+        // for demo invert this
         if (address) {
-            setTimeout(() => {
-                navigate(ROUTE_PROOF)
-            }, 4000);
+            navigate(ROUTE_PROOF)
         }
     }, [address])
 

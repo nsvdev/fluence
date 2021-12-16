@@ -15,13 +15,22 @@ import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
 import { hideString } from '../../utils';
 
-import { checkGithubOwnership, setLocalProof } from '../../store/actions/governance';
-import { ROUTE_DELEGATION, ROUTE_NOT_FOUND } from '../../constants/routes';
+import { checkGithubOwnership, setLocalProof, storeProof } from '../../store/actions/governance';
+import { ROUTE_DELEGATION } from '../../constants/routes';
+import { toast } from 'react-toastify';
 
+function isBase64(str) {
+    if (str ==='' || str.trim() ===''){ return false; }
+    try {
+        return btoa(atob(str)) == str;
+    } catch (err) {
+        return false;
+    }
+}
 
 const ProofPage = () => {
-    const { address, web3Provider, networkName } = useSelector(state => state.wallet)
-    const { checked, isOwner } = useSelector(state => state.governance.githubOwnership)
+    const { address } = useSelector(state => state.wallet)
+    const [ haveProof, setHaveProof ] = useState(false)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -29,19 +38,19 @@ const ProofPage = () => {
 
     const handleForm = (e) => {
         e.preventDefault()
-        dispatch(setLocalProof(proofValue))
-        dispatch(checkGithubOwnership(web3Provider, proofValue, networkName))
+        if (isBase64(proofValue)) {
+            dispatch(storeProof(proofValue))
+            setHaveProof(true)
+        } else {
+            toast('The proof should be a base-64 encoded string.')
+        }
     }
 
     useEffect(() => {
-        if (checked) {
-            if(isOwner) {
-                navigate(ROUTE_DELEGATION)
-            } else {
-                navigate(ROUTE_NOT_FOUND)
-            }
+        if (haveProof) {
+            navigate(ROUTE_DELEGATION)
         }
-    }, [checked, isOwner])
+    }, [haveProof])
 
     return (
         <div className={styles.background}>
