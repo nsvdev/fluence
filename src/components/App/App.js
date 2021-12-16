@@ -23,7 +23,7 @@ import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 
 import { getProposalCount } from '../../store/actions/governance';
-import { web2Login } from '../../store/actions/user';
+import { web2Login, fetchKeyFromGithub } from '../../store/actions/user';
 import { getNetworkName } from '../../store/actions/wallet';
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
@@ -89,6 +89,7 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(web2Login(user))
+      dispatch(fetchKeyFromGithub(user.nickname))
     }
   }, [user, isAuthenticated])
 
