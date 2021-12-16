@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useSubgraph } from 'thegraph-react';
-import { gql } from '@apollo/client'
 
 import Header from '../../components/Header/Header';
 import Title from '../../components/Title/Title';
@@ -11,14 +10,15 @@ import Footer from '../../components/Footer/Footer';
 import Url from '../../components/Url/Url';
 import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
 import ProposalsList from '../../components/ProposalsList/ProposalsList';
-
-import { users } from '../../mocks/UserCardMocks';
+import { hideString } from '../../utils';
 
 import cardImage from '../../images/landing-card.png';
 import linesImage from '../../images/Group 2125.svg';
 import dataImage from '../../images/image 111.png';
 import styles from './landing-page.module.css';
 import dialog from '../../images/dialog.svg';
+import { proposalsAccountsQuery } from '../../utils/graphQueries';
+import { accountsMapper } from '../../utils/gqlMappers';
 
 
 const cards = [
@@ -66,53 +66,14 @@ const cards = [
 
 const LandingPage = () => {
     const { fluence } = useSelector(state => state.graph)
-    const { useQuery } = useSubgraph(fluence);
+    const { useQuery } = useSubgraph(fluence)
+    const [ users, setUsers ] = useState([])
     
-    const { error, loading, data } = useQuery(gql`
-    {
-        proposals(
-        first: 5,
-        orderBy: id,
-        orderDirection: desc
-        ) {
-            id,
-            title,
-            proposalCreated {
-                timestamp
-            },
-            canceled,
-            executed,
-            forVotes {
-                value
-            },
-            againstVotes {
-                value
-            },
-            abstainVotes {
-                value
-            },
-            eta
-        } 
-        accounts(
-            first:6,
-        ) {
-            id,
-            balances {
-            delegatorsCount,
-            value {
-                value
-            },
-            voting {
-                value
-            }
-            }
-        }
-    }    
-    `);
-
+    const { error, loading, data } = useQuery(proposalsAccountsQuery);
     useEffect(() => {
         if (data) {
-            alert(JSON.stringify(data))
+            const { accounts } = data
+            setUsers(accounts.map(accountsMapper))
         }
     }, [data])
 
@@ -249,6 +210,7 @@ const LandingPage = () => {
                                     {
                                         ( loading || error )
                                         ?   <div style={{color: '#fff'}}>loading...</div>
+                                        // no proposals on chain yet
                                         :   <ProposalsList cards={cards} />
                                     }
                                 </div>
@@ -264,14 +226,14 @@ const LandingPage = () => {
                                                         <img className={styles.card__avatar} alt={card.name} src={card.url} />
                                                         <div className={styles.card__info}>
                                                             <p className={styles.card__name}>{card.name}</p>
-                                                            <span className={styles.card__wallet}>{card.wallet}</span>
-                                                            <span className={`${styles.card__wallet} ${styles.card__wallet_left}`}>{card.votes.length} votes</span>
+                                                            <span className={styles.card__wallet}>{hideString(card.wallet)}</span>
+                                                            <span className={`${styles.card__wallet} ${styles.card__wallet_left}`}>{card.votes} votes</span>
                                                         </div>
                                                     </div>
                                                     <div className={styles["card__rating-container"]}>
                                                         <p className={styles.card__rating}>{card.rating}</p>
                                                         <p className={styles.card__delegator}>
-                                                            {card.delegators.length} delegators
+                                                            {card.delegators} delegators
                                                         </p>
                                                     </div>
                                                 </li>
