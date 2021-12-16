@@ -30,7 +30,8 @@ function isBase64(str) {
 
 const ProofPage = () => {
     const { address } = useSelector(state => state.wallet)
-    const [ haveProof, setHaveProof ] = useState(false)
+    const { proof } = useSelector(state => state.governance.values)
+    const [ haveProof, setHaveProof ] = useState(!!proof)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
