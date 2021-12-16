@@ -12,9 +12,7 @@ import {
 } from "../actions/types"
 
 const initialState = {
-    proposals: [],
     degelationStatus: null,
-    currentProposal: null,
     delegatee: null,
     error: null,
     proposalCount: null,
