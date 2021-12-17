@@ -16,6 +16,8 @@ import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
 import dialog from '../../images/dialog.svg';
 import styles from './finish-page.module.css';
 import { hideString } from '../../utils';
+import { addTokenToMetamask } from '../../utils/metamask';
+import { governanceContracts } from '../../constants';
 
 const cards = [
     {
@@ -45,12 +47,16 @@ const cards = [
 ]
 
 const FinishPage = () => {
-    const { address } = useSelector(state => state.wallet)
+    const { address, networkName } = useSelector(state => state.wallet)
     const { delegatee } = useSelector(state => state.governance)
     const { fluence } = useSelector(state => state.graph)
     const { useQuery } = useSubgraph(fluence)
     const [ proposals, setProposals ] = useState([])
-    
+
+    const handleAddToken = () => {
+        addTokenToMetamask(governanceContracts[networkName].token)
+    }
+
     const { error, loading, data } = useQuery(proposalsQuery);
     useEffect(() => {
         if (data) {
@@ -92,7 +98,7 @@ const FinishPage = () => {
                     </p>
                     <ul className={styles.buttons}>
                         <li className={styles.button}>
-                            <Button type="large" text="Display FLT in Metamask" />
+                            <Button callback={handleAddToken} type="large" text="Display FLT in Metamask" />
                         </li>
                         <li className={styles.button}>
                             <Button type="large" icon="twitter" text="Share on Twitter" />
