@@ -13,20 +13,16 @@ import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
 
 import styles from './begin-page.module.css';
-import { storeKey, web2Logout } from '../../store/actions/user';
+import { fetchKeyFromGithub, storeKey, web2Logout } from '../../store/actions/user';
 import { checkGithubKey, checkHasClaimed } from '../../store/actions/governance';
-import { ROUTE_CLAIMED, ROUTE_NOT_FOUND, ROUTE_WALLET } from '../../constants/routes';
-import { findAccountQueryFactory } from '../../utils/graphQueries';
+import { ROUTE_WALLET } from '../../constants/routes';
 
 const PageBegin = memo(() => {
     const navigate = useNavigate()
     const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
-    const { web3Provider, address } = useSelector(state => state.wallet)
-    const { name, key } = useSelector(state => state.user)
-    const { fluence } = useSelector(state => state.graph)
-    const { useQuery } = useSubgraph(fluence)
+    const { web3Provider } = useSelector(state => state.wallet)
+    const { name, username, key } = useSelector(state => state.user)
     const dispatch = useDispatch()
-    const { data } = useQuery(findAccountQueryFactory(address || '0x186e5235386D62e962F00A7C2cD1420aDc144866'))
 
     useEffect(() => {
         if(key) {
@@ -35,13 +31,16 @@ const PageBegin = memo(() => {
     }, [name, web3Provider, key])
 
     useEffect(() => {
-        // for demo invert this
-        if(data?.account) {
-            navigate(ROUTE_CLAIMED)
-        } else {
+        if (username) {
+            dispatch(fetchKeyFromGithub(username))
+        }
+    }, [username])
+
+    useEffect(() => {
+        if (isAuthenticated && key) {
             navigate(ROUTE_WALLET)
         }
-    }, [data])
+    }, [isAuthenticated, key])
 
     const logOut = () => {
         dispatch(web2Logout())
