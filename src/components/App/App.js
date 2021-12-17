@@ -55,10 +55,6 @@ function App() {
   const { user, isAuthenticated } = useAuth0()
   const location = useLocation()
 
-  // useEffect(() => {
-  //   dispatch(reduxCleanup())
-  // }, [])
-
   const fluence = useCreateSubgraph({
     [Chains.RINKEBY]: theGraphEndpoints['rinkeby'],
   });
