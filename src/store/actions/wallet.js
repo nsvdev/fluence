@@ -3,7 +3,8 @@ import {
     RESET_WEB3_PROVIDER,
     SET_ADDRESS,
     SET_WEB3_PROVIDER,
-    SET_NETWORK_NAME
+    SET_NETWORK_NAME,
+    SET_PREV_ADDRESS
 } from "./types";
 
 export const setWeb3Provider = (provider, web3Provider, address, network) => ({
@@ -14,6 +15,11 @@ export const setWeb3Provider = (provider, web3Provider, address, network) => ({
         address,
         chainId: network.chainId
     }
+})
+
+export const setPrevAddress = (address) => ({
+    type: SET_PREV_ADDRESS,
+    payload: address
 })
 
 export const resetWeb3Provider = () => ({

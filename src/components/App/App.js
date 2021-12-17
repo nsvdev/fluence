@@ -51,9 +51,17 @@ function App() {
 
   const dispatch = useDispatch()
   const { error } = useSelector(state => state.error)
+  const { address, prevAddress } = useSelector(state => state.wallet)
   const networkName = useSelector(state => state.wallet.networkName)
-  const { user, isAuthenticated } = useAuth0()
+  const { user, isAuthenticated, logout } = useAuth0()
   const location = useLocation()
+
+  useEffect(() => {
+    if (address && address !== prevAddress) {
+      dispatch(reduxCleanup(address))
+      logout()
+    }
+  }, [address])
 
   const fluence = useCreateSubgraph({
     [Chains.RINKEBY]: theGraphEndpoints['rinkeby'],
@@ -74,11 +82,11 @@ function App() {
     }
   },[web3Provider])
 
-  useEffect(() => {
-    if (networkName) {
-      dispatch(getProposalCount(web3Provider, networkName))
-    }
-  }, [networkName])
+  // useEffect(() => {
+  //   if (networkName) {
+  //     dispatch(getProposalCount(web3Provider, networkName))
+  //   }
+  // }, [networkName])
 
   useEffect(() => {
     if (error) {
