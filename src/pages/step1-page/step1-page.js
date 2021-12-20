@@ -13,9 +13,10 @@ import Footer from '../../components/Footer/Footer';
 import ConnectWallet from '../../components/ConnectWallet/ConnectWallet';
 
 import styles from './step1-page.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ROUTE_CLAIMED, ROUTE_PROOF } from '../../constants/routes';
 import { findAccountQueryFactory } from '../../utils/graphQueries';
+import { setFindAccountData } from '../../store/actions/governance';
 
 const FirstStepPage = memo(() => {
     const navigate = useNavigate()
@@ -23,15 +24,17 @@ const FirstStepPage = memo(() => {
     const { fluence } = useSelector(state => state.graph)
     const { useQuery } = useSubgraph(fluence)
     const { data, loading } = useQuery(findAccountQueryFactory(address || ''))
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (address && !loading && data) {
             // for demo invert this
-            if (data?.account) {
-                navigate(ROUTE_CLAIMED)
-            } else {
-                navigate(ROUTE_PROOF)
-            }
+            dispatch(setFindAccountData(data))
+            // if (data?.account) {
+            //     navigate(ROUTE_CLAIMED)
+            // } else {
+            //     navigate(ROUTE_PROOF)
+            // }
         }
     }, [address, data])
 

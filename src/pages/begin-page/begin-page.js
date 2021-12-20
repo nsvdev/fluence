@@ -36,12 +36,6 @@ const PageBegin = memo(() => {
         }
     }, [username])
 
-    useEffect(() => {
-        if (isAuthenticated && key) {
-            navigate(ROUTE_WALLET)
-        }
-    }, [isAuthenticated, key])
-
     const logOut = () => {
         dispatch(web2Logout())
         logout()

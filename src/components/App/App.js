@@ -29,6 +29,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { theGraphEndpoints } from '../../constants/endpoints';
 import { reduxCleanup } from '../../store/actions/common';
+import { useRouting } from '../../hooks/useRouting';
 
 import {
   ROUTE_FLUENCE,
@@ -49,12 +50,13 @@ import TestSubgraph from '../TestSubgraph/TestSubgraph';
 function App() {
   const { web3Provider } = useWeb3Connection()
 
+  const [ location, navigate ] = useRouting()
+
   const dispatch = useDispatch()
   const { error } = useSelector(state => state.error)
-  const { address, prevAddress } = useSelector(state => state.wallet)
-  const networkName = useSelector(state => state.wallet.networkName)
+  const { address, prevAddress, networkName } = useSelector(state => state.wallet)
+  const { currentRoute } = useSelector(state => state.routes)
   const { user, isAuthenticated, logout } = useAuth0()
-  const location = useLocation()
 
   useEffect(() => {
     if (address && address !== prevAddress) {
@@ -73,20 +75,8 @@ function App() {
   }, [fluence]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
-
-  useEffect(() => {
-    if (web3Provider) {
-      dispatch(getNetworkName(web3Provider))
-    }
+    web3Provider && dispatch(getNetworkName(web3Provider))
   },[web3Provider])
-
-  // useEffect(() => {
-  //   if (networkName) {
-  //     dispatch(getProposalCount(web3Provider, networkName))
-  //   }
-  // }, [networkName])
 
   useEffect(() => {
     if (error) {
@@ -94,13 +84,16 @@ function App() {
     }
   }, [error])
 
-
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(web2Login(user))
       dispatch(fetchKeyFromGithub(user.nickname))
     }
   }, [user, isAuthenticated])
+
+  useEffect(() => {
+    (currentRoute && currentRoute !== location.pathname) && navigate(currentRoute)
+  }, [currentRoute])
 
   return (
     <TheGraphProvider chain={Chains.RINKEBY} subgraphs={subgraphs}>

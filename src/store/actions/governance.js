@@ -14,7 +14,8 @@ import {
     SET_OWNERSHIP,
     SET_CLAIM_STATUS,
     STORE_DELEGATEE,
-    STORE_PROOF
+    STORE_PROOF,
+    SET_FIND_ACCOUNT_DATA
 } from "./types"
 
 import {
@@ -48,6 +49,11 @@ export const setDelegatee = (address) => ({
 export const setError = (error) => ({
     type: SET_ERROR,
     payload: error
+})
+
+export const setFindAccountData = (data) => ({
+    type: SET_FIND_ACCOUNT_DATA,
+    payload: data
 })
 
 export const claimV2 = (w3provider, proof, key, delegatee, network) => {

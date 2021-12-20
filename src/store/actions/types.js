@@ -16,6 +16,7 @@ export const SET_ALEGIBILITY = 'gov/SET_ALEGIBILITY'
 export const SET_LOCAL_PROOF = 'gov/SET_LOCAL_PROOF'
 export const SET_OWNERSHIP = 'gov/SET_OWNERSHIP'
 export const SET_CLAIM_STATUS = 'gov/SET_CLAIM_STATUS'
+export const SET_FIND_ACCOUNT_DATA = 'gov/SET_FIND_ACCOUNT_DATA'
 
 //////----------- ERRORS -----------//////
 export const SET_ERROR = 'errors/SET_ERROR'
@@ -41,3 +42,7 @@ export const GRAPH_CLEANUP = 'utils/GRAPH_CLEANUP'
 export const USER_CLEANUP = 'utils/USER_CLEANUP'
 export const WALLET_CLEANUP = 'uitls/WALLET_CLEANUP'
 export const ERROR_CLEANUP = 'uitls/ERROR_CLEANUP'
+export const ROUTE_CLEANUP = 'uitls/ROUTE_CLEANUP'
+
+/////------------ ROUTE -----------//////
+export const SET_ROUTE = 'routes/SET_ROUTE'

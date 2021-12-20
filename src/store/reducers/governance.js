@@ -12,7 +12,8 @@ import {
     STORE_PROOF,
     STORE_KEY,
     STORE_DELEGATEE,
-    GOV_CLEANUP
+    GOV_CLEANUP,
+    SET_FIND_ACCOUNT_DATA
 } from "../actions/types"
 
 const initialState = {
@@ -36,15 +37,21 @@ const initialState = {
         proof: null,
         delegatee: null,
         key: null
-    }
+    },
+    findAccountData: null
 }
 
 export function governanceReducer(state = initialState, action) {
     switch (action.type) {
+        case SET_FIND_ACCOUNT_DATA: {
+            return {
+                ...state,
+                findAccountData: action.payload
+            }
+        }
         case GOV_CLEANUP: {
             return initialState
         }
-
         case PROPOSAL_CREATED:
             return {
                 ...state,
