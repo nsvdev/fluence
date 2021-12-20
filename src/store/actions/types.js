@@ -41,3 +41,7 @@ export const GRAPH_CLEANUP = 'utils/GRAPH_CLEANUP'
 export const USER_CLEANUP = 'utils/USER_CLEANUP'
 export const WALLET_CLEANUP = 'uitls/WALLET_CLEANUP'
 export const ERROR_CLEANUP = 'uitls/ERROR_CLEANUP'
+export const ROUTE_CLEANUP = 'uitls/ROUTE_CLEANUP'
+
+/////------------ ROUTES -----------//////
+export const SET_CURRENT_ROUTE = 'routes/SET_CURRENT_ROUTE'

@@ -37,7 +37,7 @@ const PageBegin = memo(() => {
     }, [username])
 
     useEffect(() => {
-        if (isAuthenticated && key) {
+        if (isAuthenticated && typeof key === 'string') {
             navigate(ROUTE_WALLET)
         }
     }, [isAuthenticated, key])

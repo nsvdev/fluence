@@ -4,11 +4,13 @@ import { governanceReducer } from "./governance"
 import { userReducer } from "./user"
 import { graphReducer } from "./graph"
 import { errorReducer } from "./error"
+import { routesReducer } from "./routes"
 
 export default combineReducers({
     wallet: walletReducer,
     governance: governanceReducer,
     user: userReducer,
     graph: graphReducer,
-    error: errorReducer
+    error: errorReducer,
+    routes: routesReducer
 })
