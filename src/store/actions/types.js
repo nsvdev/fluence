@@ -31,6 +31,7 @@ export const WEB2_LOGOUT = 'user/WEB2_LOGOUT'
 export const FETCH_KEY = 'user/FETCH_KEY'
 export const SET_KEY = 'user/SET_KEY'
 export const USER_ERROR = 'user/SET_ERROR'
+export const SET_USERNAME = 'user/SET_USERNAME'
 
 /////------------ THE GRAPH -----------//////
 export const SET_FLUENCE_SUBGRAPH = 'graph/SET_FLUENCE_SUBGRAPH'

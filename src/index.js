@@ -13,8 +13,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
-import Auth0ProviderRouted from './components/Auth0ProviderRouted/Auth0ProviderRouted';
-
 
 const composeEnhancers = 
   (process.env.NODE_ENV === 'development' 
@@ -43,9 +41,7 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Router>
-          <Auth0ProviderRouted>
             <App />
-          </Auth0ProviderRouted>
         </Router>
       </PersistGate>
     </Provider>

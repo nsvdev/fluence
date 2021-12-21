@@ -3,11 +3,17 @@ import {
     WEB2_LOGIN,
     WEB2_LOGOUT,
     USER_ERROR,
-    STORE_KEY
+    STORE_KEY,
+    SET_USERNAME
 } from './types'
 
 import { initialState } from '../reducers/user'
 import axios from 'axios'
+
+export const setUsername = (username) => ({
+    type: SET_USERNAME,
+    payload: username
+})
 
 export const web2Login = (user) => ({
     type: WEB2_LOGIN,

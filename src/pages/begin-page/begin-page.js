@@ -1,7 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
-import { useSubgraph } from 'thegraph-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../components/Header/Header';
@@ -13,39 +11,29 @@ import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
 
 import styles from './begin-page.module.css';
-import { fetchKeyFromGithub, storeKey, web2Logout } from '../../store/actions/user';
-import { checkGithubKey, checkHasClaimed } from '../../store/actions/governance';
+import { fetchKeyFromGithub, setUsername, storeKey } from '../../store/actions/user';
 import { ROUTE_WALLET } from '../../constants/routes';
 
 const PageBegin = memo(() => {
     const navigate = useNavigate()
-    const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
     const { web3Provider } = useSelector(state => state.wallet)
-    const { name, username, key } = useSelector(state => state.user)
+    const { username, key } = useSelector(state => state.user)
+    const [name, setName] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(key) {
-            dispatch(storeKey(key))
-        }
-    }, [name, web3Provider, key])
+        key && dispatch(storeKey(key))
+    }, [web3Provider, key])
 
     useEffect(() => {
-        if (username) {
-            dispatch(fetchKeyFromGithub(username))
-        }
+        username && dispatch(fetchKeyFromGithub(username))
     }, [username])
 
     useEffect(() => {
-        if (isAuthenticated && typeof key === 'string') {
+        if (typeof key === 'string') {
             navigate(ROUTE_WALLET)
         }
-    }, [isAuthenticated, key])
-
-    const logOut = () => {
-        dispatch(web2Logout())
-        logout()
-    }
+    }, [key])
     
     return (
         <div className={styles.background}>
@@ -70,32 +58,18 @@ const PageBegin = memo(() => {
                                     </Text>
                                 </li>
                             </ul>
+
+                            <input type='text' onChange={(e) => { setName(e.target.value)} }/>
+
                             <ul className={styles.buttons}>
                                 <li className={styles.button}>
                                     {
-                                        isLoading? 
-                                            <Button 
-                                                type="large"
-                                                icon="git"
-                                                text="Loading..."
-                                                disabled
-                                            />
-                                        :
-                                        isAuthenticated ?
-                                            <Button 
-                                                type="large"
-                                                icon="git"
-                                                text="Logout"
-                                                callback={() => logOut()}
-                                            />
-                                            :
-                                            <Button
-                                                type="large"
-                                                icon="git"
-                                                text="Check if I’m eligible"
-                                                callback={() => loginWithRedirect()}
-                                            /> 
-
+                                        <Button
+                                            type="large"
+                                            icon="git"
+                                            text="Check if I’m eligible"
+                                            callback={() => dispatch(setUsername(name))}
+                                        /> 
                                     }
                                 </li>
                                 <li className={styles.button}>
