@@ -73,13 +73,29 @@ export const claimV2 = (w3provider, proof, key, delegatee, network) => {
     }
 }
 
-export const claim = (w3provider, proof, network) => {
+export const claim = (
+    userId, 
+    delegateTo,
+    merkleProof,
+    leaf,
+    temporaryAddress,
+    leafSignatureHex,
+    w3provider,
+    network
+    ) => {
     return async dispatch => {
         let signer = w3provider.getSigner();
-        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let contract = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
         let signed = await contract.connect(signer);
         try {
-            const tx = await signed.claim(proof);
+            const tx = await signed.claimTokens(
+                userId, 
+                delegateTo,
+                merkleProof,
+                leaf,
+                temporaryAddress,
+                leafSignatureHex
+            );
             dispatch(claimStatus(MINING))
             try {
                 await tx.wait()
@@ -89,6 +105,7 @@ export const claim = (w3provider, proof, network) => {
                 dispatch(setError(error.message))
             }
         } catch (error) {
+            alert(error.message)
             dispatch(claimStatus(REJECTED))
             dispatch(setError(error.message))
         }

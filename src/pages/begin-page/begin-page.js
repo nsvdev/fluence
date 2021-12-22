@@ -13,13 +13,19 @@ import Footer from '../../components/Footer/Footer'
 import styles from './begin-page.module.css';
 import { fetchKeyFromGithub, setUsername, storeKey } from '../../store/actions/user';
 import { ROUTE_WALLET } from '../../constants/routes';
+import { claim } from '../../store/actions/governance';
+import { testTokenClaim } from '../../utils/award';
 
 const PageBegin = memo(() => {
     const navigate = useNavigate()
-    const { web3Provider } = useSelector(state => state.wallet)
+    const { web3Provider, networkName, address } = useSelector(state => state.wallet)
     const { username, key } = useSelector(state => state.user)
     const [name, setName] = useState('')
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        networkName && web3Provider && address && testTokenClaim(networkName, web3Provider, address)
+    }, [networkName, web3Provider, address])
 
     useEffect(() => {
         key && dispatch(storeKey(key))
@@ -68,7 +74,18 @@ const PageBegin = memo(() => {
                                             type="large"
                                             icon="git"
                                             text="Check if I’m eligible"
-                                            callback={() => dispatch(setUsername(name))}
+                                            // callback={() => dispatch(setUsername(name))}
+                                            callback={() => dispatch(claim(
+                                                    12, 
+                                                    '0x307c5177d9629E10fbA001dB308dD8de817D4D73',
+                                                    ['0000000000000000000000000000000000000000000000000000006d6168616d'],
+                                                    'leaf',
+                                                    '0xa54d3c09E34aC96807c1CC397404bF2B98DC4eFb',
+                                                    'hex',
+                                                    web3Provider,
+                                                    networkName
+                                                )
+                                            )}
                                         /> 
                                     }
                                 </li>
