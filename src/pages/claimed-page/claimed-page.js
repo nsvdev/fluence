@@ -49,7 +49,7 @@ const ClaimedPage = () => {
             </div>
             
             <div className="container">
-                <main className="main">
+                <main className={`main ${styles.main}`}>
                     
                     <div className={styles.title}>
                         <Title type="h1" size="large" text="Seems like you have claimed your reward already"  />

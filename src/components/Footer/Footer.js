@@ -104,22 +104,22 @@ const Footer = () => {
                             <List social>
                                 <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
                                     <Link className={styles.footer__link} to="/">
-                                        <img src={discord} alt="icon"/>
+                                        <img src={discord} className={styles.footer__icon_discord} alt="icon"/>
                                     </Link>
                                 </li>
                                 <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
                                     <Link className={styles.footer__link} to="/">
-                                    <img src={twitter} alt="icon"/>
+                                    <img src={twitter} className={styles.footer__icon_twitter} alt="icon"/>
                                     </Link>
                                 </li>
                                 <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
                                     <Link className={styles.footer__link} to="/">
-                                        <img src={telegram} alt="icon"/>
+                                        <img src={telegram} className={styles.footer__icon_telegram} alt="icon"/>
                                     </Link>
                                 </li>
                                 <li className={`${styles.footer__item} ${styles.footer__item_mr}`}>
                                     <Link className={styles.footer__link} to="/">
-                                    <img src={youtube} alt="icon"/>
+                                    <img src={youtube} className={styles.footer__icon_youtube} alt="icon"/>
                                     </Link>
                                 </li>
                             </List>

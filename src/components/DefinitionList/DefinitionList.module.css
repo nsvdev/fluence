@@ -35,6 +35,10 @@
     color: rgb(239, 127, 36);
 }
 
+.definition-list__definition_color_black {
+    color: rgb(0, 0, 0);
+}
+
 .color_black {
     color: rgba(0,0,0,0.5);
     border-color: rgba(0,0,0,0.5);

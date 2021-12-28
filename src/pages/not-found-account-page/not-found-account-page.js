@@ -21,7 +21,7 @@ const AccountNotFound = () => {
             </div>
             
             <div className="container">
-                <main className="main">
+                <main className={`main ${styles.main}`}>
 
                     <div className={styles.title}>
                         <Title type="h1" size="large" text=":| Sorry, seems like you're not eligible for this."  />
@@ -50,10 +50,10 @@ const AccountNotFound = () => {
                                         <LinkWithIcon text="Join the Discord server" icon={discordBlack} />
                                 </li>
                                 <li className={styles.dashboard__item}>
-                                        <LinkWithIcon text="Connect on Telegram" icon={telegramBlack} />
+                                        <LinkWithIcon text="Connect on Telegram" style={{"backgroundSize": "14px"}} icon={telegramBlack} />
                                 </li>
                                 <li className={styles.dashboard__item}>
-                                        <LinkWithIcon text="Governance forum" icon={dialogBlack} />
+                                        <LinkWithIcon text="Governance forum"  icon={dialogBlack} />
                                 </li>
                                 
 

@@ -63,6 +63,7 @@
 
 .dashboard__list {
     display: flex;
+    justify-content: space-between;
     margin: 0 0 30px;
     padding: 0;
 
@@ -71,7 +72,7 @@
 
 .dashboard__item {
     display: flex;
-    margin-right: 50px;
+
 
     font-family: "Hauora_Regular", sans-serif;
     font-size: 18px;
@@ -95,5 +96,31 @@
 .dashboard__link:hover {
     color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .dashboard__list {
+        display: block;
+    }
+
+    .dashboard__item {
+        margin-bottom: 32px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .main {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .main {
+        padding: 0;
+    }
+
+    .title {
+        padding: 0 15px;
+    }
 }
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './LinkWithIcon.module.css';
 
-const LinkWithIcon = ({ color='', text, icon, url='/' }) => {
+const LinkWithIcon = ({ color='', text, icon, iconWidth="", iconHeight="", url='/' }) => {
 
 
         const style = {

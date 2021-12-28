@@ -19,7 +19,7 @@ code {
 }
 
 .container {
-  max-width: 1500px;
+  max-width: 1680px;
   margin: 0 auto;
   display: flex;
   justify-content: flex-end;
@@ -27,17 +27,24 @@ code {
 
 .main {
   width: 90.64%;
-  padding: 0 15px;
+  padding: 0 90px;
 }
 
-@media screen and (max-width: 1275px) {
+@media screen and (max-width: 940px) {
   .container {
-    justify-content: flex-start;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .main {
+    width: 100%;
+    padding: 0 40px;
   }
 }
 
 @media screen and (max-width: 700px) {
   .main {
-    width: 100%;
+    padding: 0 15px;
   }
 }

@@ -48,6 +48,12 @@
     margin-bottom: 345px;
 }
 
+@media screen and (max-width: 900px) {
+    .main {
+        padding: 0 15px;
+    }
+}
+
 @media screen and (max-width: 490px) {
     .wallets {
         display: block;

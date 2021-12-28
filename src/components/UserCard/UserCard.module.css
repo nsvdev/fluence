@@ -102,6 +102,50 @@
     letter-spacing: 0.5px;
 }
 
+@media screen and (max-width: 1035px) {
+    .card__wallet {
+        display: block;
+        border: none;
+        padding-right: 0;
+    }
+
+    .card__wallet_left {
+        padding-left: 0;
+        border: none;
+    }
+
+    .card__rating {
+        margin-bottom: 2px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .card__wallet {
+        display: initial;
+        padding-right: 10px;
+        font-family: 'Hauora_Bold', sans-serif;
+        font-size: 10px;
+        line-height: 16px;
+        color: rgb(204, 204, 204);
+    
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-right: 1px solid rgba(204, 204, 204, 0.4);
+    }
+    
+    .card__wallet_left {
+        padding: 0;
+        padding-left: 10px;
+    
+        border: none;
+        border-left: 1px solid rgba(204, 204, 204, 0.4);
+    }
+
+    .card__rating {
+        margin-bottom: 2px;
+    }
+}
+
 @media screen and (max-width: 460px) {
     .card {
         padding: 27px 18px;
