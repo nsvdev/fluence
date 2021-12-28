@@ -63,7 +63,7 @@ const PageBegin = memo(() => {
                                             </Text>
                                         </li>
                                     </ul>
-                                    <input type='text' onChange={(e) => { setName(e.target.value)} }/>
+                                    <input type='text' className={styles.input} placeholder="Github username" onChange={(e) => { setName(e.target.value)} }/>
 
                                     <ul className={styles.buttons}>
                                         <li className={styles.button}>
