@@ -23,14 +23,14 @@
 
 .header {
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
     
     margin-bottom: 149px;
 }
 
 .title {
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
 
     max-width: 900px;
     margin: 0;
@@ -41,7 +41,7 @@
 
 .buttons {
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
     
     margin: 0;
     margin-bottom: 240px;
@@ -78,4 +78,42 @@
 
 .conversation__title {
     margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1363px) {
+    .involved__title {
+        padding-top: 130px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .involved__title {
+        padding-top: 135px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .main {
+        padding: 0 40px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .main {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .buttons {
+        display: block;
+    }
+
+    .button {
+        margin-bottom: 10px;
+    }
+
+    .involved__title {
+        padding-top: 0;
+    }
 }

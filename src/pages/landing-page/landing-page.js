@@ -226,8 +226,10 @@ const LandingPage = () => {
                                                         <img className={styles.card__avatar} alt={card.name} src={card.url} />
                                                         <div className={styles.card__info}>
                                                             <p className={styles.card__name}>{card.name}</p>
+
                                                             <span className={styles.card__wallet}>{hideString(card.wallet)}</span>
                                                             <span className={`${styles.card__wallet} ${styles.card__wallet_left}`}>{card.votes} votes</span>
+
                                                         </div>
                                                     </div>
                                                     <div className={styles["card__rating-container"]}>

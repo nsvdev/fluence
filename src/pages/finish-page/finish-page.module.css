@@ -139,6 +139,10 @@
 }
 
 @media screen and (max-width: 810px) {
+    .main {
+        padding: 0 15px;
+    }
+
     .buttons {
         display: block;
         margin-bottom: 117px;

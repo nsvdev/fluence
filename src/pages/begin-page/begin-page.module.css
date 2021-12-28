@@ -19,11 +19,16 @@
 .flex-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 311px;
+    
 }
 
 .flex-container__part-left {
     max-width: 715px;
+    width: 65%;
+}
+
+.dashboard {
+    margin-bottom: 80px;
 }
 
 .flex-container__part-right {
@@ -68,7 +73,7 @@
     font-family: 'Hauora_Bold', sans-serif;
     font-size: 15px;
     line-height: 21px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .definitions {
@@ -89,7 +94,7 @@
 
 @media screen and (max-width: 1366px)  {
     .title {
-        max-width: 250px;
+        max-width: 315px;
     }
 }
 
@@ -103,14 +108,27 @@
     }
 }
 
+@media screen and (max-width: 900px) {
+    .main {
+        padding: 0 15px;
+    }
+}
+
 @media screen and (max-width: 803px)  {
 
     .flex-container {
         flex-direction: column-reverse;
         justify-content: flex-start;
     }
+
+    .flex-container__part-left {
+        max-width: 715px;
+        width: 100%;
+    }
+
     .texts {
         max-width: 715px;
+
     }
     .flex-container__part-right {
         max-width: 345px;
@@ -121,8 +139,8 @@
         margin-bottom: 30px;
     }
 
-    .flex-container {
-        margin-bottom: 120px;
+    .dashboard {
+        margin-bottom: 40px;
     }
 
     .definition {
@@ -168,6 +186,19 @@
     .button:last-child {
         margin: 0;
         text-align: center;
-        margin-right: 50px;
+        margin-right: 70px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        padding: 0;
+    }
+    .title {
+        margin-left: 15px;
+    }
+
+    .main {
+        padding: 0;
     }
 }

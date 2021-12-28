@@ -51,7 +51,9 @@ const ProofPage = () => {
         if (haveProof) {
             navigate(ROUTE_DELEGATION)
         }
+
     }, [haveProof])
+
 
     return (
         <div className={styles.background}>

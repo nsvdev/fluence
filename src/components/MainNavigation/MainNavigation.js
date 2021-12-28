@@ -25,7 +25,7 @@ const MainNavigation = ({ width }) => {
 
     // eslint-disable-next-line no-lone-blocks
     return (<>
-        {width < 768
+        {width < 769
             ?
                 <nav>
                     <button className={styles.burger} aria-label="Open menu" onClick={handleOpenMenu} />
@@ -50,7 +50,7 @@ const MainNavigation = ({ width }) => {
                             <ul className={styles["burger__socials"]}>
                                 < li className={styles["burger__social"]}>
                                     <Link className={styles.footer__link} to="/">
-                                        <img src={discord} alt="icon"/>
+                                        <img src={discord} style={{"width": "26px"}} alt="icon"/>
                                     </Link>
                                 </li>
                                 < li className={styles["burger__social"]}>
@@ -60,7 +60,7 @@ const MainNavigation = ({ width }) => {
                                 </li>
                                 < li className={styles["burger__social"]}>
                                     <Link className={styles.footer__link} to="/">
-                                        <img src={telegram} alt="icon"/>
+                                        <img src={telegram} style={{"width": "19px"}} alt="icon"/>
                                     </Link>
                                 </li>
                                 < li className={styles["burger__social"]}>

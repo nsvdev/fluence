@@ -4,7 +4,7 @@ import styles from './DefinitionList.module.css';
 
 const DefinitionList = ( { dt, dd, colorT='', colorD='' }) => {
 
-    const colorStyleD = colorD === 'orange' ? "definition-list__definition_color_orange" : "";
+    const colorStyleD = colorD === 'orange' ? "definition-list__definition_color_orange" : colorD === 'black' ? "definition-list__definition_color_black" :"";
     const colorStyleT = colorT === 'black' ? "color_black" : ""
 
     return(
