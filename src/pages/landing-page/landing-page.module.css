@@ -7,17 +7,45 @@
     background-repeat: no-repeat;
 }
 
+@media screen and (max-width: 768px) {
+    .overflow {
+        background-size: 100% 88%;
+    }
+}
+
 .container {
 
 
-    padding: 0 10px;
+
     display: flex;
     box-sizing: border-box;
 }
 
 .content {
-    max-width: 1500px;
+    max-width: 1680px;
+    padding: 0 90px;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 1100px) {
+    .content {
+        padding: 0 40px;
+
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .content {
+        padding: 0 15px;
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        padding: 0;
+
+    }
 }
 
 .main1 {
@@ -68,6 +96,15 @@
     width: 90.64%;
     margin: 0 auto 156px;
 }
+
+@media screen and (max-width: 500px) {
+    .future {
+        width: 100%;
+
+    }
+}
+
+
 
 .future__title {
     max-width: 369px;
@@ -173,7 +210,7 @@
 
 .token__advantage {
     width: 30%;
-    min-width: 323px;
+    min-width: 300px;
     margin-right: 5%;
 }
 
@@ -229,8 +266,16 @@
     object-fit: cover;
 }
 
+@media screen and (max-width: 1071px) {
+    .token__image {
+        margin-bottom: 18px;
+    }
+}
+
 .token__dashboard {
     padding: 19px 17px;
+    display: flex;
+    justify-content: space-between;
     background-color: rgba(37, 39, 43, 1);
 }
 
@@ -240,15 +285,25 @@
 }
 
 .token__lines {
-    max-width: 108px;
+    width: 40%;
     height: 36px;
     margin-right: 10px;
+}
+
+.token__data {
+    width: 40%;
 }
 
 .advantage__flex {
     display: flex;
     margin-top: 56px;
 
+}
+
+@media screen and (max-width: 1276px) {
+    .advantage__flex {
+        display: block;
+    }
 }
 
 .token__button {
@@ -397,7 +452,7 @@
 }
 
 .card__wallet {
-    padding-right: 10px;
+
     font-family: 'Hauora_Bold', sans-serif;
     font-size: 10px;
     line-height: 16px;
@@ -405,7 +460,7 @@
 
     letter-spacing: 1px;
     text-transform: uppercase;
-    border-right: 1px solid rgba(204, 204, 204, 0.4);
+
 }
 
 .card__wallet_left {
@@ -414,6 +469,16 @@
 
     border: none;
     border-left: 1px solid rgba(204, 204, 204, 0.4);
+}
+
+@media screen and (max-width: 450px) {
+    .card__wallet {
+        display: block;
+    }
+    .card__wallet_left {
+        padding: 0;
+        border: none;
+    }
 }
 
 .delegates {
@@ -473,6 +538,21 @@
 .delegates__flex-container {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1150px) {
+    .delegates__flex-container {
+
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .delegates__flex-container {
+
+        justify-content: space-between;
+    }
 }
 
 .conversation {
@@ -488,6 +568,7 @@
     position: relative;
 
     padding-right: 18px;
+    margin-right: 10px;
 
     font-family: "Hauora_Regular", sans-serif;
 
@@ -499,6 +580,8 @@
     text-decoration: none;
     transition: opacity 0.2s linear 0.2s;
 }
+
+
 
 .link:hover {
     opacity: 0.6;
@@ -546,9 +629,10 @@
     }
 }
 
-@media screen and (max-width: 1071px) {
+@media screen and (max-width: 1199px) {
     .token__advantages {
-        justify-content: center;
+        margin: 0 auto;
+        width: 668px;
     }
 }
 
@@ -598,7 +682,7 @@
     }
 }
 
-@media screen and (max-width: 865px) {
+@media screen and (max-width: 972px) {
     .future__paragraph {
         width: 100%;
         margin-right: 0;
@@ -612,23 +696,45 @@
 
 @media screen and (max-width: 767px) {
 
-    .overflow {
-        background-size: 100% 90%;
+    
+    .token__image {
+        margin-bottom: 15px;
+        width: 250px;
     }
+    
+    .token__content_small {
+        padding: 8px 46px 9px 30px;
+    }
+    
     .token__advantage {
-        min-width: 230px;
+        min-width: 250px;
     }
 
-    .token__image {
-        width: 200px;
+    .token__advantage:nth-child(even) {
+        margin-right: 0;
     }
+    
+    .token__advantages {
+        width: 557px;
+    }
+
+    
 }
 
 @media screen and (max-width: 600px) {
     .involved__left {
         min-width: 345px;
         margin-right: 0;
-    }   
+    }  
+    
+    .token__advantages {
+        width: 420px;
+    }
+
+    .token__advantage {
+        min-width: 185px;
+        margin-bottom: 20px;
+    }
     
     .promo__text {
         font-size: 21px;
@@ -653,11 +759,20 @@
         padding-left: 10px;
         padding-right: 10px;
     }
+
+    .token__image {
+        width: 226px;
+
+    }
 }
 
 @media screen and (max-width: 540px) {
     .overflow {
         background-size: 100% 58%;
+    }
+
+    .token__advantages {
+        max-width: 320px;
     }
 
     .token__advantage {
@@ -668,6 +783,7 @@
     .token__image {
 
         width: 163px;
+        margin-bottom: 35px;
     }
 
     .overflow {
@@ -689,6 +805,15 @@
 
     .token {
         margin-bottom: 120px;
+    }
+
+    .token__dashboard {
+        padding: 13px 6px;
+    }
+
+    .token__data {
+        width: 56%;
+        object-fit: contain;
     }
 
     .advantage__flex {
@@ -714,7 +839,7 @@
     }
 
     .conversation {
-        margin-top: 120px;
+        margin-top: 45px;
     }
 
     .involved__left {

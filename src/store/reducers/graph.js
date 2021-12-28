@@ -1,7 +1,8 @@
-import { SET_FLUENCE_SUBGRAPH, GRAPH_CLEANUP } from "../actions/types"
+import { SET_FLUENCE_SUBGRAPH, SET_DISTRIBUTOR_SUBGRAPH, GRAPH_CLEANUP } from "../actions/types"
 
 const initialState = {
-    fluence: null
+    fluence: null,
+    distributor: null
 }
 
 export const graphReducer = (state = initialState, action) => {
@@ -14,6 +15,12 @@ export const graphReducer = (state = initialState, action) => {
             return {
                 ...state,
                 fluence: action.payload
+            }
+
+        case SET_DISTRIBUTOR_SUBGRAPH:
+            return {
+                ...state,
+                distributor: action.payload
             }
     
         default:

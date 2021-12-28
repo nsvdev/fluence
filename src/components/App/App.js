@@ -22,10 +22,14 @@ import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 
 import { getNetworkName } from '../../store/actions/wallet';
+
+
+
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { theGraphEndpoints } from '../../constants/endpoints';
 import { reduxCleanup } from '../../store/actions/common';
+
 
 import {
   ROUTE_FLUENCE,
@@ -40,9 +44,10 @@ import {
   ROUTE_CLAIMED
 } from '../../constants/routes'
 import { catchError } from '../../utils';
-import { setFluenceSubgraph } from '../../store/actions/graph';
+import { setFluenceSubgraph, setDistributorSubgraph } from '../../store/actions/graph';
 import TestSubgraph from '../TestSubgraph/TestSubgraph';
 import { setCurrentRoute } from '../../store/actions/routes';
+import { fetchMerkleRoot } from '../../store/actions/distributor';
 
 function App() {
   const { web3Provider } = useWeb3Connection()
@@ -50,10 +55,11 @@ function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { error } = useSelector(state => state.error)
-  const { address, prevAddress } = useSelector(state => state.wallet)
+  const { address, prevAddress, networkName } = useSelector(state => state.wallet)
   const { currentRoute } = useSelector(state => state.routes)
   const location = useLocation()
   const [locationPut, setLocationPut] = useState(false)
+  const [merkleRootFetched, setMerkleRootFetched] = useState(false)
 
   useEffect(() => {
     if (currentRoute
@@ -66,19 +72,31 @@ function App() {
   }, [currentRoute])
 
   useEffect(() => {
+    if (!merkleRootFetched) {
+      dispatch(fetchMerkleRoot('kovan'))
+      setMerkleRootFetched(true)
+    } 
+  }, [])
+
+  useEffect(() => {
     if (address && address !== prevAddress) {
       dispatch(reduxCleanup(address))
     }
   }, [address])
 
   const fluence = useCreateSubgraph({
-    [Chains.RINKEBY]: theGraphEndpoints['rinkeby'],
+    [Chains.RINKEBY]: theGraphEndpoints.fluence['rinkeby'],
+  });
+
+  const distributor = useCreateSubgraph({
+    [Chains.RINKEBY]: theGraphEndpoints.distributor['rinkeby'],
   });
 
   const subgraphs = useMemo(() => {
     dispatch(setFluenceSubgraph(fluence))
-    return [fluence];
-  }, [fluence]);
+    dispatch(setDistributorSubgraph(distributor))
+    return [fluence, distributor];
+  }, [fluence, distributor]);
 
   useEffect(() => {
     window.scrollTo(0, 0)

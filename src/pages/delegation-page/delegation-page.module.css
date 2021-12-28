@@ -76,9 +76,24 @@
     }
 }
 
-@media screen and (max-width: 951px) {
+
+
+@media screen and (max-width: 1000px) {
+    .dashboard__item {
+        width:42%;
+        min-width: 320px;
+    }
+}
+
+@media screen and (max-width: 900px) {
     .dashboard__item {
         width:100%;
+        min-width: 320px;
+    }
+
+    .main {
+        padding-right: 15px;
+        padding-left: 15px;
     }
 }
 

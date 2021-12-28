@@ -35,6 +35,7 @@ export const SET_USERNAME = 'user/SET_USERNAME'
 
 /////------------ THE GRAPH -----------//////
 export const SET_FLUENCE_SUBGRAPH = 'graph/SET_FLUENCE_SUBGRAPH'
+export const SET_DISTRIBUTOR_SUBGRAPH = 'graph/SET_DISTRIBUTOR_SUBGRAPH'
 
 /////------------ UTILS -----------//////
 export const GOV_CLEANUP = 'utils/GOV_CLEANUP'
@@ -46,3 +47,7 @@ export const ROUTE_CLEANUP = 'uitls/ROUTE_CLEANUP'
 
 /////------------ ROUTES -----------//////
 export const SET_CURRENT_ROUTE = 'routes/SET_CURRENT_ROUTE'
+
+/////------------ DISTRIBUTOR -----------//////
+export const FETCH_MERKLE_ROOT = 'distributor/FETCH_MERKLE_ROOT'
+export const CHECK_IS_CLAIMED = 'distributor/CHECK_IS_CLAIMED'

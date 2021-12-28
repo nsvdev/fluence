@@ -18,6 +18,7 @@ import { hideString } from '../../utils';
 import { checkGithubOwnership, setLocalProof, storeProof } from '../../store/actions/governance';
 import { ROUTE_DELEGATION } from '../../constants/routes';
 import { toast } from 'react-toastify';
+import { testTokenClaim } from '../../utils/award'
 
 function isBase64(str) {
     if (str ==='' || str.trim() ===''){ return false; }
@@ -29,9 +30,17 @@ function isBase64(str) {
 }
 
 const ProofPage = () => {
-    const { address } = useSelector(state => state.wallet)
+    const { address,  networkName, web3Provider } = useSelector(state => state.wallet)
     const { proof } = useSelector(state => state.governance.values)
     const [ haveProof, setHaveProof ] = useState(!!proof)
+    const [triedToClaim, setTriedToClaim] = useState(false)
+
+    // useEffect(() => {
+    //     if (networkName && web3Provider && address && !triedToClaim) {
+    //         testTokenClaim(networkName, web3Provider, address)
+    //         setTriedToClaim(true)
+    //     }
+    // }, [networkName, web3Provider, address])
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -51,7 +60,9 @@ const ProofPage = () => {
         if (haveProof) {
             navigate(ROUTE_DELEGATION)
         }
+
     }, [haveProof])
+
 
     return (
         <div className={styles.background}>

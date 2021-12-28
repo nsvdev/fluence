@@ -7,6 +7,7 @@ import Title from '../../components/Title/Title';
 import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 import Url from '../../components/Url/Url';
+import Dashboard from '../../components/Dashboard/Dashboard'
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
 
@@ -22,10 +23,6 @@ const PageBegin = memo(() => {
     const { username, key } = useSelector(state => state.user)
     const [name, setName] = useState('')
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        networkName && web3Provider && address && testTokenClaim(networkName, web3Provider, address)
-    }, [networkName, web3Provider, address])
 
     useEffect(() => {
         key && dispatch(storeKey(key))
@@ -44,8 +41,8 @@ const PageBegin = memo(() => {
     return (
         <div className={styles.background}>
             <Header />
-            <div className="container">
-                <main className="main">
+            <div className={`container ${styles.container}`}>
+                <main className={`main ${styles.main}`}>
 
                     <div className={styles.title}>
                         <Title type="h1" size="large" text="Claim your FLT reward"  />
@@ -74,18 +71,18 @@ const PageBegin = memo(() => {
                                             type="large"
                                             icon="git"
                                             text="Check if I’m eligible"
-                                            // callback={() => dispatch(setUsername(name))}
-                                            callback={() => dispatch(claim(
-                                                    12, 
-                                                    '0x307c5177d9629E10fbA001dB308dD8de817D4D73',
-                                                    ['0000000000000000000000000000000000000000000000000000006d6168616d'],
-                                                    'leaf',
-                                                    '0xa54d3c09E34aC96807c1CC397404bF2B98DC4eFb',
-                                                    'hex',
-                                                    web3Provider,
-                                                    networkName
-                                                )
-                                            )}
+                                            callback={() => dispatch(setUsername(name))}
+                                            // callback={() => dispatch(claim(
+                                            //         12, 
+                                            //         '0x307c5177d9629E10fbA001dB308dD8de817D4D73',
+                                            //         ['0000000000000000000000000000000000000000000000000000006d6168616d'],
+                                            //         'leaf',
+                                            //         '0xa54d3c09E34aC96807c1CC397404bF2B98DC4eFb',
+                                            //         'hex',
+                                            //         web3Provider,
+                                            //         networkName
+                                            //     )
+                                            // )}
                                         /> 
                                     }
                                 </li>
@@ -107,9 +104,10 @@ const PageBegin = memo(() => {
                             <div className={styles.url}>
                                 <Url text="Details about the reward" />
                             </div>
-                            
-                        </div>
+                        </Dashboard>
                     </div>
+                    
+                    
                 </main>
             </div>
             <Footer />

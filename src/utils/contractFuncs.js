@@ -2,10 +2,10 @@ import { Contract } from "@ethersproject/contracts";
 import abis from "../contracts";
 import { governanceContracts } from "../constants";
 import {
-    catchError,
-    PROPOSAL_STATES,
-    SUCCESS_MSG
+    catchError
 } from "../utils";
+
+const SUCCESS_MSG = 'Success! Please wait for transaction confirmation.'
 
 export async function getNetworkName(w3provider) {
   let network = await w3provider.getNetwork();
@@ -44,18 +44,7 @@ export async function getProposalDetails(w3provider, proposalId, network) {
     }
     return proposals;
 }
-  
-export async function getProposalState(w3provider, proposalId, network) {
-    let contract = new Contract(governanceContracts[network].alpha, abis.GovernorAlpha.abi, w3provider);
-    let state;
-    try {
-      state = await contract.state(proposalId);
-    } catch (error) {
-      state = error.message;
-    }
-    return PROPOSAL_STATES[state];
-}
-  
+
 export async function propose(w3provider, targets, values, signatures, calldatas, description, network) {
     let signer = w3provider.getSigner();
     let contract = new Contract(governanceContracts[network].alpha, abis.GovernorAlpha.abi, w3provider);

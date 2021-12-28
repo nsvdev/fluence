@@ -3,10 +3,8 @@ import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
 import { Contract } from '@ethersproject/contracts';
 import abis from '../contracts';
-
+import treeData from '../constants/treeData.json'
 import { governanceContracts } from '../constants';
-
-
 
 export async function testTokenClaim(network, w3provider, address) {
     console.log("network is %s", network);
@@ -15,12 +13,10 @@ export async function testTokenClaim(network, w3provider, address) {
     userWallet.address = address;
     let temporaryWallet = await generateSigner();
     
-    const FLT = governanceContracts[network]['token'];
-    let timelockAddress = governanceContracts[network]["timelock"];
-    
-    let awardedAddresses = await Promise.all(Array(100).fill((await generateSigner()).address))
+    const { awardedAddresses } = treeData
     let { tree, userIds } = await generateMerkleTree([...awardedAddresses, temporaryWallet.address])
     let merkleRoot = tree.getHexRoot();
+    alert(merkleRoot)
     console.log('merkle root', merkleRoot)
 
     let Distributor = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
@@ -45,22 +41,22 @@ async function claim(userWallet, temporaryWallet, merkleTree, userIds, distribut
     const Distributor = new Contract(distributorAddress, abis.TokenDistributor.abi, w3provider);
     const distributor = await Distributor.connect(userWallet);
 
-  let userId = userIds.get(temporaryWallet.address);
+  let userId = userIds.get('0x4701188a456406C860C85Ae3e42d0aF0689a243A');
   console.log('Claiming for userId', userId);
 
-  let leaf = await hashedLeaf(userId, temporaryWallet.address);
+  let leaf = await hashedLeaf(userId, '0x4701188a456406C860C85Ae3e42d0aF0689a243A');
   let merkleProof = merkleTree.getHexProof(leaf);
   console.log('merkle proof', merkleProof);
   let signature = await signWithSigner(temporaryWallet, leaf);
 
-    alert(userWallet.address)
+    alert('claiming tx with: ' + userWallet.address)
 
   let claimTx = await distributor.claimTokens(
     userId,
     userWallet.address,
     merkleProof,
     leaf,
-    temporaryWallet.address,
+    '0x4701188a456406C860C85Ae3e42d0aF0689a243A',
     signature,
   );
   

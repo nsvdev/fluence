@@ -5,6 +5,7 @@ import { userReducer } from "./user"
 import { graphReducer } from "./graph"
 import { errorReducer } from "./error"
 import { routesReducer } from "./routes"
+import { distributorReducer } from './distributor'
 
 export default combineReducers({
     wallet: walletReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     user: userReducer,
     graph: graphReducer,
     error: errorReducer,
-    routes: routesReducer
+    routes: routesReducer,
+    distributor: distributorReducer
 })

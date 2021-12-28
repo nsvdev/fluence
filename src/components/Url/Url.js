@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import styles from './Url.module.css';
 
-const Url = ({ text }) => {
+const Url = ({ text, color='' }) => {
     return (
-        <Link to="/" className={styles.url}>{text}</Link>
+        <Link to="/" className={`${styles.url} ${color === 'black' && styles.url_color_black}`}>{text}</Link>
     )
 }
 

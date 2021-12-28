@@ -19,15 +19,15 @@ import { findAccountQueryFactory } from '../../utils/graphQueries';
 
 const FirstStepPage = memo(() => {
     const navigate = useNavigate()
-    const { address } = useSelector(state => state.wallet)
+    const { address, web3Provider } = useSelector(state => state.wallet)
     const { fluence } = useSelector(state => state.graph)
     const { useQuery } = useSubgraph(fluence)
     const { data, loading } = useQuery(findAccountQueryFactory(address || ''))
 
     useEffect(() => {
-        if (address && !loading && data) {
+        if (address && !loading && data && web3Provider) {
             // for demo invert this
-            if (data?.account) {
+            if (!data?.account) {
                 navigate(ROUTE_CLAIMED)
             } else {
                 navigate(ROUTE_PROOF)
