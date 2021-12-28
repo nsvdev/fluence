@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSubgraph } from 'thegraph-react';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -8,33 +11,45 @@ import WalletInfo from '../../components/WalletInfo/WalletInfo';
 import UserCard from '../../components/UserCard/UserCard';
 import Footer from '../../components/Footer/Footer';
 
-import { users } from '../../mocks/UserCardMocks'
+// import { users } from '../../mocks/UserCardMocks'
 import styles from './delegation-page.module.css';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { hideString } from '../../utils';
-import { useNavigate } from 'react-router-dom';
-import { delegate } from '../../store/actions/governance';
+import { delegate, storeDelegatee } from '../../store/actions/governance';
+import { accountsQueryFactory } from '../../utils/graphQueries';
+import { accountsMapper } from '../../utils/gqlMappers';
+import { ROUTE_DONE } from '../../constants/routes';
 
 const DelegationPage = () => {
     const { address, web3, sendTransaction, web3Provider } = useWeb3Connection()
-    const delegateState = useSelector(state => state.governance)
+    const { delegatee } = useSelector(state => state.governance.values)
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
-    const delegateAction = async () => {
-        dispatch(delegate(web3Provider, address, 'kovan'))
+    const delegateAction = (delegatee) => {
+        dispatch(storeDelegatee(delegatee))
     }
 
     const acc = hideString(address)
 
+    const { fluence } = useSelector(state => state.graph)
+    const { useQuery } = useSubgraph(fluence)
+    const [ users, setUsers ] = useState([])
+    
+    const { error, loading, data } = useQuery(accountsQueryFactory(5));
     useEffect(() => {
-        if (delegateState.delegatee) {
-            navigate('/done')
+        if (data) {
+            const { accounts } = data
+            setUsers(accounts.map(accountsMapper))
         }
-    }, [delegateState.delegatee])
+    }, [data])
+
+    useEffect(() => {
+        if (delegatee) {
+            navigate(ROUTE_DONE)
+        }
+    }, [delegatee])
 
     return (
         <div className={styles.background}>
@@ -63,7 +78,7 @@ const DelegationPage = () => {
                                 {users.map(user => (
                                     <li className={styles.dashboard__item}
                                         key={user.id}>
-                                            <UserCard card={user} delegateAction={delegateAction}/>
+                                        <UserCard card={user} delegateAction={delegateAction}/>
                                     </li>
                                     
                                 ))}

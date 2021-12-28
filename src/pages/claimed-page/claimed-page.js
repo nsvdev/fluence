@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useSubgraph } from 'thegraph-react';
+import { proposalsQuery } from '../../utils/graphQueries';
 
 import Header from '../../components/Header/Header';
 import Title from '../../components/Title/Title';
@@ -39,6 +42,17 @@ const cards = [
 ]
 
 const ClaimedPage = () => {
+    const { fluence } = useSelector(state => state.graph)
+    const { useQuery } = useSubgraph(fluence)
+    const [ proposals, setProposals ] = useState([])
+    
+    const { error, loading, data } = useQuery(proposalsQuery);
+    useEffect(() => {
+        if (data) {
+            const { proposals } = data
+        }
+    }, [data])
+
     return (
         <div className={styles.background}>
             <div className={styles.background__image}>
@@ -72,7 +86,12 @@ const ClaimedPage = () => {
                             <Title type="h3" size="medium" text="Get involved with the DAO" />
                         </div>
                         <div className={styles.involved__list}>
-                            <ProposalsList cards={cards} />
+                            {
+                                ( loading || error )
+                                ?   <div style={{color: '#fff'}}>loading...</div>
+                                // no proposals on chain yet
+                                :   <ProposalsList cards={cards} />
+                            }
                         </div>
                     </section>
 

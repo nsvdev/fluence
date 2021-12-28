@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useSubgraph } from 'thegraph-react';
 
 import Header from '../../components/Header/Header';
 import Title from '../../components/Title/Title';
@@ -8,14 +10,15 @@ import Footer from '../../components/Footer/Footer';
 import Url from '../../components/Url/Url';
 import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
 import ProposalsList from '../../components/ProposalsList/ProposalsList';
-
-import { users } from '../../mocks/UserCardMocks';
+import { hideString } from '../../utils';
 
 import cardImage from '../../images/landing-card.png';
 import linesImage from '../../images/Group 2125.svg';
 import dataImage from '../../images/image 111.png';
 import styles from './landing-page.module.css';
 import dialog from '../../images/dialog.svg';
+import { proposalsAccountsQuery } from '../../utils/graphQueries';
+import { accountsMapper } from '../../utils/gqlMappers';
 
 
 const cards = [
@@ -62,6 +65,17 @@ const cards = [
 ]
 
 const LandingPage = () => {
+    const { fluence } = useSelector(state => state.graph)
+    const { useQuery } = useSubgraph(fluence)
+    const [ users, setUsers ] = useState([])
+    
+    const { error, loading, data } = useQuery(proposalsAccountsQuery);
+    useEffect(() => {
+        if (data) {
+            const { accounts } = data
+            setUsers(accounts.map(accountsMapper))
+        }
+    }, [data])
 
     return (
         <div className={styles.overflow}>
@@ -193,8 +207,12 @@ const LandingPage = () => {
                             
                             <div className={styles["involved__flex-container"]}>
                                 <div className={styles.involved__left}>
-                                    <ProposalsList cards={cards} />
-                                    
+                                    {
+                                        ( loading || error )
+                                        ?   <div style={{color: '#fff'}}>loading...</div>
+                                        // no proposals on chain yet
+                                        :   <ProposalsList cards={cards} />
+                                    }
                                 </div>
                                 <div className={styles.delegates}>
                                     <div className={styles.delegates__title}>
@@ -208,13 +226,16 @@ const LandingPage = () => {
                                                         <img className={styles.card__avatar} alt={card.name} src={card.url} />
                                                         <div className={styles.card__info}>
                                                             <p className={styles.card__name}>{card.name}</p>
-                                                            <span className={`${styles.card__wallet}`}>{card.votes.length} votes</span>
+
+                                                            <span className={styles.card__wallet}>{hideString(card.wallet)}</span>
+                                                            <span className={`${styles.card__wallet} ${styles.card__wallet_left}`}>{card.votes} votes</span>
+
                                                         </div>
                                                     </div>
                                                     <div className={styles["card__rating-container"]}>
                                                         <p className={styles.card__rating}>{card.rating}</p>
                                                         <p className={styles.card__delegator}>
-                                                            {card.delegators.length} delegators
+                                                            {card.delegators} delegators
                                                         </p>
                                                     </div>
                                                 </li>

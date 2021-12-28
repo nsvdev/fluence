@@ -7,13 +7,16 @@ import {
     CLAIM_STATUS,
     SET_ALEGIBILITY,
     SET_LOCAL_PROOF,
-    SET_OWNERSHIP
+    SET_OWNERSHIP,
+    SET_CLAIM_STATUS,
+    STORE_PROOF,
+    STORE_KEY,
+    STORE_DELEGATEE,
+    GOV_CLEANUP
 } from "../actions/types"
 
 const initialState = {
-    proposals: [],
     degelationStatus: null,
-    currentProposal: null,
     delegatee: null,
     error: null,
     proposalCount: null,
@@ -27,11 +30,21 @@ const initialState = {
     githubOwnership: {
         isOwner: false,
         checked: false
+    },
+    hasClaimed: null,
+    values: {
+        proof: null,
+        delegatee: null,
+        key: null
     }
 }
 
 export function governanceReducer(state = initialState, action) {
     switch (action.type) {
+        case GOV_CLEANUP: {
+            return initialState
+        }
+
         case PROPOSAL_CREATED:
             return {
                 ...state,
@@ -47,12 +60,6 @@ export function governanceReducer(state = initialState, action) {
             return {
                 ...state,
                 delegatee: action.payload
-            }
-        }
-        case SET_ERROR: {
-            return {
-                ...state,
-                error: action.payload
             }
         }
         case SET_PROPOSAL_COUNT: {
@@ -83,6 +90,39 @@ export function governanceReducer(state = initialState, action) {
             return {
                 ...state,
                 githubOwnership: action.payload
+            }
+        }
+        case SET_CLAIM_STATUS: {
+            return {
+                ...state,
+                hasClaimed: action.payload
+            }
+        }
+        case STORE_PROOF: {
+            return {
+                ...state,
+                values: {
+                    ...state.values,
+                    proof: action.payload
+                }
+            }
+        }
+        case STORE_KEY: {
+            return {
+                ...state,
+                values: {
+                    ...state.values,
+                    key: action.payload
+                }
+            }
+        }
+        case STORE_DELEGATEE: {
+            return {
+                ...state,
+                values: {
+                    ...state.values,
+                    delegatee: action.payload
+                }
             }
         }
         default:

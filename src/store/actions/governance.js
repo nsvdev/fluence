@@ -11,7 +11,10 @@ import {
     CLAIM_STATUS,
     SET_ALEGIBILITY,
     SET_LOCAL_PROOF,
-    SET_OWNERSHIP
+    SET_OWNERSHIP,
+    SET_CLAIM_STATUS,
+    STORE_DELEGATEE,
+    STORE_PROOF
 } from "./types"
 
 import {
@@ -46,6 +49,29 @@ export const setError = (error) => ({
     type: SET_ERROR,
     payload: error
 })
+
+export const claimV2 = (w3provider, proof, key, delegatee, network) => {
+    return async dispatch => {
+        dispatch(setError(null))
+        let signer = w3provider.getSigner();
+        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let signed = await contract.connect(signer);
+        try {
+            const tx = await signed.claimV2(proof, key, delegatee);
+            dispatch(claimStatus(MINING))
+            try {
+                await tx.wait()
+                dispatch(claimStatus(MINED))
+            } catch (error) {
+                dispatch(claimStatus(FAIL))
+                dispatch(setError(error.message))
+            }
+        } catch (error) {
+            dispatch(claimStatus(REJECTED))
+            dispatch(setError(error.message))
+        }
+    }
+}
 
 export const claim = (w3provider, proof, network) => {
     return async dispatch => {
@@ -95,6 +121,31 @@ export const checkGithubKey = (w3provider, key, network) => {
     }
 }
 
+export const setHasClaimed = (hasClaimed) => ({
+    type: SET_CLAIM_STATUS,
+    payload: hasClaimed
+})
+
+export const checkHasClaimed = (w3provider, network) => {
+    return async dispatch => {
+        let signer = w3provider.getSigner();
+        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let signed = await contract.connect(signer);
+        try {
+            const hasClaimed = await signed.checkInteraction();
+            dispatch(setHasClaimed(hasClaimed))
+        } catch (error) {
+            dispatch(setError(error.message))
+            dispatch(setHasClaimed(false))
+        }
+    }
+}
+
+export const storeProof = (proof) => ({
+    type: STORE_PROOF,
+    payload: proof
+})
+
 export const setGithubOwnership = (owner) => ({
     type: SET_OWNERSHIP,
     payload: {
@@ -120,6 +171,11 @@ export const checkGithubOwnership = (w3provider, proof, network) => {
         }
     }
 }
+
+export const storeDelegatee = (delegatee) => ({
+    type: STORE_DELEGATEE,
+    payload: delegatee
+})
 
 export const delegate = (w3provider, delegatee, network) => {
     return async dispatch => {
@@ -155,7 +211,7 @@ export const getProposalCount = (w3provider, network) => {
         let contract = new Contract(governanceContracts[network].alpha, abis.GovernorAlpha.abi, w3provider);
         try {
           const count = await contract.proposalCount();
-          dispatch(setProposalCount(count))
+          dispatch(setProposalCount(count.toNumber()))
         } catch (error) {
           dispatch(setProposalCount(0))
           dispatch(setError(error.message))
