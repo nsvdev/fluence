@@ -25,10 +25,6 @@ const PageBegin = memo(() => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        networkName && web3Provider && address && testTokenClaim(networkName, web3Provider, address)
-    }, [networkName, web3Provider, address])
-
-    useEffect(() => {
         key && dispatch(storeKey(key))
     }, [web3Provider, key])
 

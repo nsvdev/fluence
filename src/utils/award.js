@@ -3,7 +3,7 @@ import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
 import { Contract } from '@ethersproject/contracts';
 import abis from '../contracts';
-import treeData from '../constants/treeData.json'
+import treeData from '../constants/treeData.json';
 import { governanceContracts } from '../constants';
 
 export async function testTokenClaim(network, w3provider, address) {

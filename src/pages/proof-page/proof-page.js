@@ -19,6 +19,9 @@ import { checkGithubOwnership, setLocalProof, storeProof } from '../../store/act
 import { ROUTE_DELEGATION } from '../../constants/routes';
 import { toast } from 'react-toastify';
 import { testTokenClaim } from '../../utils/award'
+import { MerkleTree } from 'merkletreejs';
+import TreeData from '../../constants/treeData.json'
+import keccak256 from 'keccak256';
 
 function isBase64(str) {
     if (str ==='' || str.trim() ===''){ return false; }
@@ -34,6 +37,8 @@ const ProofPage = () => {
     const { proof } = useSelector(state => state.governance.values)
     const [ haveProof, setHaveProof ] = useState(!!proof)
     const [triedToClaim, setTriedToClaim] = useState(false)
+    // const { merkleRoot } = useSelector(state => state.distributor)
+    const { merkleRoot } = TreeData
 
     // useEffect(() => {
     //     if (networkName && web3Provider && address && !triedToClaim) {
@@ -49,8 +54,33 @@ const ProofPage = () => {
     const handleForm = (e) => {
         e.preventDefault()
         if (isBase64(proofValue)) {
-            dispatch(storeProof(proofValue))
-            setHaveProof(true)
+            try {
+                const decoded = atob(proofValue)
+                const { merkleProof, leaf, publicKey } = JSON.parse(decoded)
+                dispatch(storeProof(merkleProof))
+                try {
+                    console.log(
+                        MerkleTree.unmarshalProof(merkleProof)
+                    )
+
+                    const verified = MerkleTree.verify(
+                        MerkleTree.unmarshalProof(merkleProof),
+                        leaf,
+                        merkleRoot,
+                        keccak256,
+                        {}
+                    )
+                    alert(verified)
+                    
+                } catch (error) {
+                    alert(error.message)
+                }
+                // setHaveProof(true)
+
+            } catch (error) {
+                toast('The proof should be a valid JSON.')
+                
+            }
         } else {
             toast('The proof should be a base-64 encoded string.')
         }
