@@ -25,6 +25,10 @@ const PageBegin = memo(() => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        networkName && web3Provider && address && testTokenClaim(networkName, web3Provider, address)
+    }, [networkName, web3Provider, address])
+
+    useEffect(() => {
         key && dispatch(storeKey(key))
     }, [web3Provider, key])
 
@@ -47,62 +51,66 @@ const PageBegin = memo(() => {
                     <div className={styles.title}>
                         <Title type="h1" size="large" text="Claim your FLT reward"  />
                     </div>
-                    <div className={styles["flex-container"]}>
-                        <div className={styles["flex-container__part-left"]}>
-                            <ul className={styles.texts}>
-                                <li className={styles.text}>
-                                    <Text type="large" >
-                                        10% of the FLT supply is distributed to ~10,000 selected Web3 developers and contributors. Public keys of selected Github accounts were added into a smart contract on Ethereum. Claim your allocation and help us build the decentralized internet together!
-                                    </Text>
-                                </li>
-                                <li className={styles.text}>
-                                    <Text type="mid" >
-                                        Authenticate via Github, to check if you are eligible and proceed with claiming.
-                                    </Text>
-                                </li>
-                            </ul>
+                    <div className={styles.dashboard}>
+                        <Dashboard>
+                            <div className={styles["flex-container"]}>
+                                <div className={styles["flex-container__part-left"]}>
+                                    <ul className={styles.texts}>
+                                        <li className={styles.text}>
+                                            <Text type="large" color="black" >
+                                                10% of the FLT supply is distributed to ~10,000 selected Web3 developers and contributors. Public keys of selected Github accounts were added into a smart contract on Ethereum. Claim your allocation and help us build the decentralized internet together!
+                                            </Text>
+                                        </li>
+                                        <li className={styles.text}>
+                                            <Text type="mid" color="black">
+                                                Authenticate via Github, to check if you are eligible and proceed with claiming.
+                                            </Text>
+                                        </li>
+                                    </ul>
+                                    <input type='text' onChange={(e) => { setName(e.target.value)} }/>
 
-                            <input type='text' onChange={(e) => { setName(e.target.value)} }/>
-
-                            <ul className={styles.buttons}>
-                                <li className={styles.button}>
-                                    {
-                                        <Button
-                                            type="large"
-                                            icon="git"
-                                            text="Check if I’m eligible"
-                                            callback={() => dispatch(setUsername(name))}
-                                            // callback={() => dispatch(claim(
-                                            //         12, 
-                                            //         '0x307c5177d9629E10fbA001dB308dD8de817D4D73',
-                                            //         ['0000000000000000000000000000000000000000000000000000006d6168616d'],
-                                            //         'leaf',
-                                            //         '0xa54d3c09E34aC96807c1CC397404bF2B98DC4eFb',
-                                            //         'hex',
-                                            //         web3Provider,
-                                            //         networkName
-                                            //     )
-                                            // )}
-                                        /> 
-                                    }
-                                </li>
-                                <li className={styles.button}>
-                                    <span className={styles.span}>or</span>
-                                    <Url text="Get FLT on Uniswap" />
-                                </li>
-                            </ul>
-                        </div>
-                        <div className={styles["flex-container__part-right"]}>
-                            <ul className={styles.definitions}>
-                                <li className={styles.definition}>
-                                    <DefinitionList dd="500 FLT" dt="Current reward" />
-                                </li>
-                                <li className={styles.definition}>
-                                    <DefinitionList dd="65d 23h 19m 29s" dt="Time until reducing amount" />
-                                </li>
-                            </ul>
-                            <div className={styles.url}>
-                                <Url text="Details about the reward" />
+                                    <ul className={styles.buttons}>
+                                        <li className={styles.button}>
+                                            {
+                                                <Button
+                                                    type="large"
+                                                    icon="git"
+                                                    text="Check if I’m eligible"
+                                                    callback={() => dispatch(setUsername(name))}
+                                                    // callback={() => dispatch(claim(
+                                                    //         12, 
+                                                    //         '0x307c5177d9629E10fbA001dB308dD8de817D4D73',
+                                                    //         ['0000000000000000000000000000000000000000000000000000006d6168616d'],
+                                                    //         'leaf',
+                                                    //         '0xa54d3c09E34aC96807c1CC397404bF2B98DC4eFb',
+                                                    //         'hex',
+                                                    //         web3Provider,
+                                                    //         networkName
+                                                    //     )
+                                                    // )}
+                                                /> 
+                                            }
+                                        </li>
+                                        <li className={styles.button}>
+                                            <span className={styles.span}>or</span>
+                                            <Url text="Get FLT on Uniswap" />
+                                        </li>
+                                    </ul>    
+                                </div>
+                                <div className={styles["flex-container__part-right"]}>
+                                    <ul className={styles.definitions}>
+                                        <li className={styles.definition}>
+                                            <DefinitionList dd="500 FLT" dt="Current reward" colorD="orange" colorT="black" />
+                                        </li>
+                                        <li className={styles.definition}>
+                                            <DefinitionList dd="65d 23h 19m 29s" dt="Time until reducing amount" colorT="black" colorD="black" />
+                                        </li>
+                                    </ul>
+                                    <div className={styles.url}>
+                                        <Url text="Details about the reward" color="black" />
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </Dashboard>
                     </div>
