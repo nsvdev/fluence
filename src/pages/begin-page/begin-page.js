@@ -89,7 +89,7 @@ const PageBegin = memo(() => {
                                         </li>
                                         <li className={styles.button}>
                                             <span className={styles.span}>or</span>
-                                            <Url text="Get FLT on Uniswap" />
+                                            <Url text="Get FLT on Uniswap"  color="black"/>
                                         </li>
                                     </ul>    
                                 </div>
