@@ -21,6 +21,6 @@ export const governanceContracts = {
         "bravo": "0x7F4a7d3E805eCBe5C301fE24FB9E21EEaFB6F8E9",
         "delegator": "0x10CEE77b2C8967bFF37264900B1BE1E87548EDB2",
         "mock": "0xc76a5739Ea9ca1231ED699A202fd0C49aE21C36a",
-        "tokenDistributor" : "0x6984BaC1dF277c2F36abC8956A17A1C245B25CC8"
+        "tokenDistributor" : "0xfC3C3bCA549eDdB51Bb53ac57694270bDa6c3E35"
     },
 }

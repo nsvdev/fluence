@@ -79,8 +79,9 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (address && address !== prevAddress) {
-      dispatch(reduxCleanup(address))
+    if (address && prevAddress && (address !== prevAddress)) {
+      dispatch(reduxCleanup())
+      navigate(ROUTE_INDEX)
     }
   }, [address])
 

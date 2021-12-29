@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
-import { resetWeb3Provider, setAddress, setWeb3Provider } from '../store/actions/wallet'
+import { resetWeb3Provider, setAddress, setPrevAddress, setWeb3Provider } from '../store/actions/wallet'
 
 const { REACT_APP_INFURA_KEY: INFURA_ID } = process.env
 
@@ -87,22 +87,23 @@ export const useWeb3Connection = () => {
 
     useEffect(() => {
         if (provider?.on) {
-        const handleAccountsChanged = (accounts) => {
-            console.log('accountsChanged', accounts)
-            dispatch(setAddress(accounts))
-        }
-        const handleChainChanged = (_hexChainId) => {
-            window.location.reload()
-        }
+            const handleAccountsChanged = (accounts) => {
+                dispatch(setPrevAddress(address))
+                console.log('accountsChanged', accounts)
+                dispatch(setAddress(accounts))
+            }
+            const handleChainChanged = (_hexChainId) => {
+                window.location.reload()
+            }
 
-        const handleDisconnect = (error) => {
-            console.log('disconnect', error)
-            disconnect()
-        }
+            const handleDisconnect = (error) => {
+                console.log('disconnect', error)
+                disconnect()
+            }
 
-        provider.on('accountsChanged', handleAccountsChanged)
-        provider.on('chainChanged', handleChainChanged)
-        provider.on('disconnect', handleDisconnect)
+            provider.on('accountsChanged', handleAccountsChanged)
+            provider.on('chainChanged', handleChainChanged)
+            provider.on('disconnect', handleDisconnect)
 
         // Subscription Cleanup
         return () => {

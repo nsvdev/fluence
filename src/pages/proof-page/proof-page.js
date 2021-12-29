@@ -15,13 +15,13 @@ import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
 import { hideString } from '../../utils';
 
-import { checkGithubOwnership, setLocalProof, storeProof } from '../../store/actions/governance';
+import { storeProof } from '../../store/actions/governance';
 import { ROUTE_DELEGATION } from '../../constants/routes';
 import { toast } from 'react-toastify';
-import { testTokenClaim } from '../../utils/award'
 import { MerkleTree } from 'merkletreejs';
 import TreeData from '../../constants/treeData.json'
 import keccak256 from 'keccak256';
+import { hashedLeaf } from '../../utils/award'
 
 function isBase64(str) {
     if (str ==='' || str.trim() ===''){ return false; }
@@ -33,53 +33,46 @@ function isBase64(str) {
 }
 
 const ProofPage = () => {
-    const { address,  networkName, web3Provider } = useSelector(state => state.wallet)
+    const { address } = useSelector(state => state.wallet)
     const { proof } = useSelector(state => state.governance.values)
     const [ haveProof, setHaveProof ] = useState(!!proof)
-    const [triedToClaim, setTriedToClaim] = useState(false)
-    // const { merkleRoot } = useSelector(state => state.distributor)
-    const { merkleRoot } = TreeData
 
-    // useEffect(() => {
-    //     if (networkName && web3Provider && address && !triedToClaim) {
-    //         testTokenClaim(networkName, web3Provider, address)
-    //         setTriedToClaim(true)
-    //     }
-    // }, [networkName, web3Provider, address])
+    // const { merkleRoot } = useSelector(state => state.distributor)
+    const { merkleRoot, addresses } = TreeData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [ proofValue, setProofValue ] = useState('')
 
-    const handleForm = (e) => {
+    const handleForm = async (e) => {
         e.preventDefault()
         if (isBase64(proofValue)) {
             try {
                 const decoded = atob(proofValue)
-                const { merkleProof, leaf, publicKey } = JSON.parse(decoded)
-                dispatch(storeProof(merkleProof))
-                try {
-                    console.log(
-                        MerkleTree.unmarshalProof(merkleProof)
-                    )
+                const parsed = JSON.parse(decoded)
+                const { merkleProof, publicKey, userId } = parsed
 
+                try {
+                    const myLeaf = await hashedLeaf(userId, publicKey)
                     const verified = MerkleTree.verify(
-                        MerkleTree.unmarshalProof(merkleProof),
-                        leaf,
+                        merkleProof,
+                        myLeaf,
                         merkleRoot,
                         keccak256,
-                        {}
+                        { hashLeaves: false, sortPairs: true }
                     )
-                    alert(verified)
-                    
+                    if (verified) {
+                        setHaveProof(true)
+                        dispatch(storeProof(parsed))
+                    } else {
+                        toast('Invalid proof. Please check the data.')
+                    }
                 } catch (error) {
-                    alert(error.message)
+                    console.log(error.message)
+                    toast('Error when validating the proof.')
                 }
-                // setHaveProof(true)
-
             } catch (error) {
                 toast('The proof should be a valid JSON.')
-                
             }
         } else {
             toast('The proof should be a base-64 encoded string.')
@@ -90,7 +83,6 @@ const ProofPage = () => {
         if (haveProof) {
             navigate(ROUTE_DELEGATION)
         }
-
     }, [haveProof])
 
 
@@ -122,8 +114,8 @@ const ProofPage = () => {
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}><Link to='/' className={styles.dashboard__link}>Download </Link>the proof generation bash script to your local machine from Github and run it with the following command.</p>
                                     <p className={`${styles.dashboard__paragraph} ${styles.dashboard__paragraph_pl_27}`}>
                                         <img src={danger} className={styles.dashboard__danger} alt="danger-icon"/>
-                                    This script will read your private key, so we highly recommend inspecting the source code first
-                            </p>
+                                        This script will read your private key, so we highly recommend inspecting the source code first
+                                    </p>
                                 </li>
 
                                 <li className={styles.dashboard__item}>
@@ -140,9 +132,7 @@ const ProofPage = () => {
                                     <p className={`${styles.dashboard__text} ${styles.dashboard__text_size_mid}`}>Copy the base64-encoded proof from your terminal into the box below. The proof will be sent to the smart contract to unlock your tokens.</p>
                                     
                                     <div className={styles.dashboard__textarea}>
-
                                         <TextArea onChange={(e) => setProofValue(e.target.value)} name="token" rows="4" />
-
                                     </div>
                                 </li>
                             </ul>

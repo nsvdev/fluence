@@ -89,7 +89,7 @@ async function signWithSigner(signer, leaf) {
  *  userIds: { [string]: number }
  * }}
  */
-async function generateMerkleTree(addresses) {
+export async function generateMerkleTree(addresses) {
   // shuffle to make sure we don't accidentaly reveal GitHub usernames via userId enumeration
   let shuffled = addresses
     .map(address => ({ address, sort: Math.random() }))
@@ -115,7 +115,7 @@ async function generateMerkleTree(addresses) {
  * @param {string} address 
  * @returns {Buffer}
  */
-async function hashedLeaf(userId, address) {
+export async function hashedLeaf(userId, address) {
   let leafData = await ethers.utils.defaultAbiCoder.encode(["uint32", "address"], [userId, address]);
   let leaf = keccak256(leafData);
 

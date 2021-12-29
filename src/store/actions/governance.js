@@ -105,9 +105,8 @@ export const claim = (
                 dispatch(setError(error.message))
             }
         } catch (error) {
-            alert(error.message)
             dispatch(claimStatus(REJECTED))
-            dispatch(setError(error.message))
+            dispatch(setError(error?.data?.message || error.message))
         }
     }
 }
