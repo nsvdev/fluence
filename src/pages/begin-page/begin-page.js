@@ -63,7 +63,7 @@ const PageBegin = memo(() => {
                                             </Text>
                                         </li>
                                     </ul>
-                                    <input type='text' onChange={(e) => { setName(e.target.value)} }/>
+                                    <input type='text' className={styles.input} placeholder="Github username" onChange={(e) => { setName(e.target.value)} }/>
 
                                     <ul className={styles.buttons}>
                                         <li className={styles.button}>
@@ -89,7 +89,7 @@ const PageBegin = memo(() => {
                                         </li>
                                         <li className={styles.button}>
                                             <span className={styles.span}>or</span>
-                                            <Url text="Get FLT on Uniswap" />
+                                            <Url text="Get FLT on Uniswap"  color="black"/>
                                         </li>
                                     </ul>    
                                 </div>
