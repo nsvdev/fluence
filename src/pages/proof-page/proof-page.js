@@ -15,8 +15,8 @@ import danger from '../../images/danger.svg';
 import styles from './proof-page.module.css';
 import { hideString } from '../../utils';
 
-import { storeProof } from '../../store/actions/governance';
-import { ROUTE_DELEGATION } from '../../constants/routes';
+import { checkHasClaimed, storeProof } from '../../store/actions/governance';
+import { ROUTE_CLAIMED, ROUTE_DELEGATION } from '../../constants/routes';
 import { toast } from 'react-toastify';
 import { MerkleTree } from 'merkletreejs';
 import TreeData from '../../constants/treeData.json'
@@ -33,9 +33,10 @@ function isBase64(str) {
 }
 
 const ProofPage = () => {
-    const { address } = useSelector(state => state.wallet)
+    const { address, web3Provider, networkName } = useSelector(state => state.wallet)
     const { proof } = useSelector(state => state.governance.values)
     const [ haveProof, setHaveProof ] = useState(!!proof)
+    const { hasClaimed } = useSelector(state => state.governance)
 
     // const { merkleRoot } = useSelector(state => state.distributor)
     const { merkleRoot, addresses } = TreeData
@@ -44,6 +45,12 @@ const ProofPage = () => {
     const dispatch = useDispatch()
     const [ proofValue, setProofValue ] = useState('')
 
+    useEffect(() => {
+        if(hasClaimed.claimed) {
+            navigate(ROUTE_CLAIMED)
+        }
+    }, [hasClaimed])
+
     const handleForm = async (e) => {
         e.preventDefault()
         if (isBase64(proofValue)) {
@@ -51,6 +58,8 @@ const ProofPage = () => {
                 const decoded = atob(proofValue)
                 const parsed = JSON.parse(decoded)
                 const { merkleProof, publicKey, userId } = parsed
+
+                dispatch(checkHasClaimed(userId, web3Provider, networkName))
 
                 try {
                     const myLeaf = await hashedLeaf(userId, publicKey)
@@ -80,10 +89,10 @@ const ProofPage = () => {
     }
 
     useEffect(() => {
-        if (haveProof) {
+        if (haveProof & !hasClaimed?.claimed & hasClaimed.checked) {
             navigate(ROUTE_DELEGATION)
         }
-    }, [haveProof])
+    }, [haveProof, hasClaimed])
 
 
     return (

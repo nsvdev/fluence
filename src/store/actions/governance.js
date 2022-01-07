@@ -139,20 +139,22 @@ export const checkGithubKey = (w3provider, key, network) => {
 
 export const setHasClaimed = (hasClaimed) => ({
     type: SET_CLAIM_STATUS,
-    payload: hasClaimed
+    payload: {
+        checked: true,
+        claimed: hasClaimed
+    }
 })
 
-export const checkHasClaimed = (w3provider, network) => {
+export const checkHasClaimed = (userId, w3provider, network) => {
     return async dispatch => {
         let signer = w3provider.getSigner();
-        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
+        let contract = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
         let signed = await contract.connect(signer);
         try {
-            const hasClaimed = await signed.checkInteraction();
+            const hasClaimed = await signed.isClaimed(userId);
             dispatch(setHasClaimed(hasClaimed))
         } catch (error) {
-            dispatch(setError(error.message))
-            dispatch(setHasClaimed(false))
+            dispatch(setError('Cannot confirm that tokens are not claimed yet.'))
         }
     }
 }

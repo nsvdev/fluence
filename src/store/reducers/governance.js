@@ -31,7 +31,10 @@ const initialState = {
         isOwner: false,
         checked: false
     },
-    hasClaimed: null,
+    hasClaimed: {
+        checked: false,
+        hasClaimed: null
+    },
     values: {
         proof: null,
         delegatee: null,
