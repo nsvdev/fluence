@@ -1,6 +1,5 @@
 import React, { memo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSubgraph } from 'thegraph-react';
 
 import Header from '../../components/Header/Header';
 import Progress from '../../components/Progress/Progress';
@@ -14,26 +13,17 @@ import ConnectWallet from '../../components/ConnectWallet/ConnectWallet';
 
 import styles from './step1-page.module.css';
 import { useSelector } from 'react-redux';
-import { ROUTE_CLAIMED, ROUTE_PROOF } from '../../constants/routes';
-import { findAccountQueryFactory } from '../../utils/graphQueries';
+import { ROUTE_PROOF } from '../../constants/routes';
 
 const FirstStepPage = memo(() => {
     const navigate = useNavigate()
-    const { address } = useSelector(state => state.wallet)
-    const { fluence } = useSelector(state => state.graph)
-    const { useQuery } = useSubgraph(fluence)
-    const { data, loading } = useQuery(findAccountQueryFactory(address || ''))
+    const { address, web3Provider } = useSelector(state => state.wallet)
 
     useEffect(() => {
-        if (address && !loading && data) {
-            // for demo invert this
-            if (data?.account) {
-                navigate(ROUTE_CLAIMED)
-            } else {
-                navigate(ROUTE_PROOF)
-            }
+        if (address && web3Provider) {
+            navigate(ROUTE_PROOF)
         }
-    }, [address, data])
+    }, [address])
 
     return (
         <div className={styles.background}>

@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+subgraphs/governor/node_modules
+subgraphs/tokenDistributor/node_modules

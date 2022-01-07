@@ -10,7 +10,7 @@ import Footer from '../../components/Footer/Footer';
 import styles from './done-page.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideString } from '../../utils';
-import { claim, claimV2 } from '../../store/actions/governance';
+import { claim } from '../../store/actions/governance';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_FINISH } from '../../constants/routes';
@@ -26,7 +26,17 @@ const DonePage = () => {
     const navigate = useNavigate()
 
     const handleClaim = () => {
-        dispatch(claimV2(web3Provider, proof, key, delegatee, networkName))
+        dispatch(claim(
+            proof?.userId,
+            delegatee,
+            proof?.merkleProof,
+            proof?.leaf.data,
+            proof?.publicKey,
+            proof?.signature,
+            web3Provider,
+            networkName
+            )
+        )
     }
 
     const loader = useRef()

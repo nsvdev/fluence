@@ -1,25 +1,7 @@
 
 import { AbiCoder } from "@ethersproject/abi";
 
-export const SUCCESS_MSG = 'Success! Please wait for the transaction confirmation on the blockhain.'
 export const EXTRACT_ERROR_MESSAGE = /(?<="message":")(.*?)(?=")/g;
-export const PROPOSAL_STATES = [
-  "Pending",
-  "Active",
-  "Canceled",
-  "Quorum Failed",
-  "Defeated",
-  "Succeeded",
-  "Queued",
-  "Expired",
-  "Executed",
-];
-
-/*
- *
- *  helper functions
- *
- */
 
 export const isTransactionMined = async(w3provider, transactionHash) => {
     const txReceipt = await w3provider.getTransactionReceipt(transactionHash);

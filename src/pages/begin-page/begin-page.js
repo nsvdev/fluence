@@ -1,7 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
-import { useSubgraph } from 'thegraph-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../components/Header/Header';
@@ -14,39 +12,31 @@ import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
 
 import styles from './begin-page.module.css';
-import { fetchKeyFromGithub, storeKey, web2Logout } from '../../store/actions/user';
-import { checkGithubKey, checkHasClaimed } from '../../store/actions/governance';
+import { fetchKeyFromGithub, setUsername, storeKey } from '../../store/actions/user';
 import { ROUTE_WALLET } from '../../constants/routes';
+import { claim } from '../../store/actions/governance';
+import { testTokenClaim } from '../../utils/award';
 
 const PageBegin = memo(() => {
     const navigate = useNavigate()
-    const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
-    const { web3Provider } = useSelector(state => state.wallet)
-    const { name, username, key } = useSelector(state => state.user)
+    const { web3Provider, networkName, address } = useSelector(state => state.wallet)
+    const { username, key } = useSelector(state => state.user)
+    const [name, setName] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(key) {
-            dispatch(storeKey(key))
-        }
-    }, [name, web3Provider, key])
+        key && dispatch(storeKey(key))
+    }, [web3Provider, key])
 
     useEffect(() => {
-        if (username) {
-            dispatch(fetchKeyFromGithub(username))
-        }
+        username && dispatch(fetchKeyFromGithub(username))
     }, [username])
 
     useEffect(() => {
-        if (isAuthenticated && key) {
+        if (typeof key === 'string') {
             navigate(ROUTE_WALLET)
         }
-    }, [isAuthenticated, key])
-
-    const logOut = () => {
-        dispatch(web2Logout())
-        logout()
-    }
+    }, [key])
     
     return (
         <div className={styles.background}>
@@ -73,6 +63,30 @@ const PageBegin = memo(() => {
                                             </Text>
                                         </li>
                                     </ul>
+<<<<<<< HEAD
+                                    <input type='text' className={styles.input} placeholder="Github username" onChange={(e) => { setName(e.target.value)} }/>
+
+                                    <ul className={styles.buttons}>
+                                        <li className={styles.button}>
+                                            {
+                                                <Button
+                                                    type="large"
+                                                    icon="git"
+                                                    text="Check if I’m eligible"
+                                                    callback={() => dispatch(setUsername(name))}
+                                                    // callback={() => dispatch(claim(
+                                                    //         12, 
+                                                    //         '0x307c5177d9629E10fbA001dB308dD8de817D4D73',
+                                                    //         ['0000000000000000000000000000000000000000000000000000006d6168616d'],
+                                                    //         'leaf',
+                                                    //         '0xa54d3c09E34aC96807c1CC397404bF2B98DC4eFb',
+                                                    //         'hex',
+                                                    //         web3Provider,
+                                                    //         networkName
+                                                    //     )
+                                                    // )}
+                                                /> 
+=======
                                     <ul className={styles.buttons}>
                                         <li className={styles.button}>
                                             {
@@ -99,13 +113,20 @@ const PageBegin = memo(() => {
                                                         callback={() => loginWithRedirect()}
                                                     /> 
 
+>>>>>>> master
                                             }
                                         </li>
                                         <li className={styles.button}>
                                             <span className={styles.span}>or</span>
+<<<<<<< HEAD
+                                            <Url text="Get FLT on Uniswap"  color="black"/>
+                                        </li>
+                                    </ul>    
+=======
                                             <Url text="Get FLT on Uniswap" color="black" />
                                         </li>
                                     </ul>
+>>>>>>> master
                                 </div>
                                 <div className={styles["flex-container__part-right"]}>
                                     <ul className={styles.definitions}>

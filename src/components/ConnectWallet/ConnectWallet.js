@@ -6,7 +6,6 @@ const ConnectWallet = () => {
 
     const { connect, disconnect, chainId, web3Provider } = useWeb3Connection()
 
-
     return (
         <>
             {web3Provider ? (

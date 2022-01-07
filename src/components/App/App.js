@@ -1,7 +1,6 @@
-import { Routes, Route, useLocation} from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState, memo } from 'react';
 import {
   Chains,
   TheGraphProvider,
@@ -22,8 +21,6 @@ import LandingPage from '../../pages/landing-page/landing-page';
 import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
 
-import { getProposalCount } from '../../store/actions/governance';
-import { web2Login, fetchKeyFromGithub } from '../../store/actions/user';
 import { getNetworkName } from '../../store/actions/wallet';
 
 
@@ -47,64 +44,75 @@ import {
   ROUTE_CLAIMED
 } from '../../constants/routes'
 import { catchError } from '../../utils';
-import { setFluenceSubgraph } from '../../store/actions/graph';
+import { setFluenceSubgraph, setDistributorSubgraph } from '../../store/actions/graph';
 import TestSubgraph from '../TestSubgraph/TestSubgraph';
+import { setCurrentRoute } from '../../store/actions/routes';
+import { fetchMerkleRoot } from '../../store/actions/distributor';
 
 function App() {
   const { web3Provider } = useWeb3Connection()
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { error } = useSelector(state => state.error)
-  const { address, prevAddress } = useSelector(state => state.wallet)
-  const networkName = useSelector(state => state.wallet.networkName)
-  const { user, isAuthenticated, logout } = useAuth0()
+  const { address, prevAddress, networkName } = useSelector(state => state.wallet)
+  const { currentRoute } = useSelector(state => state.routes)
   const location = useLocation()
+  const [locationPut, setLocationPut] = useState(false)
+  const [merkleRootFetched, setMerkleRootFetched] = useState(false)
 
   useEffect(() => {
-    if (address && address !== prevAddress) {
-      dispatch(reduxCleanup(address))
-      logout()
+    if (currentRoute
+        && !locationPut
+        && currentRoute !== location.pathname
+      ) {
+      navigate(currentRoute)
+      setLocationPut(true)
+    }
+  }, [currentRoute])
+
+  useEffect(() => {
+    if (!merkleRootFetched) {
+      dispatch(fetchMerkleRoot('kovan'))
+      setMerkleRootFetched(true)
+    } 
+  }, [])
+
+  useEffect(() => {
+    if (address && prevAddress && (address !== prevAddress)) {
+      dispatch(reduxCleanup())
+      navigate(ROUTE_INDEX)
     }
   }, [address])
 
   const fluence = useCreateSubgraph({
-    [Chains.RINKEBY]: theGraphEndpoints['rinkeby'],
+    [Chains.RINKEBY]: theGraphEndpoints.fluence['rinkeby'],
+  });
+
+  const distributor = useCreateSubgraph({
+    [Chains.RINKEBY]: theGraphEndpoints.distributor['rinkeby'],
   });
 
   const subgraphs = useMemo(() => {
-    dispatch(setFluenceSubgraph(fluence));
-    return [fluence];
-  }, [fluence]);
+    dispatch(setFluenceSubgraph(fluence))
+    dispatch(setDistributorSubgraph(distributor))
+    return [fluence, distributor];
+  }, [fluence, distributor]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
+    dispatch(setCurrentRoute(location.pathname))
   }, [location]);
 
   useEffect(() => {
-    if (web3Provider) {
-      dispatch(getNetworkName(web3Provider))
-    }
+    web3Provider && dispatch(getNetworkName(web3Provider))
   },[web3Provider])
-
-  // useEffect(() => {
-  //   if (networkName) {
-  //     dispatch(getProposalCount(web3Provider, networkName))
-  //   }
-  // }, [networkName])
 
   useEffect(() => {
     if (error) {
       toast(catchError(error, true))
     }
   }, [error])
-
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(web2Login(user))
-      dispatch(fetchKeyFromGithub(user.nickname))
-    }
-  }, [user, isAuthenticated])
 
   return (
     <TheGraphProvider chain={Chains.RINKEBY} subgraphs={subgraphs}>
@@ -128,4 +136,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);
