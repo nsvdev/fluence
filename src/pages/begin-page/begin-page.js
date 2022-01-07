@@ -63,6 +63,7 @@ const PageBegin = memo(() => {
                                             </Text>
                                         </li>
                                     </ul>
+<<<<<<< HEAD
                                     <input type='text' className={styles.input} placeholder="Github username" onChange={(e) => { setName(e.target.value)} }/>
 
                                     <ul className={styles.buttons}>
@@ -85,13 +86,47 @@ const PageBegin = memo(() => {
                                                     //     )
                                                     // )}
                                                 /> 
+=======
+                                    <ul className={styles.buttons}>
+                                        <li className={styles.button}>
+                                            {
+                                                isLoading? 
+                                                    <Button 
+                                                        type="large"
+                                                        icon="git"
+                                                        text="Loading..."
+                                                        disabled
+                                                    />
+                                                :
+                                                isAuthenticated ?
+                                                    <Button 
+                                                        type="large"
+                                                        icon="git"
+                                                        text="Logout"
+                                                        callback={() => logOut()}
+                                                    />
+                                                    :
+                                                    <Button
+                                                        type="large"
+                                                        icon="git"
+                                                        text="Check if I’m eligible"
+                                                        callback={() => loginWithRedirect()}
+                                                    /> 
+
+>>>>>>> master
                                             }
                                         </li>
                                         <li className={styles.button}>
                                             <span className={styles.span}>or</span>
+<<<<<<< HEAD
                                             <Url text="Get FLT on Uniswap"  color="black"/>
                                         </li>
                                     </ul>    
+=======
+                                            <Url text="Get FLT on Uniswap" color="black" />
+                                        </li>
+                                    </ul>
+>>>>>>> master
                                 </div>
                                 <div className={styles["flex-container__part-right"]}>
                                     <ul className={styles.definitions}>

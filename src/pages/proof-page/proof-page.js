@@ -92,7 +92,13 @@ const ProofPage = () => {
         if (haveProof & !hasClaimed?.claimed & hasClaimed.checked) {
             navigate(ROUTE_DELEGATION)
         }
+<<<<<<< HEAD
     }, [haveProof, hasClaimed])
+
+=======
+
+    }, [haveProof])
+>>>>>>> master
 
 
     return (
