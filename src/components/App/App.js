@@ -77,7 +77,7 @@ function App() {
       setMerkleRootFetched(true)
     } 
   }, [])
-
+  
   useEffect(() => {
     if (address && prevAddress && (address !== prevAddress)) {
       dispatch(reduxCleanup())

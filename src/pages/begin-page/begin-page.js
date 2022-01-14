@@ -14,8 +14,6 @@ import Footer from '../../components/Footer/Footer'
 import styles from './begin-page.module.css';
 import { fetchKeyFromGithub, setUsername, storeKey } from '../../store/actions/user';
 import { ROUTE_WALLET } from '../../constants/routes';
-import { claim } from '../../store/actions/governance';
-import { testTokenClaim } from '../../utils/award';
 
 const PageBegin = memo(() => {
     const navigate = useNavigate()

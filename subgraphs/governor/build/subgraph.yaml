@@ -9,8 +9,8 @@ dataSources:
     network: kovan
     source:
       abi: IGovernor
-      address: "0x92AF86f9486218195a9bFd88D4C79Ea65Ba8dF49"
-      startBlock: 26142393
+      address: "0x4D73dC0Ab142252CDC2052C823DBd48EB17790ca"
+      startBlock: 29243533
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -62,8 +62,8 @@ dataSources:
     network: kovan
     source:
       abi: IComp
-      address: "0xc584E34Ce32b68F110EA14f7882918Aa3BFD1646"
-      startBlock: 26142393
+      address: "0x1572bBd8D6dac4A9802dB9e571BBA2A1f4446f92"
+      startBlock: 29243533
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -88,8 +88,8 @@ dataSources:
     network: kovan
     source:
       abi: ITimelock
-      address: "0xc78c7195b7726a41B3d5a74E7aD1c788c9118AEd"
-      startBlock: 26142393
+      address: "0x30c02ab96C935d8cC87fE4a5647786B5a452E41B"
+      startBlock: 29243533
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

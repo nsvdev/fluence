@@ -18,8 +18,7 @@ export const fetchMerkleRoot = (network) => {
             const merkleRoot = await contract.methods.merkleRoot().call()
             dispatch(setMerkleRoot(merkleRoot))
         } catch (error) {
-            //
-            alert(error)
+            console.log(error)
         }
     }
 }
