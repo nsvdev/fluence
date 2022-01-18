@@ -1,7 +1,9 @@
-import { FETCH_MERKLE_ROOT } from "../actions/types"
+import { FETCH_MERKLE_ROOT, FETCH_CURRENT_AWARD, FETCH_NEXT_HALVE_PERIOD } from "../actions/types"
 
 const initialState = {
-    merkleRoot: null
+    merkleRoot: null,
+    currentAward: null,
+    nextHalvePeriod: null
 }
 
 export const distributorReducer = (state = initialState, action) => {
@@ -10,6 +12,18 @@ export const distributorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 merkleRoot: action.payload
+            }
+
+        case FETCH_CURRENT_AWARD:
+            return {
+                ...state,
+                currentAward: action.payload
+            }
+
+        case FETCH_NEXT_HALVE_PERIOD:
+            return {
+                ...state,
+                nextHalvePeriod: action.payload
             }
     
         default:

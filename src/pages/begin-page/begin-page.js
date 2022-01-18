@@ -10,33 +10,32 @@ import Url from '../../components/Url/Url';
 import Dashboard from '../../components/Dashboard/Dashboard'
 import DefinitionList from '../../components/DefinitionList/DefinitionList';
 import Footer from '../../components/Footer/Footer'
+import TimeUntilReduce from '../../components/TimeUntilReduce/TimeUntilReduce';
 
 import styles from './begin-page.module.css';
-import { fetchKeyFromGithub, setUsername, storeKey } from '../../store/actions/user';
+import { setUsername, storeKey } from '../../store/actions/user';
 import { ROUTE_WALLET } from '../../constants/routes';
-import { claim } from '../../store/actions/governance';
-import { testTokenClaim } from '../../utils/award';
 
 const PageBegin = memo(() => {
     const navigate = useNavigate()
-    const { web3Provider, networkName, address } = useSelector(state => state.wallet)
+    const { web3Provider } = useSelector(state => state.wallet)
+    const { currentAward, nextHalvePeriod } = useSelector(state => state.distributor)
     const { username, key } = useSelector(state => state.user)
     const [name, setName] = useState('')
     const dispatch = useDispatch()
+
+    const time = new Date(nextHalvePeriod * 1000)
+    console.log(time)
 
     useEffect(() => {
         key && dispatch(storeKey(key))
     }, [web3Provider, key])
 
     useEffect(() => {
-        username && dispatch(fetchKeyFromGithub(username))
-    }, [username])
-
-    useEffect(() => {
-        if (typeof key === 'string') {
+        if (username) {
             navigate(ROUTE_WALLET)
-        }
-    }, [key])
+        } 
+    }, [username])
     
     return (
         <div className={styles.background}>
@@ -73,17 +72,6 @@ const PageBegin = memo(() => {
                                                     icon="git"
                                                     text="Check if I’m eligible"
                                                     callback={() => dispatch(setUsername(name))}
-                                                    // callback={() => dispatch(claim(
-                                                    //         12, 
-                                                    //         '0x307c5177d9629E10fbA001dB308dD8de817D4D73',
-                                                    //         ['0000000000000000000000000000000000000000000000000000006d6168616d'],
-                                                    //         'leaf',
-                                                    //         '0xa54d3c09E34aC96807c1CC397404bF2B98DC4eFb',
-                                                    //         'hex',
-                                                    //         web3Provider,
-                                                    //         networkName
-                                                    //     )
-                                                    // )}
                                                 /> 
                                             }
                                         </li>
@@ -96,10 +84,10 @@ const PageBegin = memo(() => {
                                 <div className={styles["flex-container__part-right"]}>
                                     <ul className={styles.definitions}>
                                         <li className={styles.definition}>
-                                            <DefinitionList dd="500 FLT" dt="Current reward" colorD="orange" colorT="black" />
+                                            <DefinitionList dd={`${currentAward || 0} FLT`} dt="Current reward" colorD="orange" colorT="black" />
                                         </li>
                                         <li className={styles.definition}>
-                                            <DefinitionList dd="65d 23h 19m 29s" dt="Time until reducing amount" colorT="black" colorD="black" />
+                                            <TimeUntilReduce />
                                         </li>
                                     </ul>
                                     <div className={styles.url}>

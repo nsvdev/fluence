@@ -1,8 +1,8 @@
 export const theGraphEndpoints = {
     fluence : {
-        'rinkeby' : 'https://api.thegraph.com/subgraphs/name/vasemkin/fluence-governance-kovan'
+        'kovan' : 'https://api.thegraph.com/subgraphs/name/vasemkin/fluence-gov-kovan-v3'
     },
     distributor : {
-        'rinkeby' : 'https://api.thegraph.com/subgraphs/name/vasemkin/tokendist'
+        'kovan' : 'https://api.thegraph.com/subgraphs/name/vasemkin/token-dist-kovan-v3'
     }
 }

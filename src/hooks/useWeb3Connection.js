@@ -4,7 +4,15 @@ import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
-import { resetWeb3Provider, setAddress, setPrevAddress, setWeb3Provider } from '../store/actions/wallet'
+import supportedChains from '../constants/chains'
+import { toast } from 'react-toastify'
+import { setError } from '../store/actions/governance'
+import {
+    resetWeb3Provider,
+    setAddress,
+    setPrevAddress,
+    setWeb3Provider
+} from '../store/actions/wallet'
 
 const { REACT_APP_INFURA_KEY: INFURA_ID } = process.env
 
@@ -20,7 +28,7 @@ const providerOptions = {
 let web3Modal
 if  (typeof window !== 'undefined') {
         web3Modal = new Web3Modal({
-            network: 'mainnet', // optional
+            network: 'kovan', // optional
             cacheProvider: true,
             providerOptions, // required
     })
@@ -92,8 +100,19 @@ export const useWeb3Connection = () => {
                 console.log('accountsChanged', accounts)
                 dispatch(setAddress(accounts))
             }
+
             const handleChainChanged = (_hexChainId) => {
-                window.location.reload()
+                let chainSupported = false
+
+                supportedChains.forEach(chain => {
+                    if (web3.utils.hexToNumber(_hexChainId) === chain.chain_id) {
+                        chainSupported = true
+                    } 
+                })
+
+                chainSupported
+                    ? window.location.reload()
+                    : toast(`Network not supported. Please switch to ${supportedChains[0].name}.`)
             }
 
             const handleDisconnect = (error) => {
@@ -123,7 +142,6 @@ export const useWeb3Connection = () => {
         web3Provider,
         address,
         chainId,
-        web3Provider,
         web3,
         sendTransaction
     }

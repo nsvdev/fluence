@@ -14,14 +14,15 @@ import { claim } from '../../store/actions/governance';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_FINISH } from '../../constants/routes';
-import { MINED, MINING, PENDING } from '../../constants';
+import { MINED, MINING } from '../../constants';
 import { toast } from 'react-toastify';
 
 const DonePage = () => {
     const { web3Provider } = useWeb3Connection()
     const { address, networkName } = useSelector(state => state.wallet)
     const { claimStatus } = useSelector(state => state.governance)
-    const { proof, delegatee, key } = useSelector(state => state.governance.values)
+    const { currentAward } = useSelector(state => state.distributor)
+    const { proof, delegatee } = useSelector(state => state.governance.values)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -78,7 +79,7 @@ const DonePage = () => {
                     </p>
                     
                     <div className={styles.button}>
-                        <Button callback={handleClaim} text='Claim 500 FLT' />
+                        <Button callback={handleClaim} text={`Claim ${currentAward} FLT`} />
                     </div>
                 </main>
             </div>

@@ -19,7 +19,6 @@ import { checkHasClaimed, storeProof } from '../../store/actions/governance';
 import { ROUTE_CLAIMED, ROUTE_DELEGATION } from '../../constants/routes';
 import { toast } from 'react-toastify';
 import { MerkleTree } from 'merkletreejs';
-import TreeData from '../../constants/treeData.json'
 import keccak256 from 'keccak256';
 import { hashedLeaf } from '../../utils/award'
 
@@ -38,15 +37,14 @@ const ProofPage = () => {
     const [ haveProof, setHaveProof ] = useState(!!proof)
     const { hasClaimed } = useSelector(state => state.governance)
 
-    // const { merkleRoot } = useSelector(state => state.distributor)
-    const { merkleRoot, addresses } = TreeData
+    const { merkleRoot } = useSelector(state => state.distributor)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [ proofValue, setProofValue ] = useState('')
 
     useEffect(() => {
-        if(hasClaimed.claimed) {
+        if(hasClaimed?.claimed) {
             navigate(ROUTE_CLAIMED)
         }
     }, [hasClaimed])
@@ -89,7 +87,7 @@ const ProofPage = () => {
     }
 
     useEffect(() => {
-        if (haveProof & !hasClaimed?.claimed & hasClaimed.checked) {
+        if (haveProof & !hasClaimed?.claimed & hasClaimed?.checked) {
             navigate(ROUTE_DELEGATION)
         }
     }, [haveProof, hasClaimed])

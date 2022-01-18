@@ -10,7 +10,7 @@ const LinkWithIcon = ({ color='', text, icon, iconWidth="", iconHeight="", url='
         const style = {
             width: "38px",
             height: "38px",
-            "margin-right": "10px",
+            "marginRight": "10px",
             display: "inline-block",
 
             
@@ -25,7 +25,7 @@ const LinkWithIcon = ({ color='', text, icon, iconWidth="", iconHeight="", url='
         const styleWhite = {
             width: "38px",
             height: "38px",
-            "margin-right": "10px",
+            "marginRight": "10px",
             display: "inline-block",
 
             

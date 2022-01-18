@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState, memo } from 'react';
 import {
@@ -20,17 +20,11 @@ import AccountNotFound from '../../pages/not-found-account-page/not-found-accoun
 import LandingPage from '../../pages/landing-page/landing-page';
 import FinishPage from '../../pages/finish-page/finish-page';
 import ConnectWallet from '../ConnectWallet/ConnectWallet';
-
 import { getNetworkName } from '../../store/actions/wallet';
-
-
-
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { theGraphEndpoints } from '../../constants/endpoints';
 import { reduxCleanup } from '../../store/actions/common';
-
-
 import {
   ROUTE_FLUENCE,
   ROUTE_INDEX,
@@ -45,9 +39,8 @@ import {
 } from '../../constants/routes'
 import { catchError } from '../../utils';
 import { setFluenceSubgraph, setDistributorSubgraph } from '../../store/actions/graph';
-import TestSubgraph from '../TestSubgraph/TestSubgraph';
 import { setCurrentRoute } from '../../store/actions/routes';
-import { fetchMerkleRoot } from '../../store/actions/distributor';
+import { fetchCurrentAward, fetchMerkleRoot, fetchNextHalvePeriod } from '../../store/actions/distributor';
 
 function App() {
   const { web3Provider } = useWeb3Connection()
@@ -55,7 +48,8 @@ function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { error } = useSelector(state => state.error)
-  const { address, prevAddress, networkName } = useSelector(state => state.wallet)
+  const { address, prevAddress } = useSelector(state => state.wallet)
+  const { username } = useSelector(state => state.user)
   const { currentRoute } = useSelector(state => state.routes)
   const location = useLocation()
   const [locationPut, setLocationPut] = useState(false)
@@ -74,23 +68,28 @@ function App() {
   useEffect(() => {
     if (!merkleRootFetched) {
       dispatch(fetchMerkleRoot('kovan'))
+      dispatch(fetchCurrentAward('kovan'))
+      dispatch(fetchNextHalvePeriod('kovan'))
       setMerkleRootFetched(true)
     } 
   }, [])
-
+  
   useEffect(() => {
     if (address && prevAddress && (address !== prevAddress)) {
       dispatch(reduxCleanup())
       navigate(ROUTE_INDEX)
+      dispatch(setCurrentRoute(ROUTE_INDEX))
+    } else if (!address && !web3Provider && username) {
+      navigate(ROUTE_WALLET)
     }
   }, [address])
 
   const fluence = useCreateSubgraph({
-    [Chains.RINKEBY]: theGraphEndpoints.fluence['rinkeby'],
+    [Chains.KOVAN]: theGraphEndpoints.fluence['kovan'],
   });
 
   const distributor = useCreateSubgraph({
-    [Chains.RINKEBY]: theGraphEndpoints.distributor['rinkeby'],
+    [Chains.KOVAN]: theGraphEndpoints.distributor['kovan'],
   });
 
   const subgraphs = useMemo(() => {
@@ -115,21 +114,24 @@ function App() {
   }, [error])
 
   return (
-    <TheGraphProvider chain={Chains.RINKEBY} subgraphs={subgraphs}>
+    <TheGraphProvider chain={Chains.KOVAN} subgraphs={subgraphs}>
       <div className="App">
         <ToastContainer />
         <Routes>
-          <Route path={'/test-subgraph'} element={<TestSubgraph />} />
-          <Route path={ROUTE_FLUENCE} element={<LandingPage />} />
-          <Route path={ROUTE_INDEX} element={<PageBegin/>} />
-          <Route path={ROUTE_WALLET} element={<FirstStepPage/>} />
-          <Route path={ROUTE_CONNECT} element={<ConnectWallet />} />
-          <Route path={ROUTE_PROOF} element={<ProofPage/>} />
-          <Route path={ROUTE_DELEGATION} element={<DelegationPage/>} />
-          <Route path={ROUTE_DONE} element={<DonePage/>} />
-          <Route path={ROUTE_FINISH} element={<FinishPage />} />
-          <Route path={ROUTE_NOT_FOUND} element={<AccountNotFound />} />
-          <Route path={ROUTE_CLAIMED} element={<ClaimedPage />} />
+          <Route exact path={ROUTE_FLUENCE} element={<LandingPage />} />
+          <Route exact path={ROUTE_INDEX} element={<PageBegin/>} />
+          <Route exact path={ROUTE_WALLET} element={<FirstStepPage/>} />
+          <Route exact path={ROUTE_CONNECT} element={<ConnectWallet />} />
+          <Route exact path={ROUTE_PROOF} element={<ProofPage/>} />
+          <Route exact path={ROUTE_DELEGATION} element={<DelegationPage/>} />
+          <Route exact path={ROUTE_DONE} element={<DonePage/>} />
+          <Route exact path={ROUTE_FINISH} element={<FinishPage />} />
+          <Route exact path={ROUTE_NOT_FOUND} element={<AccountNotFound />} />
+          <Route exact path={ROUTE_CLAIMED} element={<ClaimedPage />} />
+          <Route
+              path="*"
+              element={<Navigate to="/" />}
+          />
         </Routes>
       </div>
     </TheGraphProvider>

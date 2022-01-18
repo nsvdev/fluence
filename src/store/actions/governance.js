@@ -24,6 +24,7 @@ import {
     PENDING,
     REJECTED
 } from '../../constants'
+import supportedChains from "../../constants/chains";
 
 export const setLocalProof = (proof) => ({
     type: SET_LOCAL_PROOF,
@@ -50,28 +51,7 @@ export const setError = (error) => ({
     payload: error
 })
 
-export const claimV2 = (w3provider, proof, key, delegatee, network) => {
-    return async dispatch => {
-        dispatch(setError(null))
-        let signer = w3provider.getSigner();
-        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
-        let signed = await contract.connect(signer);
-        try {
-            const tx = await signed.claimV2(proof, key, delegatee);
-            dispatch(claimStatus(MINING))
-            try {
-                await tx.wait()
-                dispatch(claimStatus(MINED))
-            } catch (error) {
-                dispatch(claimStatus(FAIL))
-                dispatch(setError(error.message))
-            }
-        } catch (error) {
-            dispatch(claimStatus(REJECTED))
-            dispatch(setError(error.message))
-        }
-    }
-}
+const WRONG_CHAIN_MESSAGE = `Looks like the contract does not support the current network. Please switch to ${supportedChains[0].name}`
 
 export const claim = (
     userId, 
@@ -85,28 +65,32 @@ export const claim = (
     ) => {
     return async dispatch => {
         let signer = w3provider.getSigner();
-        let contract = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
-        let signed = await contract.connect(signer);
         try {
-            const tx = await signed.claimTokens(
-                userId, 
-                delegateTo,
-                merkleProof,
-                leaf,
-                temporaryAddress,
-                leafSignatureHex
-            );
-            dispatch(claimStatus(MINING))
+            let contract = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
+            let signed = await contract.connect(signer);
             try {
-                await tx.wait()
-                dispatch(claimStatus(MINED))
+                const tx = await signed.claimTokens(
+                    userId, 
+                    delegateTo,
+                    merkleProof,
+                    leaf,
+                    temporaryAddress,
+                    leafSignatureHex
+                );
+                dispatch(claimStatus(MINING))
+                try {
+                    await tx.wait()
+                    dispatch(claimStatus(MINED))
+                } catch (error) {
+                    dispatch(claimStatus(FAIL))
+                    dispatch(setError(error.message))
+                }
             } catch (error) {
-                dispatch(claimStatus(FAIL))
-                dispatch(setError(error.message))
+                dispatch(claimStatus(REJECTED))
+                dispatch(setError(error?.data?.message || error.message))
             }
         } catch (error) {
-            dispatch(claimStatus(REJECTED))
-            dispatch(setError(error?.data?.message || error.message))
+            dispatch(setError(WRONG_CHAIN_MESSAGE))
         }
     }
 }
@@ -119,24 +103,6 @@ export const setAlegibility = (alegible) => ({
     }
 })
 
-export const checkGithubKey = (w3provider, key, network) => {
-    return async dispatch => {
-        let signer = w3provider.getSigner();
-        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
-        let signed = await contract.connect(signer);
-        try {
-            const alegible = await signed.checkKey(key);
-            dispatch(setAlegibility(alegible))
-        } catch (error) {
-            dispatch(setAlegibility({
-                isAlegible: false,
-                checked: true
-            }))
-            dispatch(setError(error.message))
-        }
-    }
-}
-
 export const setHasClaimed = (hasClaimed) => ({
     type: SET_CLAIM_STATUS,
     payload: {
@@ -148,13 +114,17 @@ export const setHasClaimed = (hasClaimed) => ({
 export const checkHasClaimed = (userId, w3provider, network) => {
     return async dispatch => {
         let signer = w3provider.getSigner();
-        let contract = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
-        let signed = await contract.connect(signer);
         try {
-            const hasClaimed = await signed.isClaimed(userId);
-            dispatch(setHasClaimed(hasClaimed))
+            let contract = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
+            let signed = await contract.connect(signer);
+            try {
+                const hasClaimed = await signed.isClaimed(userId);
+                dispatch(setHasClaimed(hasClaimed))
+            } catch (error) {
+                dispatch(setError('Cannot confirm that tokens are not claimed yet.'))
+            }
         } catch (error) {
-            dispatch(setError('Cannot confirm that tokens are not claimed yet.'))
+            dispatch(setError(WRONG_CHAIN_MESSAGE))
         }
     }
 }
@@ -171,24 +141,6 @@ export const setGithubOwnership = (owner) => ({
         checked: true
     }
 })
-
-export const checkGithubOwnership = (w3provider, proof, network) => {
-    return async dispatch => {
-        let signer = w3provider.getSigner();
-        let contract = new Contract(governanceContracts[network].mock, abis.Mock.abi, w3provider);
-        let signed = await contract.connect(signer);
-        try {
-            const owner = await signed.checkProof(proof);
-            dispatch(setGithubOwnership(owner))
-        } catch (error) {
-            dispatch(setGithubOwnership({
-                isOwner: false,
-                checked: true
-            }))
-            dispatch(setError(error.message))
-        }
-    }
-}
 
 export const storeDelegatee = (delegatee) => ({
     type: STORE_DELEGATEE,
@@ -226,13 +178,17 @@ export const setProposalCount = (count) => ({
 
 export const getProposalCount = (w3provider, network) => {
     return async dispatch => {
-        let contract = new Contract(governanceContracts[network].alpha, abis.GovernorAlpha.abi, w3provider);
         try {
-          const count = await contract.proposalCount();
-          dispatch(setProposalCount(count.toNumber()))
+            let contract = new Contract(governanceContracts[network].alpha, abis.GovernorAlpha.abi, w3provider);
+            try {
+              const count = await contract.proposalCount();
+              dispatch(setProposalCount(count.toNumber()))
+            } catch (error) {
+              dispatch(setProposalCount(0))
+              dispatch(setError(error.message))
+            }
         } catch (error) {
-          dispatch(setProposalCount(0))
-          dispatch(setError(error.message))
+            dispatch(setError(WRONG_CHAIN_MESSAGE))
         }
     }
 }
