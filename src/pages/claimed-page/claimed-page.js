@@ -10,9 +10,14 @@ import Footer from '../../components/Footer/Footer';
 import ProposalsList from '../../components/ProposalsList/ProposalsList';
 import Url from '../../components/Url/Url';
 import LinkWithIcon from '../../components/LinkWithIcon/LinkWithIcon';
+import TwitterShare from '../../hoc/TwitterShare';
+import { addTokenToMetamask } from '../../utils/metamask';
+import { governanceContracts } from '../../constants';
 
 import dialog from '../../images/dialog.svg';
 import styles from './claimed-page.module.css';
+
+const TwitterShareButton = TwitterShare(Button)
 
 const cards = [
     {
@@ -42,6 +47,7 @@ const cards = [
 ]
 
 const ClaimedPage = () => {
+    const { networkName } = useSelector(state => state.wallet)
     const { fluence } = useSelector(state => state.graph)
     const { useQuery } = useSubgraph(fluence)
     const [ proposals, setProposals ] = useState([])
@@ -53,12 +59,16 @@ const ClaimedPage = () => {
         }
     }, [data])
 
+    const handleAddToken = () => {
+        addTokenToMetamask(governanceContracts[networkName].token)
+    }
+
     return (
         <div className={styles.background}>
             <div className={styles.background__image}>
                 
             </div>
-            <div class={styles.header}>
+            <div className={styles.header}>
                 <Header button />
             </div>
             
@@ -71,10 +81,16 @@ const ClaimedPage = () => {
 
                     <ul className={styles.buttons}>
                         <li className={styles.button}>
-                            <Button type="large" text="Claim 500 FLT" />
+                            <Button callback={handleAddToken} type="large" text="Display FLT in Metamask" />
                         </li>
                         <li className={styles.button}>
-                            <Button type="large" icon="twitter" text="Share on Twitter" />
+                            <TwitterShareButton
+                                type="large"
+                                icon="twitter"
+                                text="Share on Twitter"
+                                caption="I just claimed 500 FLT tokens on the Fluence Network!"
+                                url="https://fluence.one"
+                            />
                         </li>
                         <li className={styles.button}>
                             <Url text="Get more FLT on Uniswap" />

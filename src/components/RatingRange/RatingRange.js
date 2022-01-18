@@ -24,12 +24,12 @@ useEffect(() => {
         position: "absolute",
     top: 0,
     left: 0,
-    "z-index": 10,
+    "zIndex": 10,
 
     height: "3px",
     width: `${width}`,
 
-    "background-color": "#CFFFC4",
+    "backgroundColor": "#CFFFC4",
     }
         
         

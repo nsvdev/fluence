@@ -4,7 +4,7 @@ import { useWeb3Connection } from '../../hooks/useWeb3Connection'
 
 const ConnectWallet = () => {
 
-    const { connect, disconnect, chainId, web3Provider } = useWeb3Connection()
+    const { connect, disconnect, web3Provider } = useWeb3Connection()
 
     return (
         <>

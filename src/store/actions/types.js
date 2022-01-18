@@ -50,4 +50,6 @@ export const SET_CURRENT_ROUTE = 'routes/SET_CURRENT_ROUTE'
 
 /////------------ DISTRIBUTOR -----------//////
 export const FETCH_MERKLE_ROOT = 'distributor/FETCH_MERKLE_ROOT'
+export const FETCH_CURRENT_AWARD = 'distributor/FETCH_CURRENT_AWARD'
+export const FETCH_NEXT_HALVE_PERIOD = 'distributor/FETCH_NEXT_HALVE_PERIOD'
 export const CHECK_IS_CLAIMED = 'distributor/CHECK_IS_CLAIMED'

@@ -2,13 +2,13 @@ import { ethers } from 'ethers';
 import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
 
-async function generateSigner() {
+export async function generateSigner() {
   let wallet = await ethers.Wallet.createRandom();
 
   return wallet;
 }
 
-async function signWithSigner(signer, leaf) {
+export async function signWithSigner(signer, leaf) {
   if (!ethers.utils.isBytesLike(leaf) || ethers.utils.hexDataLength(leaf) !== 32) {
     throw 'ERROR: leaf must be a bytes32 value. Length was ' + ethers.utils.hexDataLength(leaf);
   }

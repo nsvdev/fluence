@@ -11,18 +11,16 @@ import WalletInfo from '../../components/WalletInfo/WalletInfo';
 import UserCard from '../../components/UserCard/UserCard';
 import Footer from '../../components/Footer/Footer';
 
-// import { users } from '../../mocks/UserCardMocks'
 import styles from './delegation-page.module.css';
 
-import { useWeb3Connection } from '../../hooks/useWeb3Connection';
 import { hideString } from '../../utils';
-import { delegate, storeDelegatee } from '../../store/actions/governance';
+import { storeDelegatee } from '../../store/actions/governance';
 import { accountsQueryFactory } from '../../utils/graphQueries';
 import { accountsMapper } from '../../utils/gqlMappers';
 import { ROUTE_DONE } from '../../constants/routes';
 
 const DelegationPage = () => {
-    const { address, web3, sendTransaction, web3Provider } = useWeb3Connection()
+    const { address } = useSelector(state => state.wallet)
     const { delegatee } = useSelector(state => state.governance.values)
     const navigate = useNavigate()
 
@@ -37,7 +35,7 @@ const DelegationPage = () => {
     const { useQuery } = useSubgraph(fluence)
     const [ users, setUsers ] = useState([])
     
-    const { error, loading, data } = useQuery(accountsQueryFactory(5));
+    const { data } = useQuery(accountsQueryFactory(5));
     useEffect(() => {
         if (data) {
             const { accounts } = data

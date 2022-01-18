@@ -18,6 +18,7 @@ import { ROUTE_PROOF } from '../../constants/routes';
 const FirstStepPage = memo(() => {
     const navigate = useNavigate()
     const { address, web3Provider } = useSelector(state => state.wallet)
+    const { currentAward } = useSelector(state => state.distributor)
 
     useEffect(() => {
         if (address && web3Provider) {
@@ -42,7 +43,7 @@ const FirstStepPage = memo(() => {
                             <div className={styles["dashboard__flex-container"]}>
                                 <div className={styles.dashboard__logo}/>
                                 <div className={styles.definition}>
-                                    <DefinitionList dd="500 FLT" dt="ready to be claimed" colorD="orange" colorT="black"/>
+                                    <DefinitionList dd={`${currentAward || 0} FLT`} dt="ready to be claimed" colorD="orange" colorT="black"/>
                                 </div>
                                 
                             </div>
