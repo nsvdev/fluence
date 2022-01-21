@@ -30,10 +30,31 @@ export const setKey = (key) => ({
     payload: key
 })
 
-export const setError = (message) => ({
-    type: USER_ERROR,
-    payload: message
-})
+export const setError = (message) => {
+    let msg
+    alert(message)
+    try {
+        const isEthJs = /ethjs-query/.test(message)
+        const parsedMessage = isEthJs 
+            ? JSON.parse(
+                    message
+                    .replace('[ethjs-query] while formatting outputs from RPC ', '')
+                    .slice(0, -1))
+            : message
+        
+        const newMessage = isEthJs 
+            ? `${parsedMessage.message} CODE:${parsedMessage.code}`
+            : message
+
+        msg = newMessage
+    } catch (error) {
+        msg = message
+    }
+    return {
+        type: USER_ERROR,
+        payload: msg
+    }
+}
 
 export const storeKey = (key) => ({
     type: STORE_KEY,

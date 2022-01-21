@@ -46,10 +46,32 @@ export const setDelegatee = (address) => ({
     payload: address
 })
 
-export const setError = (error) => ({
-    type: SET_ERROR,
-    payload: error
-})
+export const setError = (message) => {
+    let msg
+    try {
+        const isEthJs = /ethjs-query/.test(message)
+        const parsedMessage = isEthJs 
+            ? JSON.parse(
+                    message
+                    .replace("[ethjs-query] while formatting outputs from RPC '", '')
+                    .slice(0, -1)
+                    )
+            : message
+        console.log(parsedMessage)
+        
+        const newMessage = isEthJs 
+            ? `${parsedMessage.value.data.message}. Error code: ${parsedMessage.value.code}`
+            : message
+
+        msg = newMessage
+    } catch (error) {
+        msg = message
+    }
+    return {
+        type: SET_ERROR,
+        payload: msg
+    }
+}
 
 const WRONG_CHAIN_MESSAGE = `Looks like the contract does not support the current network. Please switch to ${supportedChains[0].name}`
 

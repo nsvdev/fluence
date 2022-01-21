@@ -116,7 +116,7 @@ function App() {
   return (
     <TheGraphProvider chain={Chains.KOVAN} subgraphs={subgraphs}>
       <div className="App">
-        <ToastContainer />
+        <ToastContainer autoClose={false}/>
         <Routes>
           <Route exact path={ROUTE_FLUENCE} element={<LandingPage />} />
           <Route exact path={ROUTE_INDEX} element={<PageBegin/>} />

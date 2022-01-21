@@ -20,7 +20,6 @@ export const governanceContracts = {
         "alpha": "0x7563c1e261C3E16de5f5DE247f85e04511E734Fe",
         "bravo": "0x7F4a7d3E805eCBe5C301fE24FB9E21EEaFB6F8E9",
         "delegator": "0x10CEE77b2C8967bFF37264900B1BE1E87548EDB2",
-        "mock": "0xc76a5739Ea9ca1231ED699A202fd0C49aE21C36a",
-        "tokenDistributor" : "0x5Adbb1E8DF39C2450c66d20908C3Ecb2ACd7a281"
+        "tokenDistributor": "0x893d41e739A36CB3234F02Df010Ad5E997acF540"
     },
 }
