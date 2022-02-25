@@ -41,6 +41,7 @@ import { catchError } from '../../utils';
 import { setFluenceSubgraph, setDistributorSubgraph } from '../../store/actions/graph';
 import { setCurrentRoute } from '../../store/actions/routes';
 import { fetchCurrentAward, fetchMerkleRoot, fetchNextHalvePeriod } from '../../store/actions/distributor';
+import { useVh } from '../../hooks/useVh';
 
 function App() {
   const { web3Provider } = useWeb3Connection()
@@ -55,6 +56,7 @@ function App() {
   const [locationPut, setLocationPut] = useState(false)
   const [merkleRootFetched, setMerkleRootFetched] = useState(false)
 
+  useVh()
   useEffect(() => {
     if (currentRoute
         && !locationPut

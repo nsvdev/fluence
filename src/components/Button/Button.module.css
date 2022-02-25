@@ -12,7 +12,7 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
     border-radius: 30px;
 
-    transition: all 0.2s linear 0.2s;
+    transition: .3s ease;
 }
 
 .button_height_default {
@@ -61,7 +61,7 @@
 
 .button_icon_git::before {
     background-image: url('../../images/github.svg');
-    transition: all 0.2s linear 0.2s;
+    transition: .3s ease;
     width: 20.5px;
     height: 20px;
     top: 16px;
@@ -74,7 +74,7 @@
 
 .button_icon_twitter::before {
     background-image: url('../../images/twitter.svg');
-    transition: all 0.2s linear 0.2s;
+    transition: .3s ease;
     background-position: center;
     background-repeat: no-repeat;
     width: 16px;

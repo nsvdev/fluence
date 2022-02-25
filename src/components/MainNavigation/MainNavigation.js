@@ -30,8 +30,8 @@ const MainNavigation = ({ width }) => {
                 <nav>
                     <button className={styles.burger} aria-label="Open menu" onClick={handleOpenMenu} />
                     <div className={`${styles.overlay} ${IsOpenMenu && styles.overlay_active}`}>
+                        <button className={styles.close} onClick={handleCloseMenu} aria-label="Close menu" />
                         <div className={styles.body}>
-                            <button className={styles.close} onClick={handleCloseMenu} aria-label="Close menu" />
                             <ul className={styles.burger__list}>
                                 <li className={styles.burger__item}>
                                     <NavLink to="#" className={`${styles.burger__link} ${active === 'tech' && styles.burger__link_active}` } onClick={() => setActive('tech')}>Technology</NavLink>

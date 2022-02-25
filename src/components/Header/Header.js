@@ -8,7 +8,6 @@ import logo from '../../images/logo.svg'
 import styles from './Header.module.css';
 
 const Header = ({ button=false }) => {
-
     const [currentWidthWindow, setCurrentWidthWindow] = useState(window.innerWidth);
 
     const navigate = useNavigate();

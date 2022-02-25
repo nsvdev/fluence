@@ -92,7 +92,6 @@
 }
 
 .input {
-    margin-bottom: 30px;
     padding: 11px 20px;
     max-width: 394px;
     width: 100%;
@@ -110,12 +109,37 @@
     border-radius: 5px;
 }
 
+.input__invalid {
+    border: 1px solid #EF4646;
+}
+
+.input__pressed {
+    border: 1px solid #4D4D4D;
+}
+
 .input::placeholder {
     font-family: "Hauora_Regular", sans-serif;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.5px;
     color: rgba(0, 0, 0, 0.5);
+}
+
+.incorrect {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    color: #EF4646;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.input:focus {
+    outline: none;
 }
 
 

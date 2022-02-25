@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import githubUsernameRegex from 'github-username-regex';
 
 import Header from '../../components/Header/Header';
 import Title from '../../components/Title/Title';
@@ -36,6 +37,27 @@ const PageBegin = memo(() => {
             navigate(ROUTE_WALLET)
         } 
     }, [username])
+
+    const [inputValid, setInputValid] = useState(true)
+    const [inputPressed, setInputPressed] = useState(false)
+
+    const handleChangeUsername = (e) => {
+        e.target.value !== '' ? setInputPressed(true) : setInputPressed(false)
+        setInputValid(githubUsernameRegex.test(e.target.value))
+        setName(e.target.value)
+    } 
+
+    const getInputClassName = () => {
+        if (!inputValid) {
+            return `${styles.input} ${styles.input__invalid}`
+        }
+
+        if (inputPressed) {
+            return `${styles.input} ${styles.input__pressed}`
+        }
+
+        return styles.input
+    }
     
     return (
         <div className={styles.background}>
@@ -62,7 +84,14 @@ const PageBegin = memo(() => {
                                             </Text>
                                         </li>
                                     </ul>
-                                    <input type='text' className={styles.input} placeholder="Github username" onChange={(e) => { setName(e.target.value)} }/>
+                                    <input
+                                        type='text'
+                                        className={getInputClassName()}
+                                        placeholder="Github username"
+                                        onChange={handleChangeUsername}
+                                    />
+
+                                    <p className={styles.incorrect}>{inputValid ? <>&nbsp;</> : 'Incorrect username'}</p>
 
                                     <ul className={styles.buttons}>
                                         <li className={styles.button}>
