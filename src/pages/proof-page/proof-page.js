@@ -21,11 +21,12 @@ import { toast } from 'react-toastify';
 import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
 import { hashedLeaf } from '../../utils/award'
+import { Buffer } from "buffer";
 
 function isBase64(str) {
-    if (str ==='' || str.trim() ===''){ return false; }
+    if (str === '' || str.trim() ===''){ return false; }
     try {
-        return btoa(atob(str)) == str;
+        return btoa(atob(str)) === str;
     } catch (err) {
         return false;
     }
@@ -43,6 +44,8 @@ const ProofPage = () => {
     const dispatch = useDispatch()
     const [ proofValue, setProofValue ] = useState('')
 
+    window.Buffer = Buffer;
+
     useEffect(() => {
         if(hasClaimed?.claimed) {
             navigate(ROUTE_CLAIMED)
@@ -51,39 +54,76 @@ const ProofPage = () => {
 
     const handleForm = async (e) => {
         e.preventDefault()
-        if (isBase64(proofValue)) {
+        
+        try {
+            // TODO: validate data better
+            let [ userId, tmpEthAddr, signatureHex, merkleProofHex ] = proofValue.split(",");
             try {
-                const decoded = atob(proofValue)
-                const parsed = JSON.parse(decoded)
-                const { merkleProof, publicKey, userId } = parsed
-
-                dispatch(checkHasClaimed(userId, web3Provider, networkName))
-
+                let asn1Signature = Buffer.from(signatureHex, "hex");
+                let merkleProof = JSON.parse(Buffer.from(merkleProofHex, "hex").toString());
                 try {
-                    const myLeaf = await hashedLeaf(userId, publicKey)
+                    let signature = validateSignature(asn1Signature, tmpEthAddr);
+
+                    const leaf = await hashedLeaf(userId, tmpEthAddr);
                     const verified = MerkleTree.verify(
                         merkleProof,
-                        myLeaf,
+                        leaf,
                         merkleRoot,
                         keccak256,
                         { hashLeaves: false, sortPairs: true }
                     )
                     if (verified) {
                         setHaveProof(true)
-                        dispatch(storeProof(parsed))
+                        dispatch(storeProof([ userId, tmpEthAddr, signature, merkleProof ]))
                     } else {
                         toast('Invalid proof. Please check the data.')
                     }
                 } catch (error) {
-                    console.log(error.message)
-                    toast('Error when validating the proof.')
+                    console.log(error);
+                    toast('Invalid signature.')
                 }
             } catch (error) {
-                toast('The proof should be a valid JSON.')
+                console.log(error);
+                toast('Invalid proof format. Please check the data. It should be [userId,tmpEthAddr,signatureHex,merkleProofHex].')
             }
-        } else {
-            toast('The proof should be a base-64 encoded string.')
+        } catch (error) {
+            console.log(error);
+            toast('The proof should be a valid hex string');
         }
+
+        // if (isBase64(proofValue)) {
+        //     try {
+        //         const decoded = atob(proofValue)
+        //         const parsed = JSON.parse(decoded)
+        //         const { merkleProof, publicKey, userId } = parsed
+
+        //         dispatch(checkHasClaimed(userId, web3Provider, networkName))
+
+        //         try {
+        //             const myLeaf = await hashedLeaf(userId, publicKey)
+        //             const verified = MerkleTree.verify(
+        //                 merkleProof,
+        //                 myLeaf,
+        //                 merkleRoot,
+        //                 keccak256,
+        //                 { hashLeaves: false, sortPairs: true }
+        //             )
+        //             if (verified) {
+        //                 setHaveProof(true)
+        //                 dispatch(storeProof(parsed))
+        //             } else {
+        //                 toast('Invalid proof. Please check the data.')
+        //             }
+        //         } catch (error) {
+        //             console.log(error.message)
+        //             toast('Error when validating the proof.')
+        //         }
+        //     } catch (error) {
+        //         toast('The proof should be a valid JSON.')
+        //     }
+        // } else {
+        //     toast('The proof should be a base-64 encoded string.')
+        // }
     }
 
     useEffect(() => {
