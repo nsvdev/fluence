@@ -33,8 +33,10 @@
     "web3-react": "^5.0.5",
     "web3modal": "^1.9.4",
     
-    "buffer": "^6.0.3",
-    "asn1.js": "^5.4.1"
+    "safer-buffer": "^2.1.0",
+    "bn.js": "^4.0.0",
+    "asn1.js": "^5.4.1",
+    "ethereumjs-util": "^7.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

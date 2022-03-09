@@ -23,6 +23,8 @@ import keccak256 from 'keccak256';
 import { hashedLeaf } from '../../utils/award'
 import { Buffer } from "buffer";
 import { validateASN1Signature } from '../../utils/asn1';
+import { ethers } from 'ethers';
+
 
 function isBase64(str) {
     if (str === '' || str.trim() ===''){ return false; }
@@ -58,15 +60,19 @@ const ProofPage = () => {
         
         try {
             // TODO: validate data better
-            let [ userId, tmpEthAddr, signatureHex, merkleProofHex ] = proofValue.split(",");
+            let [ userId, tmpEthAddrNoPrefix, signatureHex, merkleProofHex ] = proofValue.split(",");
+            let tmpEthAddr = '0x' + tmpEthAddrNoPrefix;
             
             dispatch(checkHasClaimed(userId, web3Provider, networkName));
             
             try {
+                console.log("signatureHex", signatureHex);
+                console.log("tmpEthAddr", tmpEthAddr);
                 let asn1Signature = Buffer.from(signatureHex, "hex");
-                let merkleProof = JSON.parse(Buffer.from(merkleProofHex, "hex").toString());
+                let merkleProof = JSON.parse(Buffer.from(merkleProofHex, "base64").toString());
                 try {
-                    let signedHash = keccak256(address);
+                    let signedHash = ethers.utils.hashMessage(address);
+                    console.log("Signed Hash", signedHash);
                     let signature = validateASN1Signature(signedHash, asn1Signature, tmpEthAddr);
 
                     const leaf = await hashedLeaf(userId, tmpEthAddr);

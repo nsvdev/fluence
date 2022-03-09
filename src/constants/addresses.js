@@ -15,11 +15,11 @@ export const governanceContracts = {
         "tokenDistributor": "0x0B266f046872Bde8db51941f3441D56149AeEa83"
     },
     "hardhat": {
-        "token": "0x1D759b89e3b9b25a21fa8f145cBBF9F9E0E0A7D1",
-        "timelock": "0x5cdfe3B857f02444436CCE334c0Caa931521D0A8",
-        "alpha": "0x7563c1e261C3E16de5f5DE247f85e04511E734Fe",
-        "bravo": "0x7F4a7d3E805eCBe5C301fE24FB9E21EEaFB6F8E9",
-        "delegator": "0x10CEE77b2C8967bFF37264900B1BE1E87548EDB2",
-        "tokenDistributor": "0x893d41e739A36CB3234F02Df010Ad5E997acF540"
+        "token": "0xD1553ef84fF9e71165B4BcC70eEBFBBdd49D0Cb4",
+        "timelock": "0x54be00437b79ed04d1935b1DE9D0C304949F4033",
+        "alpha": "0x7A8F77815f365Ea241C5104bb4a02a78AcE4e3A5",
+        "bravo": "0x2373dE6De2EFe3463Ea279e173c700c5CAbf7619",
+        "delegator": "0xDfE0c07C8c6BB3FD9a7fd6EE45bD2C086374f13c",
+        "tokenDistributor": "0x3C60da59f724062FE60c964342331C5366e4E224"
     },
 }
