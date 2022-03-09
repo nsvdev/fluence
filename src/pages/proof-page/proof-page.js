@@ -22,6 +22,7 @@ import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
 import { hashedLeaf } from '../../utils/award'
 import { Buffer } from "buffer";
+import { validateASN1Signature } from '../../utils/asn1';
 
 function isBase64(str) {
     if (str === '' || str.trim() ===''){ return false; }
@@ -58,11 +59,15 @@ const ProofPage = () => {
         try {
             // TODO: validate data better
             let [ userId, tmpEthAddr, signatureHex, merkleProofHex ] = proofValue.split(",");
+            
+            dispatch(checkHasClaimed(userId, web3Provider, networkName));
+            
             try {
                 let asn1Signature = Buffer.from(signatureHex, "hex");
                 let merkleProof = JSON.parse(Buffer.from(merkleProofHex, "hex").toString());
                 try {
-                    let signature = validateSignature(asn1Signature, tmpEthAddr);
+                    let signedHash = keccak256(address);
+                    let signature = validateASN1Signature(signedHash, asn1Signature, tmpEthAddr);
 
                     const leaf = await hashedLeaf(userId, tmpEthAddr);
                     const verified = MerkleTree.verify(
