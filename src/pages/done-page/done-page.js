@@ -27,15 +27,17 @@ const DonePage = () => {
     const navigate = useNavigate()
 
     const handleClaim = () => {
-        dispatch(claim(
-            proof?.userId,
-            delegatee,
-            proof?.merkleProof,
-            proof?.leaf.data,
-            proof?.publicKey,
-            proof?.signature,
-            web3Provider,
-            networkName
+        // { userId, tmpEthAddr, signature, merkleProof }
+
+        dispatch(
+            claim(
+                proof?.userId,
+                delegatee,
+                proof?.merkleProof,
+                proof?.tmpEthAddr,
+                proof?.signature,
+                web3Provider,
+                networkName
             )
         )
     }

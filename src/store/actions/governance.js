@@ -79,12 +79,11 @@ export const claim = (
     userId, 
     delegateTo,
     merkleProof,
-    leaf,
-    temporaryAddress,
-    leafSignatureHex,
+    tmpEthAddr,
+    senderSignatureHex,
     w3provider,
     network
-    ) => {
+) => {
     return async dispatch => {
         let signer = w3provider.getSigner();
         try {
@@ -95,9 +94,8 @@ export const claim = (
                     userId, 
                     delegateTo,
                     merkleProof,
-                    leaf,
-                    temporaryAddress,
-                    leafSignatureHex
+                    tmpEthAddr,
+                    senderSignatureHex
                 );
                 dispatch(claimStatus(MINING))
                 try {

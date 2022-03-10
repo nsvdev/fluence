@@ -74,6 +74,7 @@ const ProofPage = () => {
                     let signedHash = ethers.utils.hashMessage(address);
                     console.log("Signed Hash", signedHash);
                     let signature = validateASN1Signature(signedHash, asn1Signature, tmpEthAddr);
+                    console.log("Signature is correct.")
 
                     const leaf = await hashedLeaf(userId, tmpEthAddr);
                     const verified = MerkleTree.verify(
@@ -85,9 +86,9 @@ const ProofPage = () => {
                     )
                     if (verified) {
                         setHaveProof(true)
-                        dispatch(storeProof([ userId, tmpEthAddr, signature, merkleProof ]))
+                        dispatch(storeProof({ userId, tmpEthAddr, signature, merkleProof }))
                     } else {
-                        toast('Invalid proof. Please check the data.')
+                        toast('Invalid merkle proof. Please check the data.')
                     }
                 } catch (error) {
                     console.log(error);
