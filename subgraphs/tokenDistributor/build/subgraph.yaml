@@ -6,7 +6,7 @@ dataSources:
     name: TokenDistributor
     network: kovan
     source:
-      address: "0x0B266f046872Bde8db51941f3441D56149AeEa83"
+      address: "0xcd82cbC760386F671766fF151a9D1011b620b400"
       abi: TokenDistributor
       startBlock: 29328901
     mapping:

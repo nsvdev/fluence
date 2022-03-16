@@ -7,12 +7,12 @@ export const governanceContracts = {
         "delegator": "0xAe54a9C846A17F9190ece245Ab816941eFF53707",
     },
     "kovan": {
-        "token": "0xE9F4873ef959965df478bE523564769339d2e03E",
-        "timelock": "0x5d854122352D14071d6292FC4E7cA4FF15786e3b",
-        "alpha": "0x7c7E53e7bb45B481f17455c9C056d47157507362",
-        "bravo": "0xf3482b80e1C2e5a9C0268768922ddDc20210B648",
-        "delegator": "0xB00Af48C75247388FFc03e94506e7CF99de4afeA",
-        "tokenDistributor": "0x0B266f046872Bde8db51941f3441D56149AeEa83"
+        "token": "0x9F8B186759cB231Ba1d21D0f7bC67BD342D9C5D6",
+        "timelock": "0xAC792b75A2e400776A04e54CB649315f55670F33",
+        "alpha": "0x7790bC32dc890188a0A4dAFD516C836ab508FEa3",
+        "bravo": "0x4e7cdfFefE9F38c4648067fEe88129Bebaba31b4",
+        "delegator": "0xb9b571d626FCa4ae68e0f27652DAc32b3Bb266b3",
+        "tokenDistributor": "0xcd82cbC760386F671766fF151a9D1011b620b400"
     },
     "hardhat": {
         "token": "0xD1553ef84fF9e71165B4BcC70eEBFBBdd49D0Cb4",
