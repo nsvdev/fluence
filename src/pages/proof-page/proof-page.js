@@ -55,6 +55,14 @@ const ProofPage = () => {
         }
     }, [hasClaimed])
 
+    function fromHex(str) {
+        if (str.startsWith('0x')) {
+            return Buffer.from(str.slice(2), 'hex');
+        } else {
+            return Buffer.from(str, 'hex');
+        }
+    }
+
     const handleForm = async (e) => {
         e.preventDefault()
         
@@ -71,10 +79,11 @@ const ProofPage = () => {
                 let asn1Signature = Buffer.from(signatureHex, "hex");
                 let merkleProof = JSON.parse(Buffer.from(merkleProofHex, "base64").toString());
                 try {
-                    let signedHash = ethers.utils.hashMessage(address);
+                    console.log("address is", fromHex(address));
+                    let signedHash = ethers.utils.hashMessage(fromHex(address));
                     console.log("Signed Hash", signedHash);
                     let signature = validateASN1Signature(signedHash, asn1Signature, tmpEthAddr);
-                    console.log("Signature is correct.")
+                    console.log("Signature is correct.", signature);
 
                     const leaf = await hashedLeaf(userId, tmpEthAddr);
                     const verified = MerkleTree.verify(

@@ -14,7 +14,7 @@ const EcdsaSigAsnParse = define('EcdsaSig', function() {
 
 // 16b2a0fb0e44a02560123359ea248da287367d45340ab13d0a81045fda38283d
 
-export async function validateASN1Signature(hashHex, asn1Signature, expectedEthAddr) {
+export function validateASN1Signature(hashHex, asn1Signature, expectedEthAddr) {
     // let hash = "50b2c43fd39106bafbba0da34fc430e1f91e3c96ea2acee2bc34119f92b37750";
     // let asn1Signature = "304402204c45f724b4bc4b7994f634f94807701e399731f422f2556d205ffa10df1ab1b302206685617710ad55a5ac4f9b605e5d21461feba47ddf76eea8c581657eebc20734";
   
@@ -31,25 +31,24 @@ export async function validateASN1Signature(hashHex, asn1Signature, expectedEthA
     }
     console.log("bufferHash", bufferHash);
      
-
     let bufferSig = Buffer.from(asn1Signature);
   
-    let { r, s } = await findEthereumSig(bufferSig);
-  
-    console.log("r", r, "s", s);
-  
+    let { r, s } = findEthereumSig(bufferSig);
+    
     let { pubkey, v } = findRightKey(bufferHash, r, s, expectedEthAddr);
   
     let raw_signature = { r: '0x' + r.toString(16, 32), s: '0x' + s.toString(16, 32), v };
     let signature = ethers.utils.splitSignature(raw_signature);
     
     let recoveredAddress = ethers.utils.recoverAddress(hashHex, signature);
+
+    console.log("signature", ethers.utils.joinSignature(signature));
     
     if (recoveredAddress.toLowerCase() !== expectedEthAddr.toLowerCase()) {
       throw new Error(`Expected ETH addr ${expectedEthAddr}, but recovered ${recoveredAddress}. Signature must be invalid.`)
     }
 
-    ethers.utils.joinSignature(signature)
+    return ethers.utils.joinSignature(signature);
   }
   
   function recoverPubKeyFromSig(msg, r, s, v) {
@@ -82,7 +81,7 @@ export async function validateASN1Signature(hashHex, asn1Signature, expectedEthA
     return { pubKey, v };
   }
   
-  async function findEthereumSig(signatureHex) {
+  function findEthereumSig(signatureHex) {
     let decoded = EcdsaSigAsnParse.decode(signatureHex, 'der');
     let r = decoded.r;
     let s = decoded.s;
