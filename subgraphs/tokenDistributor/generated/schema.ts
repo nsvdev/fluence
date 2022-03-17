@@ -6,7 +6,6 @@ import {
   Value,
   ValueKind,
   store,
-  Address,
   Bytes,
   BigInt,
   BigDecimal
@@ -16,26 +15,32 @@ export class TokenDistributor extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("merkleRoot", Value.fromString(""));
+    this.set("claimers", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save TokenDistributor entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save TokenDistributor entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("TokenDistributor", id.toString(), this);
+    assert(id != null, "Cannot save TokenDistributor entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type TokenDistributor must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("TokenDistributor", id.toString(), this);
+    }
   }
 
   static load(id: string): TokenDistributor | null {
-    return store.get("TokenDistributor", id) as TokenDistributor | null;
+    return changetype<TokenDistributor | null>(
+      store.get("TokenDistributor", id)
+    );
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -44,7 +49,7 @@ export class TokenDistributor extends Entity {
 
   get merkleRoot(): string {
     let value = this.get("merkleRoot");
-    return value.toString();
+    return value!.toString();
   }
 
   set merkleRoot(value: string) {
@@ -53,7 +58,7 @@ export class TokenDistributor extends Entity {
 
   get claimers(): BigInt {
     let value = this.get("claimers");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set claimers(value: BigInt) {
@@ -65,26 +70,30 @@ export class Account extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("user_id", Value.fromBigInt(BigInt.zero()));
+    this.set("amount", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Account entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Account entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Account", id.toString(), this);
+    assert(id != null, "Cannot save Account entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Account must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Account", id.toString(), this);
+    }
   }
 
   static load(id: string): Account | null {
-    return store.get("Account", id) as Account | null;
+    return changetype<Account | null>(store.get("Account", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -93,7 +102,7 @@ export class Account extends Entity {
 
   get user_id(): BigInt {
     let value = this.get("user_id");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set user_id(value: BigInt) {
@@ -102,7 +111,7 @@ export class Account extends Entity {
 
   get amount(): BigInt {
     let value = this.get("amount");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set amount(value: BigInt) {

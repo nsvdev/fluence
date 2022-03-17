@@ -47,6 +47,8 @@ const ProofPage = () => {
     const dispatch = useDispatch()
     const [ proofValue, setProofValue ] = useState('')
 
+    console.log("merkleRoot is", merkleRoot);
+
     window.Buffer = Buffer;
 
     useEffect(() => {
