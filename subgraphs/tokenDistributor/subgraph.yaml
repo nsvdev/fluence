@@ -6,9 +6,9 @@ dataSources:
     name: TokenDistributor
     network: kovan
     source:
-      address: "0xe9AE9F370DDB56fF275127C31eff0971487c6B3f"
+      address: "0x01D933CA4b9eA57105466dD0E71Bf8489aDAA302"
       abi: TokenDistributor
-      startBlock: 29328901
+      startBlock: 30477500
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
