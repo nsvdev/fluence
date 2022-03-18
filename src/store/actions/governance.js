@@ -90,6 +90,7 @@ export const claim = (
             let contract = new Contract(governanceContracts[network].tokenDistributor, abis.TokenDistributor.abi, w3provider);
             let signed = await contract.connect(signer);
             try {
+                console.log("claiming with", { userId, delegateTo, merkleProof, tmpEthAddr, senderSignatureHex })
                 const tx = await signed.claimTokens(
                     userId, 
                     delegateTo,
@@ -139,9 +140,11 @@ export const checkHasClaimed = (userId, w3provider, network) => {
             let signed = await contract.connect(signer);
             try {
                 const hasClaimed = await signed.isClaimed(userId);
+                console.log(`isClaimed for ${userId} is ${hasClaimed}. Contract is ${governanceContracts[network].tokenDistributor}`);
                 dispatch(setHasClaimed(hasClaimed))
             } catch (error) {
                 dispatch(setError('Cannot confirm that tokens are not claimed yet.'))
+                console.error(error);
             }
         } catch (error) {
             dispatch(setError(WRONG_CHAIN_MESSAGE))

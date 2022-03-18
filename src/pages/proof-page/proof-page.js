@@ -113,40 +113,6 @@ const ProofPage = () => {
             console.log(error);
             toast('The proof should be a valid hex string');
         }
-
-        // if (isBase64(proofValue)) {
-        //     try {
-        //         const decoded = atob(proofValue)
-        //         const parsed = JSON.parse(decoded)
-        //         const { merkleProof, publicKey, userId } = parsed
-
-        //         dispatch(checkHasClaimed(userId, web3Provider, networkName))
-
-        //         try {
-        //             const myLeaf = await hashedLeaf(userId, publicKey)
-        //             const verified = MerkleTree.verify(
-        //                 merkleProof,
-        //                 myLeaf,
-        //                 merkleRoot,
-        //                 keccak256,
-        //                 { hashLeaves: false, sortPairs: true }
-        //             )
-        //             if (verified) {
-        //                 setHaveProof(true)
-        //                 dispatch(storeProof(parsed))
-        //             } else {
-        //                 toast('Invalid proof. Please check the data.')
-        //             }
-        //         } catch (error) {
-        //             console.log(error.message)
-        //             toast('Error when validating the proof.')
-        //         }
-        //     } catch (error) {
-        //         toast('The proof should be a valid JSON.')
-        //     }
-        // } else {
-        //     toast('The proof should be a base-64 encoded string.')
-        // }
     }
 
     useEffect(() => {

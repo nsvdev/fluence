@@ -11,6 +11,7 @@ export const setMerkleRoot = (merkleRoot) => ({
 
 export const fetchMerkleRoot = (network) => {
     const web3 = new Web3(infuraUrlFactory('kovan'))
+    console.log("fetching merkle root from", web3);
     const contract = new web3.eth.Contract(abis.TokenDistributor.abi, governanceContracts.kovan.tokenDistributor)
 
     return async dispatch => {

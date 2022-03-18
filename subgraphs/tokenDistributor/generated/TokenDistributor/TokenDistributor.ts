@@ -86,6 +86,87 @@ export class TokenDistributor extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  HALVE_PERIOD(): BigInt {
+    let result = super.call("HALVE_PERIOD", "HALVE_PERIOD():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_HALVE_PERIOD(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("HALVE_PERIOD", "HALVE_PERIOD():(uint256)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  INITIAL_AWARD(): BigInt {
+    let result = super.call("INITIAL_AWARD", "INITIAL_AWARD():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_INITIAL_AWARD(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "INITIAL_AWARD",
+      "INITIAL_AWARD():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  checkSignedBy(sender_signature: Bytes, expected_signer: Address): boolean {
+    let result = super.call(
+      "checkSignedBy",
+      "checkSignedBy(bytes,address):(bool)",
+      [
+        ethereum.Value.fromBytes(sender_signature),
+        ethereum.Value.fromAddress(expected_signer)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_checkSignedBy(
+    sender_signature: Bytes,
+    expected_signer: Address
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "checkSignedBy",
+      "checkSignedBy(bytes,address):(bool)",
+      [
+        ethereum.Value.fromBytes(sender_signature),
+        ethereum.Value.fromAddress(expected_signer)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  currentAward(): BigInt {
+    let result = super.call("currentAward", "currentAward():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_currentAward(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("currentAward", "currentAward():(uint256)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   deployTime(): BigInt {
     let result = super.call("deployTime", "deployTime():(uint256)", []);
 
@@ -99,6 +180,21 @@ export class TokenDistributor extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  hashedSender(): Bytes {
+    let result = super.call("hashedSender", "hashedSender():(bytes32)", []);
+
+    return result[0].toBytes();
+  }
+
+  try_hashedSender(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall("hashedSender", "hashedSender():(bytes32)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   isClaimed(index: BigInt): boolean {
@@ -135,6 +231,65 @@ export class TokenDistributor extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
+  nextHalvePeriod(): BigInt {
+    let result = super.call(
+      "nextHalvePeriod",
+      "nextHalvePeriod():(uint256)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_nextHalvePeriod(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "nextHalvePeriod",
+      "nextHalvePeriod():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  packedSender(): Bytes {
+    let result = super.call("packedSender", "packedSender():(bytes)", []);
+
+    return result[0].toBytes();
+  }
+
+  try_packedSender(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall("packedSender", "packedSender():(bytes)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
+  senderSigner(sender_signature: Bytes): Address {
+    let result = super.call("senderSigner", "senderSigner(bytes):(address)", [
+      ethereum.Value.fromBytes(sender_signature)
+    ]);
+
+    return result[0].toAddress();
+  }
+
+  try_senderSigner(sender_signature: Bytes): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "senderSigner",
+      "senderSigner(bytes):(address)",
+      [ethereum.Value.fromBytes(sender_signature)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   timeLockContract(): Address {
     let result = super.call(
       "timeLockContract",
@@ -156,6 +311,29 @@ export class TokenDistributor extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  timeTillAwardHalve(): BigInt {
+    let result = super.call(
+      "timeTillAwardHalve",
+      "timeTillAwardHalve():(uint256)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_timeTillAwardHalve(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "timeTillAwardHalve",
+      "timeTillAwardHalve():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   token(): Address {
@@ -241,16 +419,12 @@ export class ClaimTokensCall__Inputs {
     return this._call.inputValues[2].value.toBytesArray();
   }
 
-  get leaf(): Bytes {
-    return this._call.inputValues[3].value.toBytes();
-  }
-
   get temporary_address(): Address {
-    return this._call.inputValues[4].value.toAddress();
+    return this._call.inputValues[3].value.toAddress();
   }
 
-  get leaf_signature_hex(): Bytes {
-    return this._call.inputValues[5].value.toBytes();
+  get sender_signature(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
   }
 }
 
